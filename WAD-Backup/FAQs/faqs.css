@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+}
+
+body {
+    min-height: 100vh;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Reusable Header*/
+.container {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    max-width:100%;
+    min-height: 147px;
+    max-height: 250px;
+    padding: 0px 10px;
+    z-index: 1000;
+    box-shadow: 0 1px 1px lightgrey;
+}
+
+.header1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.info1 {
+    flex: 1;
+    text-align: left;
+}
+
+.info2 {
+    flex: 1;
+    text-align: right;
+}
+
+.search, .logo, .icons {
+    width: 300px;
+}
+
+.header2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+}
+
+.search {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 55px;
+    gap: 10px;
+}
+
+.fa-bars {
+    cursor: pointer;
+}
+
+.input-container {
+    position: relative;
+}
+
+.search input {
+    border-radius: 30px;
+    width: 100px;
+    padding: 0px 30px 0px 5px;
+}
+
+.fa-magnifying-glass {
+    position: absolute;
+    font-size: 14px;
+    top: 6px;
+    left: 75px;
+    color: lightgrey;
+    cursor: pointer;
+}
+
+.logo {
+    background-color: white;
+    text-align: center;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.icons {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 55px;
+}
+
+.fa-heart, .fa-user, .fa-cart-shopping {
+    color: black;
+    cursor: pointer;
+}
+
+.navBar {
+    width: 100%;
+    left: 0;
+    background-color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.navBtn {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.navBtn a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: lightgrey;
+}
+
+.navBtn a:hover {
+    color:  black;
+}
+
+/* Overlay */
+.dropdown-overlay {
+    display: none; /* Overlay hidden at first */
+    position: fixed; /* Fixed to make the dropdown relative to the viewport */
+    top: 150px;
+    left: 30%;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 700px;
+    max-height: 70vh; /* Limit height to 70% of the viewport */
+    padding: 20px;
+    overflow-y: auto; /* Add vertical scrolling for overflowing content */
+    box-sizing: border-box;
+}
+
+.dropdown-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+}
+
+.column h4 a{
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: rgb(3,32,98);
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.column h4 a:hover {
+    color: rgb(3,32,98);
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.column ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.column ul li:last-child {
+    margin-bottom: 30px;
+}
+
+.column a {
+    color: black;
+}
+
+.column a:hover {
+    color: rgb(3,32,98);
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .dropdown-overlay {
+        top: 200px; /* Adjust positioning for smaller screens */
+        left: 5%; /* Reduce left offset */
+        width: 90%; /* Expand width to occupy more space */
+        max-height: 60vh; /* Reduce height for smaller screens */
+    }
+
+    .dropdown-content {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 15px; /* Increase spacing between stacked columns */
+    }
+
+    .column {
+        flex: 1 1 100%; /* Each column takes full width */
+    }
+}
+
+/* ------------------------------------------*/
+
+.smallNav, .faqs-title, .subtitle,.faqs-content {
+    position: relative;
+    top: 150px;
+}
+
+.smallNav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallNav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.smallNav a {
+    text-decoration: none;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.colored {
+    font-weight: bold;
+    color: rgb(3,32,98);
+}
+
+/* Smaller screen - content not covered by nav bar */
+@media (max-width: 768px) { 
+    .smallNav {
+        padding-top: 60px; /* Match the adjusted height of the navbar */
+    }
+}
+
+.faqs-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; 
+}
+
+.faqs-title p {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* FAQs Content*/
+.subtitle {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.faqs-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    width: 60%;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    position: relative;
+    margin-bottom: 5px; /* spacing between items */
+}
+
+.menu a {
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    background-color: rgb(238,238,238);
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.menu .dropdown-content {
+    display: none;
+    font-size: 14px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+    width: 100%;
+}
+
+.menu .dropdown-btn.active + .dropdown-content {
+    display: block;
+}
+
+.fa-angle-down {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+/* Reusable Footer*/
+footer {
+    position: relative;
+    top: 200px;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 50px 50px 10px 50px;
+}
+
+footer p, footer ul, footer ul a {
+    font-family: "Jacques Francois", serif;
+}
+
+.foot1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.CompanyName {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.CompanyAddress {
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.foot1-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.foot1-logo img {
+    width: 120px;
+}
+
+.followUs {
+    margin-top: 40px;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.followUs p {
+    font-family: "Roboto", sans-serif;
+}
+
+.fa-facebook {
+    position: absolute;
+    top: 3px;
+    left: 90px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.fa-square-instagram {
+    position: absolute;
+    top: 2px;
+    left: 120px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.foot2, .foot3, .foot4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.foot2-title, .foot3-title, .foot4-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info-list, .product-list, .links-list {
+    font-size: 16px;
+}
+
+.foot2 ul, .foot3 ul, .foot4 ul {
+    list-style: none;
+}
+
+.foot2 ul a, .foot3 ul a, .foot4 ul a {
+    text-decoration: none;
+    color: white;
+    line-height: 2.5;
+}
+
+.chatWithUs {
+    position: relative;
+    font-size: 14px;
+    margin-top: 70px;
+    font-weight: bold;
+}
+
+.chatWithUs a {
+    color: white;
+    text-decoration: none;
+}
+
+.fa-message {
+    position: absolute;
+    left: -17px;
+    bottom: 2px;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    position: relative;
+    top: 200px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.footer-bottom p {
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    font-family: "Jacques Francois", serif;
+}
+
+/* Reusable Menu Overlay*/
+
+.dropdown-overlay {
+    display: none; /* Overlay hidden at first */
+    position: fixed; /* Fixed to make the dropdown relative to the viewport */
+    top: 150px;
+    left: 30%;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 700px;
+    max-height: 70vh; /* Limit height to 70% of the viewport */
+    padding: 20px;
+    overflow-y: auto; /* Add vertical scrolling for overflowing content */
+    box-sizing: border-box;
+}
+
+.dropdown-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+}
+
+.column h4 a{
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: rgb(3,32,98);
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.column h4 a:hover {
+    color: rgb(3,32,98);
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.column ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.column ul li:last-child {
+    margin-bottom: 30px;
+}
+
+.column a {
+    color: black;
+}
+
+.column a:hover {
+    color: rgb(3,32,98);
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .dropdown-overlay {
+        top: 200px; /* Adjust positioning for smaller screens */
+        left: 5%; /* Reduce left offset */
+        width: 90%; /* Expand width to occupy more space */
+        max-height: 60vh; /* Reduce height for smaller screens */
+    }
+
+    .dropdown-content {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 15px; /* Increase spacing between stacked columns */
+    }
+
+    .column {
+        flex: 1 1 100%; /* Each column takes full width */
+    }
+}
+
+@media (max-width: 768px) { /* For Every Page - Smaller Screen Not Cover Content Below Nav Bar*/
+    .slider, .aboutUs, .howToOrder, .categoryTitle, .category-slider, .sentence3, .service, .sections, footer, .footer-bottom {
+        padding-top: 60px; /* Match the adjusted height of the navbar */
+    }
+}

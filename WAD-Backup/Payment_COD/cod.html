@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Payment</title>
+        <meta charset="Utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link id="stylesheet" rel="stylesheet" type="text/css" href="cod.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="image/logo3.png" alt="logo">
+            </div>
+            <div class="line"></div>
+        </header>
+        
+        <div class="payment-container">
+            <div class="payment">
+                <fieldset>
+                    <legend>Payment Method</legend>
+                    <div class="method">
+                        <div class="row">
+                            <input type="radio" checked="checked" name="paymentMethod" id="COD" value="COD">
+                            <label for="COD">Cash On Delivery</label>
+                        </div>
+                        <div class="row">
+                            <input type="radio" name="paymentMethod" id="card" value="card">
+                            <label for="card">Credit/Debit Card</label>
+                            <div class="card-icon">
+                                <i class="fa-brands fa-cc-visa"></i>
+                                <i class="fa-brands fa-cc-mastercard"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="radio" name="paymentMethod" id="banking" value="banking">
+                            <label for="banking">Online Banking</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="trans">
+                <fieldset>
+                    <legend>Transaction Details</legend>
+                    <div class="trans-detail">
+                        <div class="row1">
+                            <div class="label">Name</div>
+                            <div class="value">Adam Wong</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Email address</div>
+                            <div class="value">123@gmail.com</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Product name</div>
+                            <div class="value"><span class="product-name">Tennis Ball</span></div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Date & Time</div>
+                            <div class="value" id="currentDateTime"></div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Pay to</div>
+                            <div class="value">Wintro Premium Enterprise</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Transaction ID</div>
+                            <div class="value">B8670</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Order ID</div>
+                            <div class="value">A1234</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Subtotal</div>
+                            <div class="value"><span class="price">RM XX.XX</span></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>        
+
+            <div class="agreement">
+                <input type="checkbox" checked="checked" name="agree" id="agree">
+                <label for="agree">I agree to the Wintro Premium <a href="">Terms and Conditions</a> and <a href="">Privacy Policy.</a></label>
+            </div>
+
+
+            <div class="timing">
+                <p>You have <span id="timeLeft"></span><span class="minute"> minutes</span> left to complete transaction.</p>
+            </div>
+
+            <div class="buttons">
+                <button>Proceed</button>
+                <button>Cancel</button>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="cod.js"></script>
+    </body>
+</html>

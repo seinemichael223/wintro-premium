@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Payment</title>
+        <meta charset="Utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link id="stylesheet" rel="stylesheet" type="text/css" href="banking.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="image/logo3.png" alt="logo">
+            </div>
+            <div class="line"></div>
+        </header>
+        
+        <div class="payment-container">
+            <div class="time-container">
+                <div class="countdown">
+                    <p>Time Out: <span id="timeLeft1"></span></p>
+                </div>
+                <div class="payment">
+                    <fieldset>
+                        <legend>Online Banking</legend>
+                        <div class="method">
+                            <label for="bank">Select your bank:</label>
+                            <select name="bank" id="bank">
+                                <option value="" disabled selected class="select-bank">-- Bank --</option>
+                                <option value="Maybank">Maybank</option>
+                                <option value="CIMB">CIMB</option>
+                                <option value="RHB">RHB</option>
+                                <option value="PublicBank">Public Bank</option>
+                                <option value="HongLeongBank">Hong Leong Bank</option>
+                                <option value="Ambank">AmBank</option>
+                                <option value="BankIslam">Bank Islam</option>
+                                <option value="UOB">UOB Malaysia</option>
+                                <option value="BankRakyat">Bank Rakyat</option>
+                                <option value="OCBC">OCBC Bank Malaysia</option>
+                                <option value="AllianceBank">Alliance Bank</option>
+                                <option value="AffinBank">Affin Bank</option>
+                                <option value="KFH">Kuwait Finance House</option>
+                                <option value="MBSB">MBSB Bank</option>
+                                <option value="BankMuamalat">Bank Muamalat Malaysia</option>
+                                <option value="EonBank">Eon Bank</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="trans">
+                <fieldset>
+                    <legend>Transaction Details</legend>
+                    <div class="trans-detail">
+                        <div class="row1">
+                            <div class="label">Name</div>
+                            <div class="value">Adam Wong</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Email address</div>
+                            <div class="value">123@gmail.com</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Product name</div>
+                            <div class="value"><span class="product-name">Tennis Ball</span></div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Date & Time</div>
+                            <div class="value" id="currentDateTime"></div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Pay to</div>
+                            <div class="value">Wintro Premium Enterprise</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Transaction ID</div>
+                            <div class="value">B8670</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Order ID</div>
+                            <div class="value">A1234</div>
+                        </div>
+                        <div class="row1">
+                            <div class="label">Subtotal</div>
+                            <div class="value"><span class="price">RM XX.XX</span></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>        
+
+            <div class="agreement">
+                <input type="checkbox" checked="checked" name="agree" id="agree">
+                <label for="agree">I agree to the Wintro Premium <a href="">Terms and Conditions</a> and <a href="">Privacy Policy.</a></label>
+            </div>
+
+
+            <div class="timing">
+                <p>You have <span id="timeLeft"></span><span class="minute"> minutes</span> left to complete transaction.</p>
+            </div>
+
+            <div class="buttons">
+                <button>Proceed</button>
+                <button>Cancel</button>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="banking.js"></script>
+    </body>
+</html>
