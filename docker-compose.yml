@@ -1,0 +1,46 @@
+services:
+  apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php:8.2-apache-custom
+    container_name: apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./apache-config:/etc/apache2/sites-available
+    depends_on:
+      - mysql
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    command: bash -c "apachectl -D FOREGROUND"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: front_db
+      MYSQL_USER: virtuosa
+      MYSQL_PASSWORD: cello
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: virtuosa
+      PMA_PASSWORD: cello
+
+volumes:
+  mysql_data:
