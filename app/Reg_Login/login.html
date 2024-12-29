@@ -11,17 +11,17 @@
     <body>
         <div class="container" id="container">
             <div class="sign-up">
-                <form name="signupForm" id="signupForm"  autocomplete="on" onsubmit="return(validate('signupForm'));">
+                <form action="../includes/signup-inc.php" method="post" name="signupForm" id="signupForm"  autocomplete="on" onsubmit="return(validate('signupForm'));">
                     
                     <h2>Let's get started.</h2>
 
                     <div>
                     <label for="signup-fn">Full Name<span class="star"> *</span></label>
-                    <input type="text" name="Name" id="signup-fn" placeholder="Enter Full Name" required>
+                    <input type="text" name="username" id="signup-fn" placeholder="Enter Full Name" required>
                     <label for="signup-email">Email<span class="star"> *</span></label>
-                    <input type="text" name="Email" id="signup-email" placeholder="Enter Email" required>
+                    <input type="text" name="email" id="signup-email" placeholder="Enter Email" required>
                     <label for="signup-password">Password<span class="star"> *</span></label>
-                    <input type="password" name="Password" id="signup-pwd" placeholder="Enter Password" required>
+                    <input type="password" name="pwd" id="signup-pwd" placeholder="Enter Password" required>
                     </div>
 
                     <div class="eye1">
