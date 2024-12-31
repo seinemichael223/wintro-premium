@@ -10,148 +10,78 @@ CREATE TABLE IF NOT EXISTS users (
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- --------------------------------------------------------
---
--- Table structure for table category
---
-
 CREATE TABLE IF NOT EXISTS category (
-  category_id int(12) AUTO_INCREMENT PRIMARY KEY,
-  category_name varchar(50) NOT NULL
+    category_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(50) NOT NULL
 );
 
---
--- Dumping data for table category
---
-
-INSERT INTO category (category_id, category_name) VALUES
-(1, 'Awards and Trophies'),
-(2, 'Gifts and Souvenirs'),
-(3, 'Clothing'),
-(4, 'Printings'),
-(5, 'Office Equipments'),
-(6, 'Sport Equipments'),
-(7, 'Nametags');
-
--- --------------------------------------------------------
-
---
--- Table structure for table inventory
---
-
-CREATE TABLE IF NOT EXISTS inventory (
-  inventory_id int(12) AUTO_INCREMENT PRIMARY KEY,
-  stock_quantity int(12) NOT NULL,
-  option_id int(12) DEFAULT NULL,
-  product_id int(12) NOT NULL,
-  product_id int FOREIGN KEY REFERENCES product(product_id)
+CREATE TABLE IF NOT EXISTS sub_category (
+    sub_category_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    sub_category_name VARCHAR(50) NOT NULL,
+    category_id INT(12) NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES category (category_id)
 );
-
--- --------------------------------------------------------
-
---
--- Table structure for table options
---
-
-CREATE TABLE IF NOT EXISTS options (
-  option_id int(12) AUTO_INCREMENT PRIMARY KEY,
-  option_colour varchar(50) DEFAULT NULL,
-  option_size varchar(50) NOT NULL,
-  product_id int(12) NOT NULL,
-  product_id int FOREIGN KEY REFERENCES product(product_id)
-);
-
---
--- Dumping data for table options
---
-
-INSERT INTO options (option_id, option_colour, option_size, product_id) VALUES
-(1, 'Gold', '400mm(H)x 120mm(L)x 120mm(W)', 1),
-(2, 'Gold', '360mm(H)x 100mm(L)x 100mm(W)', 1),
-(3, 'Gold', '330mm(H)x 90mm(L)x 90mm(W)', 1),
-(4, 'Gold', '290mm(H)x 90mm(L)x 90mm(W)', 1),
-(5, 'Gold-Red', '350mm(H)x 79mm(L)x 79mm(W)', 2),
-(6, 'Gold-Red', '322mm(H)x 79mm(L)x 79mm(W)', 2),
-(7, 'Gold-Red', '295mm(H)x 79mm(L)x 79mm(W)', 2),
-(8, 'Gold', '380mm(H)x 79mm(L)x 79mm(W)', 3),
-(9, 'Gold', '360mm(H)x 79mm(L)x 79mm(W)', 3),
-(10, 'Gold', '315mm(H)x 79mm(L)x 79mm(W)', 3),
-(15, 'Gold-Red', '335mm(H)x 120mm(L)x 120mm(W)', 4),
-(16, 'Gold-Red', '300mm(H)x 100mm(L)x 100mm(W)', 4),
-(17, 'Gold-Red', '270mm(H)x 100mm(L)x 100mm(W)', 4),
-(18, 'Gold-Blue', '335mm(H)x 120mm(L)x 120mm(W)', 4),
-(19, 'Gold-Blue', '300mm(H)x 100mm(L)x 100mm(W)', 4),
-(20, 'Gold-Blue', '270mm(H)x 100mm(L)x 100mm(W)', 4),
-(21, 'Gold', '312mm(H)x 100mm(L)x 100mm(W)', 5),
-(22, 'Silver', '312mm(H)x 100mm(L)x 100mm(W)', 5),
-(23, 'Bronze', '312mm(H)x 100mm(L)x 100mm(W)', 5),
-(24, 'Gold', '70mm(H)', 6),
-(25, 'Silver', '70mm(H)', 6),
-(26, 'Bronze', '70mm(H)', 6),
-(27, 'Gold', '70mm(H)', 7),
-(28, 'Silver', '70mm(H)', 7),
-(29, 'Bronze', '70mm(H)', 7),
-(30, 'Gold', '70mm(H)', 8),
-(31, 'Silver', '70mm(H)', 8),
-(32, 'Bronze', '70mm(H)', 8),
-(33, NULL, '270mm(H)x 120mm(L)x 55mm(W)', 9),
-(34, NULL, '250mm(H)x 110mm(L)x 55mm(W)', 9),
-(35, NULL, '230mm(H)x 110mm(L)x 55mm(W)', 9),
-(36, NULL, '235mm(H)x 110mm(L)x 55mm(W)', 10),
-(37, NULL, '215mm(H)x 110mm(L)x 55mm(W)', 10),
-(38, NULL, '195mm(H)x 110mm(L)x 55mm(W)', 10),
-(39, NULL, '215mm(H)x 150mm(L)x 55mm(W)', 11),
-(40, NULL, '200mm(H)x 130mm(L)x 55mm(W)', 12),
-(41, NULL, '266mm(H)x 266mm(L)x 2mm(W)', 13),
-(42, NULL, '215mm(H)x 215mm(L)x 2mm(W)', 13),
-(43, NULL, '173mm(H)x 173mm(L)x 2mm(W)', 13),
-(44, NULL, '203mm(H)x 203mm(L)x 2mm(W)', 14),
-(45, NULL, '5', 17),
-(46, NULL, '6', 17),
-(47, NULL, '7', 17),
-(48, NULL, '7', 18),
-(49, NULL, '5', 19),
-(50, NULL, '6', 19),
-(51, NULL, '7', 19),
-(52, NULL, '5', 20),
-(53, NULL, '5', 21),
-(54, NULL, '4', 22),
-(55, NULL, '5', 22),
-(56, NULL, '5', 23),
-(57, NULL, '5', 24),
-(58, NULL, '4', 25),
-(59, NULL, '4', 26),
-(60, NULL, '4', 27),
-(61, NULL, '5', 27),
-(62, NULL, '6', 31),
-(63, NULL, '7', 32),
-(64, NULL, '9.9', 34),
-(65, NULL, '9.8', 34),
-(66, NULL, '600', 35),
-(67, NULL, '700', 35);
-
--- --------------------------------------------------------
-
---
--- Table structure for table product
---
 
 CREATE TABLE IF NOT EXISTS product (
-  product_id int(12) AUTO_INCREMENT PRIMARY KEY,
-  product_name varchar(100) NOT NULL,
-  product_description text DEFAULT NULL,
-  product_image varchar(100) NOT NULL,
-  product_unit_price decimal(10,2) NOT NULL,
-  product_bulk_price decimal(10,2) DEFAULT NULL,
-  product_created_at timestamp NOT NULL DEFAULT current_timestamp(),
-  product_upated_at timestamp NOT NULL DEFAULT current_timestamp(),
-  sub_category_id int(12),
-  sub_category_id int FOREIGN KEY REFERENCES sub_category(sub_category_id)
+    product_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    product_description TEXT DEFAULT NULL,
+    product_image VARCHAR(100) NOT NULL,
+    product_unit_price DECIMAL(10, 2) NOT NULL,
+    product_bulk_price DECIMAL(10, 2) DEFAULT NULL,
+    product_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    product_upated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    sub_category_id INT(12),
+    FOREIGN KEY (sub_category_id) REFERENCES sub_category(sub_category_id)
 );
 
---
--- Dumping data for table product
---
+CREATE TABLE IF NOT EXISTS inventory (
+    inventory_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    stock_quantity INT(12) NOT NULL,
+    option_id INT(12),
+    product_id INT(12) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (product_id)
+);
+
+CREATE TABLE IF NOT EXISTS options (
+    option_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    option_colour VARCHAR(50),
+    option_size VARCHAR(50) NOT NULL,
+    product_id INT(12) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (product_id)
+);
+
+INSERT INTO category (category_name) VALUES
+('Awards and Trophies'),
+('Gifts and Souvenirs'),
+('Clothing'),
+('Printings'),
+('Office Equipments'),
+('Sport Equipments'),
+('Nametags');
+
+INSERT INTO sub_category (sub_category_id, sub_category_name, category_id) VALUES
+(1, 'Trophy', 1),
+(2, 'Medal', 1),
+(3, 'Crystal', 1),
+(4, 'Pewter Award', 1),
+(5, 'Stationary Hamper', 2),
+(6, 'Food Hamper', 2),
+(7, 'Jersey', 3),
+(8, 'T-shirt', 3),
+(9, 'Uniform', 3),
+(10, 'Corporate', 3),
+(11, 'Sticker', 4),
+(12, 'Certificate', 4),
+(13, 'Banner', 4),
+(14, 'Signboard', 4),
+(15, 'Pre Inked Stamp & Cop', 5),
+(16, 'Basketball', 6),
+(17, 'Badminton', 6),
+(18, 'Football', 6),
+(19, 'Table Tennis', 6),
+(20, 'Futsal', 6),
+(21, 'Stopwatch', 6);
 
 INSERT INTO product (product_id, product_name, product_description, product_image, product_unit_price, product_bulk_price, product_created_at, product_upated_at, sub_category_id) VALUES
 (1, 'CT5003F Acrylic Plastic Trophy', '', 'uploads/Awards and Trophies/trophy/Acrylic Plastic Trophy.png\r\n', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
@@ -190,46 +120,70 @@ INSERT INTO product (product_id, product_name, product_description, product_imag
 (34, 'ARMO SPEED Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/ARMO SPEED Badminton Rackets.png', 39.90, 38.90, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17),
 (35, 'TS POWER Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/TS POWER Badminton Rackets.png', 39.90, 38.90, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17);
 
--- --------------------------------------------------------
-
---
--- Table structure for table sub_category
---
-
-CREATE TABLE IF NOT EXISTS sub_category (
-  sub_category_id int(12) AUTO_INCREMENT PRIMARY KEY,
-  sub_category_name varchar(50) NOT NULL,
-  category_id int(12) NOT NULL,
-  category_id int FOREIGN KEY REFERENCES category(category_id)
-);
-
---
--- Dumping data for table sub_category
---
-
-INSERT INTO sub_category (sub_category_id, sub_category_name, category_id) VALUES
-(1, 'Trophy', 1),
-(2, 'Medal', 1),
-(3, 'Crystal', 1),
-(4, 'Pewter Award', 1),
-(5, 'Stationary Hamper', 2),
-(6, 'Food Hamper', 2),
-(7, 'Jersey', 3),
-(8, 'T-shirt', 3),
-(9, 'Uniform', 3),
-(10, 'Corporate', 3),
-(11, 'Sticker', 4),
-(12, 'Certificate', 4),
-(13, 'Banner', 4),
-(14, 'Signboard', 4),
-(15, 'Pre Inked Stamp & Cop', 5),
-(16, 'Basketball', 6),
-(17, 'Badminton', 6),
-(18, 'Football', 6),
-(19, 'Table Tennis', 6),
-(20, 'Futsal', 6),
-(21, 'Stopwatch', 6);
-
+INSERT INTO options (option_colour, option_size, product_id) VALUES
+('Gold', '400mm(H)x 120mm(L)x 120mm(W)', 1),
+('Gold', '360mm(H)x 100mm(L)x 100mm(W)', 1),
+('Gold', '330mm(H)x 90mm(L)x 90mm(W)', 1),
+('Gold', '290mm(H)x 90mm(L)x 90mm(W)', 1),
+('Gold-Red', '350mm(H)x 79mm(L)x 79mm(W)', 2),
+('Gold-Red', '322mm(H)x 79mm(L)x 79mm(W)', 2),
+('Gold-Red', '295mm(H)x 79mm(L)x 79mm(W)', 2),
+('Gold', '380mm(H)x 79mm(L)x 79mm(W)', 3),
+('Gold', '360mm(H)x 79mm(L)x 79mm(W)', 3),
+('Gold', '315mm(H)x 79mm(L)x 79mm(W)', 3),
+('Gold-Red', '335mm(H)x 120mm(L)x 120mm(W)', 4),
+('Gold-Red', '300mm(H)x 100mm(L)x 100mm(W)', 4),
+('Gold-Red', '270mm(H)x 100mm(L)x 100mm(W)', 4),
+('Gold-Blue', '335mm(H)x 120mm(L)x 120mm(W)', 4),
+('Gold-Blue', '300mm(H)x 100mm(L)x 100mm(W)', 4),
+('Gold-Blue', '270mm(H)x 100mm(L)x 100mm(W)', 4),
+('Gold', '312mm(H)x 100mm(L)x 100mm(W)', 5),
+('Silver', '312mm(H)x 100mm(L)x 100mm(W)', 5),
+('Bronze', '312mm(H)x 100mm(L)x 100mm(W)', 5),
+('Gold', '70mm(H)', 6),
+('Silver', '70mm(H)', 6),
+('Bronze', '70mm(H)', 6),
+('Gold', '70mm(H)', 7),
+('Silver', '70mm(H)', 7),
+('Bronze', '70mm(H)', 7),
+('Gold', '70mm(H)', 8),
+('Silver', '70mm(H)', 8),
+('Bronze', '70mm(H)', 8),
+(NULL, '270mm(H)x 120mm(L)x 55mm(W)', 9),
+(NULL, '250mm(H)x 110mm(L)x 55mm(W)', 9),
+(NULL, '230mm(H)x 110mm(L)x 55mm(W)', 9),
+(NULL, '235mm(H)x 110mm(L)x 55mm(W)', 10),
+(NULL, '215mm(H)x 110mm(L)x 55mm(W)', 10),
+(NULL, '195mm(H)x 110mm(L)x 55mm(W)', 10),
+(NULL, '215mm(H)x 150mm(L)x 55mm(W)', 11),
+(NULL, '200mm(H)x 130mm(L)x 55mm(W)', 12),
+(NULL, '266mm(H)x 266mm(L)x 2mm(W)', 13),
+(NULL, '215mm(H)x 215mm(L)x 2mm(W)', 13),
+(NULL, '173mm(H)x 173mm(L)x 2mm(W)', 13),
+(NULL, '203mm(H)x 203mm(L)x 2mm(W)', 14),
+(NULL, '5', 17),
+(NULL, '6', 17),
+(NULL, '7', 17),
+(NULL, '7', 18),
+(NULL, '5', 19),
+(NULL, '6', 19),
+(NULL, '7', 19),
+(NULL, '5', 20),
+(NULL, '5', 21),
+(NULL, '4', 22),
+(NULL, '5', 22),
+(NULL, '5', 23),
+(NULL, '5', 24),
+(NULL, '4', 25),
+(NULL, '4', 26),
+(NULL, '4', 27),
+(NULL, '5', 27),
+(NULL, '6', 31),
+(NULL, '7', 32),
+(NULL, '9.9', 34),
+(NULL, '9.8', 34),
+(NULL, '600', 35),
+(NULL, '700', 35);
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;
