@@ -7,8 +7,8 @@ session_set_cookie_params([
     'lifetime' => 1800,
     'domain' => 'localhost',
     'path' => '/',
-    'secure' => false,
-    'httponly' => false
+    'secure' => true,
+    'httponly' => true
 ]);
 
 session_start();

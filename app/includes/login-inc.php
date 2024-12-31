@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["user_username"] = htmlspecialchars($result["username"]);
         $_SESSION["last_regeneration"] = time();
 
-        header("Location: ../Homepage/homepage.html?login=success");
+        header("Location: ../Homepage/homepage.php?login=success");
         exit(); // Always use exit after header()
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
