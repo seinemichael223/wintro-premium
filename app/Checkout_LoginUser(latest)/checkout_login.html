@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <meta charset="Utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link id="stylesheet" rel="stylesheet" type="text/css" href="checkout_login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="header1">
+                <div class="info1">
+                <p>Call Us +60 12 345 6789</p>
+                </div>
+                <div class="info2">
+                <p>Free Shipping for Orders over RM199.90</p>
+                </div>
+            </div>
+            <div class="header2">
+                <div class="search">
+                    <i class="fa-solid fa-bars"></i>
+                    <div class="input-container">
+                        <input type="text" name="search" id="search" placeholder="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <div class="logo">
+                    <img src="image/wpLogo2.png" alt="logo">
+                </div>
+                <div class="icons">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-user"></i>
+                <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <p>RM 0.00</p>
+                </div>
+            </div>
+            <div class="navBar">
+                <div class="navBtn">
+                    <li><a href="../Homepage/homepage.html">HOME</a></li>
+                    <li><a href="../AboutUs/aboutUs.html">ABOUT US</a></li>
+                    <li class="dropdown">
+                        <a href="#" id="product-link">PRODUCT</a>
+                        <div class="dropdown-overlay" id="product-dropdown">
+                            <div class="dropdown-content">
+                                <div class="column">
+                                    <h4><a href="#">Awards and Trophies</a></h4>
+                                    <ul>
+                                        <li><a href="../Product/Awards&Trophies/awards_trophies.html">Trophy</a></li>
+                                        <li><a href="#">Medal</a></li>
+                                        <li><a href="#">Crystal</a></li>
+                                        <li><a href="#">Pewter Award</a></li>
+                                    </ul>
+                                    <h4><a href="#">Gifts & Souvenirs</a></h4>
+                                    <ul>
+                                        <li><a href="#">Stationary Hamper</a></li>
+                                        <li><a href="#">Food Hamper</a></li>
+                                    </ul>
+                                    <h4><a href="#">Nametags</a></h4>
+                                </div>
+                                <div class="column">
+                                    <h4><a href="#">Clothing</a></h4>
+                                    <ul>
+                                        <li><a href="#">Jersey</a></li>
+                                        <li><a href="#">T-shirt</a></li>
+                                        <li><a href="#">Uniform</a></li>
+                                        <li><a href="#">Corporate</a></li>
+                                    </ul>
+                                    <h4><a href="#">Printings</a></h4>
+                                    <ul>
+                                        <li><a href="#">Sticker</a></li>
+                                        <li><a href="#">Certificate</a></li>
+                                        <li><a href="#">Banner</a></li>
+                                        <li><a href="#">Signboard</a></li>
+                                    </ul>
+                                </div>
+                                <div class="column">
+                                    <h4><a href="#">Office Equipment</a></h4>
+                                    <ul>
+                                        <li><a href="#">Pre Inked Stamp & Cop</a></li>
+                                    </ul>
+                                    <h4><a href="#">Sport Equipment</a></h4>
+                                    <ul>
+                                        <li><a href="#">Basketball</a></li>
+                                        <li><a href="#">Badminton</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">Table Tennis</a></li>
+                                        <li><a href="#">Futsal</a></li>
+                                        <li><a href="#">Stopwatch</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="../Services/service.html">SERVICES</a></li>
+                    <li><a href="../ContactUs/ContactUs.html">CONTACT US</a></li>
+                    <li><a href="../HowToOrder/HowToOrder.html">HOW TO ORDER</a></li>
+                </div>
+            </div>               
+        </div>
+        
+        <div class="smallNav">
+            <ul>
+                <li><a href="../Homepage/homepage.html">Home</a></li>
+                <p>|</p>
+                <li><a href="../MyCart/myCart.html">My Cart</a></li>
+                <p>|</p>
+                <li><a href="#"><span class="colored">My Cart</span></a></li>
+            </ul>           
+        </div>
+
+        <div class="checkout-title">
+            <p>Checkout</p>
+        </div>
+
+        <div class="checkout-container">
+            <div class="left-side">
+                <fieldset class="fieldset1">
+                    <legend class="legend1">Delivery Method</legend>
+                        <div class="delivery-method">
+                            <div class="delivery-method1">
+                                <input type="radio" checked="checked" name="method" id="self-pickup" value="self-pickup">
+                                <label for="self-pickup">Self Pick-up</label>
+                                <p><span class="address">Pick-up address: No.27 A, Jalan teratai 10 <br>
+                                    Taman Johor Jaya, 81100 Jogor Bahru, Johor</span></p>
+                            </div>
+                            <div class="delivery-method2">
+                                <input type="radio" name="method" id="doorstep" value="doorstep">
+                                <label for="doorstep">Doorstep Delivery</label>
+                            </div>
+                        </div>
+                </fieldset>
+
+                <div class="addressBox hidden">
+                    <div class="shipping-box">
+                        <div class="shipping-actions">
+                            <div class="ship-edit" id="edit-ship"><p>Edit</p></div>
+                            <span class="pipe">|</span>
+                            <div class="ship-addNew" id="add-ship"><p>Add New</p></div>
+                            <span class="pipe">|</span>
+                            <div class="ship-delete" id="deleteBtn"><p>Delete</p></div>
+                        </div>
+
+                        <div class="dropdown shipping-dropdown">
+                            <div class="dropdown-header">
+                                <fieldset class="fieldset3">
+                                    <legend class="legend3">Shipping Address</legend>
+                                    <select id="ship-address-select">
+                                        <option value="" disabled selected>--Choose an address--</option>
+                                    </select>
+                                </fieldset>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="fieldset5 hidden">
+                        <legend class="legend3">Shipping Address</legend>
+                        <div class="shipping-form">
+                            <form name="shippingForm" id="shippingForm" onsubmit="return(validate('shippingForm'));">
+                                <div class="input-box">
+                                    <label for="ship-fn">Full name<span class="star"> *</span></label>
+                                    <input type="text" name="ship-fn" id="ship-fn">
+                                </div>
+                
+                                <div class="input-box">
+                                    <label for="ship-phoneNo">Phone number<span class="star"> *</span></label>
+                                    <input type="tel" name="ship-phoneNo" id="ship-phoneNo" placeholder="012-123-1234" required>
+                                </div>
+                 
+                                <div class="input-box">
+                                    <label for="ship-Email">Email address<span class="star"> *</span></label>
+                                    <input type="text" name="ship-Email" id="ship-Email">
+                                </div>
+                
+                                <div class="input-box">
+                                    <label for="ship-street">Street Address<span class="star"> *</span></label>
+                                    <input type="text" name="ship-street" id="ship-street">
+                                </div>
+                                
+                                <div class="column">
+                                    <div class="input-box">
+                                        <label for="ship-city">City<span class="star"> *</span></label>
+                                        <input type="text" name="ship-city" id="ship-city">
+                                    </div>
+                                    <div class="input-box">
+                                        <label for="ship-postcode">Postcode<span class="star"> *</span></label>
+                                        <input type="text" name="ship-postcode" id="ship-postcode">
+                                    </div>
+                                </div>
+                
+                                <div class="input-box">
+                                    <div class="select-state">
+                                        <label for="ship-state">State<span class="star"> *</span></label>
+                                        <select name="ship-state" id="ship-state">
+                                            <option value="Sabah">Sabah</option>
+                                            <option value="Sarawak">Sarawak</option>
+                                            <option value="Johor">Johor</option>
+                                            <option value="Kedah">Kedah</option>
+                                            <option value="Kelantan">Kelantan</option>
+                                            <option value="Melaka">Melaka</option>
+                                            <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                            <option value="Pahang">Pahang</option>
+                                            <option value="Penang">Penang</option>
+                                            <option value="Perak">Perak</option>
+                                            <option value="Perlis">Perlis</option>
+                                            <option value="Selangor">Selangor</option>
+                                            <option value="Terengganu">Terengganu</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-btn">
+                                    <button type="submit" id="saveBtn1">Save</button>
+                                    <button id="cancelBtn1">Cancel</button>
+                                </div>   
+                            </form>
+                        </div>
+                    </fieldset>
+
+                    <div class="billing-box">
+                        <div class="billing-actions">
+                            <div class="bill-edit" id="edit-bill" ><p>Edit</p></div>
+                            <span class="pipe">|</span>
+                            <div class="bill-addNew" id="add-bill"><p>Add New</p></div>
+                            <span class="pipe">|</span>
+                            <div class="bill-delete" id="deleteBtn2"><p>Delete</p></div>
+                        </div> 
+
+                        <div class="dropdown billing-dropdown">
+                            <div class="dropdown-header">
+                                <fieldset class="fieldset4">
+                                    <legend class="legend4">Billing Address</legend>
+                                    <select id="bill-address-select">
+                                        <option value="" disabled selected>--Choose an address--</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <fieldset class="fieldset6 hidden">
+                    <legend class="legend3">Billing Address</legend>
+                    <div class="billing-form">
+                        <form name="billingForm" id="billingForm" onsubmit="return(validate('billingForm'));">
+                            <div class="input-box">
+                                <label for="bill-fn">Full name<span class="star"> *</span></label>
+                                <input type="text" name="bill-fn" id="bill-fn">
+                            </div>
+            
+                            <div class="input-box">
+                                <label for="bill-phoneNo">Phone number<span class="star"> *</span></label>
+                                <input type="tel" name="bill-phoneNo" id="bill-phoneNo" placeholder="012-123-1234">
+                            </div>
+            
+                            <div class="input-box">
+                                <label for="bill-Email">Email address<span class="star"> *</span></label>
+                                <input type="text" name="bill-Email" id="bill-Email">
+                            </div>
+            
+                            <div class="input-box">
+                                <label for="bill-street">Street Address<span class="star"> *</span></label>
+                                <input type="text" name="bill-street" id="bill-street">
+                            </div>
+                            
+                            <div class="column">
+                                <div class="input-box">
+                                    <label for="bill-city">City<span class="star"> *</span></label>
+                                    <input type="text" name="bill-city" id="bill-city">
+                                </div>
+                                <div class="input-box">
+                                    <label for="bill-postcode">Postcode<span class="star"> *</span></label>
+                                    <input type="text" name="bill-postcode" id="bill-postcode">
+                                </div>
+                            </div>
+            
+                            <div class="input-box">
+                                <div class="select-state">
+                                    <label for="bill-state">State<span class="star"> *</span></label>
+                                    <select name="bill-state" id="bill-state">
+                                        <option value="Sabah">Sabah</option>
+                                        <option value="Sarawak">Sarawak</option>
+                                        <option value="Johor">Johor</option>
+                                        <option value="Kedah">Kedah</option>
+                                        <option value="Kelantan">Kelantan</option>
+                                        <option value="Melaka">Melaka</option>
+                                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                        <option value="Pahang">Pahang</option>
+                                        <option value="Penang">Penang</option>
+                                        <option value="Perak">Perak</option>
+                                        <option value="Perlis">Perlis</option>
+                                        <option value="Selangor">Selangor</option>
+                                        <option value="Terengganu">Terengganu</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-btn">
+                                <button type="submit" id="saveBtn2">Save</button>
+                                <button id="cancelBtn2">Cancel</button>
+                            </div>   
+                        </form>
+                    </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="right-side">
+                <fieldset class="fieldset2">
+                    <legend class="legend2">Order Review</legend>
+                        <div class="order">
+                            <div class="product-detail">
+                                <div class="image">
+                                    <img src="image/trophy.png" alt="product">
+                                </div>
+                                <div class="detail">
+                                    <div class="detail1">
+                                        <h5>Product</h5>
+                                        <p>Description</p>
+                                    </div>
+                                    <div class="detail2">
+                                        <p>Qty: 1</p>
+                                        <p><span class="price-highlight">RM XX.XX</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="voucher">
+                                <i class="fa-solid fa-ticket"></i>
+                                <input type="text" name="code" id="code" placeholder="Apply">
+                            </div>
+                            <div class="summary">
+                                <div class="total">
+                                    <p>Total</p>
+                                    <p>RM XX.XX</p>
+                                </div>
+                                <div class="shippingFee">
+                                    <p>Shipping Fee</p>
+                                    <p>RM XX.XX</p>
+                                </div>
+                                <div class="subtotal">
+                                    <p>Subtotal</p>
+                                    <p><span class="highlight-subtotal">RM XX.XX</span></p>
+                                </div>
+                            </div>
+                            <div class="pay-btn">
+                                <button type="submit">Pay Now</button>
+                            </div>
+                        </div>
+                </fieldset>
+            </div>
+
+            <div id="deleteModal" class="modal hidden">
+                <div class="modal-content">
+                    <p>Are you sure you want to delete this address?</p>
+                    <div class="modal-actions">
+                        <button id="confirmDelete">Yes</button>
+                        <button id="cancelDelete">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="checkout_login.js"></script>
+    </body>
+</html>
