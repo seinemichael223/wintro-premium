@@ -1,0 +1,11 @@
+HS3V
+Measuring unit :1/100th of a second
+Measuring capacity : 9:59’59.99″
+Mode : Net time, split time, 1st/2nd place times
+RM165.00
+
+F-011
+Measuring unit :1/100th of a second
+Measuring capacity : 9:59’59.99″
+Mode : Calendar, calendar
+RM25.00

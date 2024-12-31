@@ -1,0 +1,11 @@
+BG3800 Synthetic Rubber
+Size 7/6/5
+RM190.00
+
+BG3200 Composite Leather
+Size 7/5
+RM170.00
+
+BG3000 Synthetic Rubber
+Size 7
+RM119.00
