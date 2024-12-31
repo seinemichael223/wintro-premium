@@ -147,22 +147,11 @@
                             <div class="dropdown-header">
                                 <fieldset class="fieldset3">
                                     <legend class="legend3">Shipping Address</legend>
-                                    <div class="shipping-info">
-                                        <div class="name">Adam Wong</div>
-                                        <div class="phoneNo">+60 12-123-1234</div>
-                                        <div class="email">adamhandsome@gmail.com</div>
-                                        <div class="street">No.8, Lorong 1A, Jalan Permai,</div>
-                                        <div class="detail">94300, Kota Samarahan, Sarawak.</div>
-                                    </div>
-                                    <i class="fa-solid fa-angle-down" id="ship-angle"></i>
+                                    <select id="ship-address-select">
+                                        <option value="" disabled selected>--Choose an address--</option>
+                                    </select>
                                 </fieldset>
-                                <div class="other-shipAddress hidden">
-                                    <div class="name">Barbara</div>
-                                        <div class="phoneNo">+60 12-123-1234</div>
-                                        <div class="email">adamhandsome@gmail.com</div>
-                                        <div class="street">No.8, Lorong 1A, Jalan Permai,</div>
-                                        <div class="detail">94300, Kota Samarahan, Sarawak.</div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -178,7 +167,7 @@
                 
                                 <div class="input-box">
                                     <label for="ship-phoneNo">Phone number<span class="star"> *</span></label>
-                                    <input type="tel" name="ship-phoneNo" id="ship-phoneNo" placeholder="012-123-1234">
+                                    <input type="tel" name="ship-phoneNo" id="ship-phoneNo" placeholder="012-123-1234" required>
                                 </div>
                  
                                 <div class="input-box">
@@ -238,28 +227,16 @@
                             <div class="bill-addNew" id="add-bill"><p>Add New</p></div>
                             <span class="pipe">|</span>
                             <div class="bill-delete" id="deleteBtn2"><p>Delete</p></div>
-                        </div>
+                        </div> 
 
                         <div class="dropdown billing-dropdown">
                             <div class="dropdown-header">
                                 <fieldset class="fieldset4">
                                     <legend class="legend4">Billing Address</legend>
-                                    <div class="billing-info">
-                                        <div class="name">Adam Wong</div>
-                                        <div class="phoneNo">+60 12-123-1234</div>
-                                        <div class="email">adamhandsome@gmail.com</div>
-                                        <div class="street">No.8, Lorong 1A, Jalan Permai,</div>
-                                        <div class="detail">94300, Kota Samarahan, Sarawak.</div>
-                                    </div>
-                                    <i class="fa-solid fa-angle-down" id="bill-angle"></i>
+                                    <select id="bill-address-select">
+                                        <option value="" disabled selected>--Choose an address--</option>
+                                    </select>
                                 </fieldset>
-                                <div class="other-billAddress hidden">
-                                    <div class="name">Jordan</div>
-                                        <div class="phoneNo">+60 12-123-1234</div>
-                                        <div class="email">adamhandsome@gmail.com</div>
-                                        <div class="street">No.8, Lorong 1A, Jalan Permai,</div>
-                                        <div class="detail">94300, Kota Samarahan, Sarawak.</div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -275,7 +252,7 @@
             
                             <div class="input-box">
                                 <label for="bill-phoneNo">Phone number<span class="star"> *</span></label>
-                                <input type="tel" name="bill-phoneNo" id="bill-phoneNo" placeholder="+60 12-123-1234">
+                                <input type="tel" name="bill-phoneNo" id="bill-phoneNo" placeholder="012-123-1234">
                             </div>
             
                             <div class="input-box">
@@ -374,25 +351,16 @@
                 </fieldset>
             </div>
 
-            <div id="overlay" class="overlay">
-                <div class="overlay-content">
-                    <p>Confirm to delete this address?</p>
-                    <div class="info-delete">
-                        <div class="name">Adam Wong</div>
-                        <div class="phoneNo">+60 12-123-1234</div>
-                        <div class="email">adamhandsome@gmail.com</div>
-                        <div class="billing-address">No.8, Lorong 1A, Jalan Permai,
-                                                    94300, Kota Samarahan, Sarawak.</div>
-                    </div>
-                    <div class="overlay-actions">
-                        <button>Delete</button>
-                        <button id="cancelBtn">Cancel</button>
+            <div id="deleteModal" class="modal hidden">
+                <div class="modal-content">
+                    <p>Are you sure you want to delete this address?</p>
+                    <div class="modal-actions">
+                        <button id="confirmDelete">Yes</button>
+                        <button id="cancelDelete">No</button>
                     </div>
                 </div>
             </div>
-
         </div>
-
 
         <script type="text/javascript" src="checkout_login.js"></script>
     </body>

@@ -707,3 +707,70 @@ input[type="checkbox"] {
 button:hover {
     background-color: black;
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#confirmDelete {
+    background-color: rgb(3,32,98);
+    color: white;
+}
+
+#confirmDelete:hover , #cancelDelete:hover {
+    background-color: black;
+}
+
+#cancelDelete {
+    background-color: rgb(3,32,98);
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+#bill-address-select, #ship-address-select {
+    width: 100%;
+    height: 20px;
+    border-radius: 0;
+    border: none;
+    background-color: lightgrey;
+    box-shadow: 0 1px 1px lightgrey;
+    white-space: nowrap;
+}
+
+#bill-address-select:focus, #ship-address-select:focus {
+    outline: none;
+}

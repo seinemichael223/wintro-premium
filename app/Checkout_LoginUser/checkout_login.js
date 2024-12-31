@@ -37,268 +37,197 @@ function toggleAddressBox() {
         toggleAddressBox();
 };
 
-// Show other saved shipping address
-document.getElementById('ship-angle').addEventListener('click', function() {
-    const otherAddress = document.querySelector('.other-shipAddress');
-    otherAddress.classList.toggle('hidden');
-});
+// Function to handle the form submission and add the new address
+function addAddress(formId, selectId) {
+    const form = document.getElementById(formId);
+    const select = document.getElementById(selectId);
 
-// Show other saved billing address
-document.getElementById('bill-angle').addEventListener('click', function() {
-    const otherAddress = document.querySelector('.other-billAddress');
-    otherAddress.classList.toggle('hidden');
-});
+    // Get the form data
+    const fullName = form.querySelector(`#${formId} input[name*='fn']`).value;
+    const phoneNo = form.querySelector(`#${formId} input[name*='phoneNo']`).value;
+    const email = form.querySelector(`#${formId} input[name*='Email']`).value;
+    const street = form.querySelector(`#${formId} input[name*='street']`).value;
+    const city = form.querySelector(`#${formId} input[name*='city']`).value;
+    const postcode = form.querySelector(`#${formId} input[name*='postcode']`).value;
+    const state = form.querySelector(`#${formId} select[name*='state']`).value;
 
-// Swap content between addresses when the other address is clicked
-document.querySelector('.other-shipAddress').addEventListener('click', function () {
-    const shippingInfo = document.querySelector('.shipping-info');
-    const otherAddress = document.querySelector('.other-shipAddress');
+    // Validate that all required fields are filled
+    if (!fullName || !phoneNo || !email || !street || !city || !postcode || !state) {
+        return false;
+    }
 
-    // Swap contents
-    const tempContent = shippingInfo.innerHTML;
-    shippingInfo.innerHTML = otherAddress.innerHTML;
-    otherAddress.innerHTML = tempContent;
+    // Create a new option element
+    const option = document.createElement("option");
+    option.value = `${street}, ${city}, ${postcode}, ${state}`;
+    option.textContent = `${fullName} - ${street}, ${city}, ${postcode}, ${state}`;
+    select.appendChild(option);
 
-    // Hide the other address after swapping
-    otherAddress.classList.add('hidden');
-});
+    // Clear the form fields after adding the address
+    form.reset();
 
-// Swap content between addresses when the other address is clicked
-document.querySelector('.other-billAddress').addEventListener('click', function () {
-    const billingInfo = document.querySelector('.billing-info');
-    const otherAddress = document.querySelector('.other-billAddress');
+    // Hide the form
+    form.closest('fieldset').classList.add('hidden');
 
-    // Swap contents
-    const tempContent = billingInfo.innerHTML;
-    billingInfo.innerHTML = otherAddress.innerHTML;
-    otherAddress.innerHTML = tempContent;
-
-    // Hide the other address after swapping
-    otherAddress.classList.add('hidden');
-});
-
-// Utility function to toggle visibility
-function toggleVisibility(hiddenElement, visibleElement) {
-    hiddenElement.classList.add('hidden');
-    visibleElement.classList.remove('hidden');
+    return false; // Prevent actual form submission
 }
 
-// Elements for Shipping Address
-const shippingBox = document.querySelector('.shipping-box');
-const shippingInfo = document.querySelector('.shipping-info');
-const shippingForm = document.getElementById('shippingForm');
-const editShippingBtn = document.getElementById('edit-ship');
-const addShippingBtn = document.getElementById('add-ship');
-const saveShippingBtn = document.getElementById('saveBtn1');
-const cancelShippingBtn = document.getElementById('cancelBtn1');
-
-// Elements for Billing Address
-const billingBox = document.querySelector('.billing-box');
-const billingInfo = document.querySelector('.billing-info');
-const billingForm = document.getElementById('billingForm');
-const editBillingBtn = document.getElementById('edit-bill');
-const addBillingBtn = document.getElementById('add-bill');
-const saveBillingBtn = document.getElementById('saveBtn2');
-const cancelBillingBtn = document.getElementById('cancelBtn2');
-
-// Handle "Edit" for Shipping
-editShippingBtn.addEventListener('click', () => {
-    toggleVisibility(shippingBox, shippingForm.closest('.fieldset5'));
+// Attach event listeners to the Save buttons
+document.getElementById("saveBtn1").addEventListener("click", function (event) {
+    event.preventDefault();
+    addAddress("shippingForm", "ship-address-select");
 });
 
-// Handle "Add New" for Shipping
-addShippingBtn.addEventListener('click', () => {
-    toggleVisibility(shippingBox, shippingForm.closest('.fieldset5'));
+document.getElementById("saveBtn2").addEventListener("click", function (event) {
+    event.preventDefault();
+    addAddress("billingForm", "bill-address-select");
 });
 
-saveShippingBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent form submission
+// Show/hide the form when "Add New" is clicked
+document.getElementById("add-ship").addEventListener("click", function () {
+    document.querySelector(".fieldset5").classList.remove("hidden");
+});
 
-    if (!validate('shippingForm')) {
-        return; // Stop further execution if validation fails
+document.getElementById("add-bill").addEventListener("click", function () {
+    document.querySelector(".fieldset6").classList.remove("hidden");
+});
+
+// Cancel button to hide the form
+document.getElementById("cancelBtn1").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(".fieldset5").classList.add("hidden");
+});
+
+document.getElementById("cancelBtn2").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(".fieldset6").classList.add("hidden");
+});
+
+// Function to populate the form with the selected address details for editing
+function editAddress(selectId, formId) {
+    const select = document.getElementById(selectId);
+    const form = document.getElementById(formId);
+
+    // Get the selected address option
+    const selectedOption = select.options[select.selectedIndex];
+    if (!selectedOption || selectedOption.value === "") {
+        alert("Please select an address to edit.");
+        return;
     }
 
-    // Get values from the form
-    const name = document.getElementById('ship-fn').value;
-    const phoneNo = document.getElementById('ship-phoneNo').value;
-    const email = document.getElementById('ship-Email').value;
-    const street = document.getElementById('ship-street').value;
-    const city = document.getElementById('ship-city').value;
-    const postcode = document.getElementById('ship-postcode').value;
-    const state = document.getElementById('ship-state').value;
+    // Extract details from the selected option's value
+    const [street, city, postcode, state] = selectedOption.value.split(", ");
+    const [fullName] = selectedOption.textContent.split(" - ");
 
-    // Update the shipping information display
-    shippingInfo.innerHTML = `
-        <div class="name">${name}</div>
-        <div class="phoneNo">${phoneNo}</div>
-        <div class="email">${email}</div>
-        <div class="shipping-address">${street}, ${city}, ${postcode}, ${state}.</div>
-    `;
+    // Populate the form fields
+    form.querySelector(`#${formId} input[name*='fn']`).value = fullName;
+    form.querySelector(`#${formId} input[name*='street']`).value = street;
+    form.querySelector(`#${formId} input[name*='city']`).value = city;
+    form.querySelector(`#${formId} input[name*='postcode']`).value = postcode;
+    form.querySelector(`#${formId} select[name*='state']`).value = state;
 
-    toggleVisibility(shippingForm.closest('.fieldset5'), shippingBox);
-});
-
-// Handle "Cancel" for Shipping
-cancelShippingBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent form submission
-    toggleVisibility(shippingForm.closest('.fieldset5'), shippingBox);
-});
-
-// Handle "Edit" for Billing
-editBillingBtn.addEventListener('click', () => {
-    toggleVisibility(billingBox, billingForm.closest('.fieldset6'));
-});
-
-// Handle "Add New" for Billing
-addBillingBtn.addEventListener('click', () => {
-    toggleVisibility(billingBox, billingForm.closest('.fieldset6'));
-});
-
-saveBillingBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent form submission
-
-    if (!validate('billingForm')) {
-        return; // Stop further execution if validation fails
-    }
-
-    // Get values from the form
-    const name = document.getElementById('bill-fn').value;
-    const phoneNo = document.getElementById('bill-phoneNo').value;
-    const email = document.getElementById('bill-Email').value;
-    const street = document.getElementById('bill-street').value;
-    const city = document.getElementById('bill-city').value;
-    const postcode = document.getElementById('bill-postcode').value;
-    const state = document.getElementById('bill-state').value;
-
-    // Update the billing information display
-    billingInfo.innerHTML = `
-        <div class="name">${name}</div>
-        <div class="phoneNo">${phoneNo}</div>
-        <div class="email">${email}</div>
-        <div class="billing-address">${street}, ${city}, ${postcode}, ${state}.</div>
-    `;
-
-    toggleVisibility(billingForm.closest('.fieldset6'), billingBox);
-});
-
-// Handle "Cancel" for Shipping
-cancelBillingBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent form submission
-    toggleVisibility(billingForm.closest('.fieldset6'), billingBox);
-});
-
-// Overlay button
-const popUp = document.getElementById("overlay")
-const overlayBtn = document.getElementById("deleteBtn");
-
-overlayBtn.addEventListener("click", () => {
-  popUp.classList.add("open-overlay");
-});
-
-// Close overlay
-const xBtn = document.getElementById("cancelBtn");
-
-xBtn.addEventListener("click", () => {
-  popUp.classList.remove("open-overlay");
-});
-
-const overlayBtn2 = document.getElementById("deleteBtn2");
-
-overlayBtn2.addEventListener("click", () => {
-  popUp.classList.add("open-overlay");
-});
-
-// Validate empty field, email, and phone number format for both forms
-function validate(formId) {
-    const form = document.getElementById(formId); // Dynamically select the form using the ID
-    const inputs = form.querySelectorAll("input"); // Get all input fields in the selected form
-  
-    // Check for empty fields
-    for (const input of inputs) {
-        if (input.value.trim() === "") { // Trim to remove spaces and ensure input is clean
-            alert("Please fill in the empty field.");
-            input.focus(); // Stay at current page
-            return false;
-        }
-    }
-
-    // Validate email for the shipping form
-    const emailField = form.querySelector('input[name="ship-Email"]'); // select email input
-    if (emailField) {
-        const email = emailField.value;
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // RegEx for email format
-    
-        if (!emailPattern.test(email)) {
-            alert("Please provide a valid email address.");
-            emailField.focus();
-            return false;
-        }
-    }
-
-    // Validate phone number for the shipping form
-    const telField = form.querySelector('input[name="ship-phoneNo"]');
-    if (telField) {
-        const tel = telField.value;
-        const telPattern = /^0\d{2}-\d{3}-\d{4}$/; // RegEx for phone number format
-    
-        if (!telPattern.test(tel)) {
-            alert("Please provide a valid phone number.");
-            telField.focus();
-            return false;
-        }
-    }
-
-    // Validate phone number for the billing form
-    const telField2 = form.querySelector('input[name="bill-phoneNo"]');
-    if (telField2) {
-        const tel = telField2.value;
-        const telPattern = /^0\d{2}-\d{3}-\d{4}$/; // RegEx for phone number format
-    
-        if (!telPattern.test(tel)) {
-            alert("Please provide a valid phone number.");
-            telField2.focus();
-            return false;
-        }
-    }
-
-    // Validate email for the billing form
-    const emailField2 = form.querySelector('input[name="bill-Email"]'); // select email input
-    if (emailField2) {
-        const email2 = emailField2.value;
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // RegEx for email format
-    
-        if (!emailPattern.test(email2)) {
-            alert("Please provide a valid email address.");
-            emailField2.focus();
-            return false;
-        }
-    }
-
-    // Validate postcode for the shipping form
-    const postcodeField = form.querySelector('input[name="ship-postcode"]');
-    if (postcodeField) {
-        const postcode = postcodeField.value;
-        const postcodePattern = /^\d{5}$/; // RegEx for 5-digit Malaysian postcode
-    
-        if (!postcodePattern.test(postcode)) {
-            alert("Please provide a valid 5-digit postcode.");
-            postcodeField.focus();
-            return false;
-        }
-    }
-
-    // Validate postcode for the billing form
-    const postcodeField2 = form.querySelector('input[name="bill-postcode"]');
-    if (postcodeField2) {
-        const postcode = postcodeField2.value;
-        const postcodePattern = /^\d{5}$/; // RegEx for 5-digit Malaysian postcode
-    
-        if (!postcodePattern.test(postcode)) {
-            alert("Please provide a valid 5-digit postcode.");
-            postcodeField2.focus();
-            return false;
-        }
-    }
-
-    return true; // Return true if all validations pass
+    // Show the form
+    form.closest('fieldset').classList.remove('hidden');
 }
+
+// Function to save the edited address
+function saveEditedAddress(selectId, formId) {
+    const select = document.getElementById(selectId);
+    const form = document.getElementById(formId);
+
+    // Get updated form data
+    const fullName = form.querySelector(`#${formId} input[name*='fn']`).value;
+    const phoneNo = form.querySelector(`#${formId} input[name*='phoneNo']`).value;
+    const email = form.querySelector(`#${formId} input[name*='Email']`).value;
+    const street = form.querySelector(`#${formId} input[name*='street']`).value;
+    const city = form.querySelector(`#${formId} input[name*='city']`).value;
+    const postcode = form.querySelector(`#${formId} input[name*='postcode']`).value;
+    const state = form.querySelector(`#${formId} select[name*='state']`).value;
+
+    // Validate required fields
+    if (!fullName || !street || !city || !postcode || !state) {
+        return false;
+    }
+
+    // Update the selected option
+    const selectedOption = select.options[select.selectedIndex];
+    selectedOption.value = `${street}, ${city}, ${postcode}, ${state}`;
+    selectedOption.textContent = `${fullName} - ${street}, ${city}, ${postcode}, ${state}`;
+
+    // Clear and hide the form
+    form.reset();
+    form.closest('fieldset').classList.add('hidden');
+
+    return false;
+}
+
+// Attach event listeners to the Edit buttons
+document.getElementById("edit-ship").addEventListener("click", function () {
+    editAddress("ship-address-select", "shippingForm");
+});
+
+document.getElementById("edit-bill").addEventListener("click", function () {
+    editAddress("bill-address-select", "billingForm");
+});
+
+// Attach event listeners to Save buttons to handle edited address saving
+document.getElementById("saveBtn1").addEventListener("click", function (event) {
+    event.preventDefault();
+    saveEditedAddress("ship-address-select", "shippingForm");
+});
+
+document.getElementById("saveBtn2").addEventListener("click", function (event) {
+    event.preventDefault();
+    saveEditedAddress("bill-address-select", "billingForm");
+});
+
+// Cancel buttons to hide the form without changes
+document.getElementById("cancelBtn1").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(".fieldset5").classList.add("hidden");
+});
+
+document.getElementById("cancelBtn2").addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(".fieldset6").classList.add("hidden");
+});
+
+// Get modal elements
+const deleteModal = document.getElementById('deleteModal');
+const confirmDeleteBtn = document.getElementById('confirmDelete');
+const cancelDeleteBtn = document.getElementById('cancelDelete');
+
+// Variable to track which dropdown is being handled
+let currentSelect = null;
+
+// Show modal on shipping delete button click
+document.getElementById('deleteBtn').addEventListener('click', () => {
+    currentSelect = document.getElementById('ship-address-select'); // Set the current dropdown
+    deleteModal.classList.remove('hidden');
+});
+
+// Show modal on billing delete button click
+document.getElementById('deleteBtn2').addEventListener('click', () => {
+    currentSelect = document.getElementById('bill-address-select'); // Set the current dropdown
+    deleteModal.classList.remove('hidden');
+});
+
+// Hide modal when "No" is clicked
+cancelDeleteBtn.addEventListener('click', () => {
+    deleteModal.classList.add('hidden');
+});
+
+// Perform deletion when "Yes" is clicked
+confirmDeleteBtn.addEventListener('click', () => {
+    if (currentSelect) {
+        const selectedOption = currentSelect.options[currentSelect.selectedIndex];
+
+        if (selectedOption && selectedOption.value) {
+            currentSelect.remove(currentSelect.selectedIndex); // Remove the selected address
+        } else {
+            alert('Please select an address to delete.');
+        }
+    }
+
+    deleteModal.classList.add('hidden'); // Hide modal after action
+});
+
