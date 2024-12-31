@@ -35,15 +35,15 @@
             </div>
 
             <div class="sign-in">
-                <form name="signinForm" id="signinForm" autocomplete="on" onsubmit="return(validate('signinForm'));">
+                <form action="../includes/login-inc.php" method="post" name="signinForm" id="signinForm" autocomplete="on" onsubmit="return(validate('signinForm'));">
 
                     <h2>Sign In</h2>
 
                     <div>
-                    <label for="signin-email">Email<span class="star"> *</span></label>
-                    <input type="text" name="Email" id="signin-email" placeholder="Enter Email" required>
+                    <label for="signin-email">Username<span class="star"> *</span></label>
+                    <input type="text" name="username" id="signin-email" placeholder="Enter Username" required>
                     <label for="signin-password">Password<span class="star"> *</span></label>
-                    <input type="password" name="Password" id="signin-pwd" placeholder="Enter Password" required>
+                    <input type="password" name="pwd" id="signin-pwd" placeholder="Enter Password" required>
                     </div>
                     <div class="eye2">
                     <i class="fa-solid fa-eye" id="show-signin-pwd"></i> 
