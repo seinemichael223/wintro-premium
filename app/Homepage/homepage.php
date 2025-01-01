@@ -43,10 +43,10 @@ require_once '../includes/config_session-inc.php';
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
                     <a href="../includes/logout-inc.php">Logout</a>
+                    <a href="../includes/product_details-inc.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <?php else: ?>
                     <a href="../Reg_Login/login.php">Login</a>
                 <?php endif; ?>
-                <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>
         </div>
