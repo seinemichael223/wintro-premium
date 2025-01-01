@@ -42,6 +42,7 @@ require_once '../includes/config_session-inc.php';
                 <i class="fa-regular fa-heart"></i>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
+                    <a href="../includes/logout-inc.php">Logout</a>
                 <?php else: ?>
                     <a href="../Reg_Login/login.php">Login</a>
                 <?php endif; ?>
