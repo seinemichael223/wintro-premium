@@ -12,29 +12,10 @@ require_once 'includes/login_view-inc.php';
     </head>
 
     <body>
-        <h3>Login</h3>
-
-        <form action="includes/login-inc.php" method="post">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="pwd" placeholder="Password">
-            <button>Login</button>
-        </form>
-
-        <?php
-        check_login_errors();
-?>
-
-        <h3>Signup</h3>
-        <form action="includes/signup-inc.php" method="post">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="pwd" placeholder="Password">
-            <input type="text" name="email" placeholder="E-Mail">
-            <button>Signup</button>
-        </form>
-
         <form action="dummydata.php" method="post">
             <button>Load Dummy Data</button>
         </form>
+        <a href="Homepage/homepage.php">Skip to Homepage</a>
 
         <?php
 check_signup_errors();
