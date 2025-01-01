@@ -1,3 +1,7 @@
+<?php
+require_once '../includes/config_session-inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +40,11 @@
 
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-user"></i>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
+                <?php else: ?>
+                    <a href="../Reg_Login/login.php">Login</a>
+                <?php endif; ?>
                 <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>

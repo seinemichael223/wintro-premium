@@ -2,17 +2,22 @@
 // Function to display product cards
 function displayProducts($pdo)
 {
-    $sql = "SELECT * FROM products WHERE category = 'Trophy'";
+    $sql = "SELECT * FROM product WHERE sub_category_id = 1";
+    // $sql = "SELECT * FROM product WHERE product_id = 1";
     $result = $pdo->query($sql);
 
     echo '<div class="product-grid">';
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+    if ($result->rowCount() > 0) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            // Adjust the path to the image based on the folder structure
+            $image_url = "" . htmlspecialchars($row['product_image']); // Correct relative path
+
+
             echo '
             <div class="product-card">
                 <div class="card-image">
-                    <img src="' . htmlspecialchars($row['product_image']) . '" alt="' . htmlspecialchars($row['product_name']) . '">
+                    <img src="' . $image_url . '" alt="' . htmlspecialchars($row['product_name']) . '">
                 </div>
                 <div class="card-title">
                     <h5>' . htmlspecialchars($row['product_name']) . '</h5>

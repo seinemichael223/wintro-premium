@@ -35,14 +35,6 @@ CREATE TABLE IF NOT EXISTS product (
     FOREIGN KEY (sub_category_id) REFERENCES sub_category(sub_category_id)
 );
 
-CREATE TABLE IF NOT EXISTS inventory (
-    inventory_id INT(12) AUTO_INCREMENT PRIMARY KEY,
-    stock_quantity INT(12) NOT NULL,
-    option_id INT(12),
-    product_id INT(12) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES product (product_id)
-);
-
 CREATE TABLE IF NOT EXISTS options (
     option_id INT(12) AUTO_INCREMENT PRIMARY KEY,
     option_colour VARCHAR(50),
@@ -50,6 +42,16 @@ CREATE TABLE IF NOT EXISTS options (
     product_id INT(12) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
+
+CREATE TABLE IF NOT EXISTS inventory (
+    inventory_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    stock_quantity INT(12) NOT NULL,
+    option_id INT(12),
+    product_id INT(12) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (product_id),
+    FOREIGN KEY (option_id) REFERENCES options (option_id)
+);
+
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
@@ -193,6 +195,11 @@ CREATE TABLE IF NOT EXISTS contact_us (
     message TEXT NOT NULL,
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
+(1, 10, 1, 1),
+(2, 20, 2, 1),
+(3, 12, 3, 1),
+(4, 20, 4, 1);
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;
