@@ -35,15 +35,6 @@ CREATE TABLE IF NOT EXISTS product (
     FOREIGN KEY (sub_category_id) REFERENCES sub_category(sub_category_id)
 );
 
-CREATE TABLE IF NOT EXISTS inventory (
-    inventory_id INT(12) AUTO_INCREMENT PRIMARY KEY,
-    stock_quantity INT(12) NOT NULL,
-    option_id INT(12),
-    product_id INT(12) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES product (product_id),
-    FOREIGN KEY (option_id) REFERENCES product (option_id)
-);
-
 CREATE TABLE IF NOT EXISTS options (
     option_id INT(12) AUTO_INCREMENT PRIMARY KEY,
     option_colour VARCHAR(50),
@@ -51,6 +42,16 @@ CREATE TABLE IF NOT EXISTS options (
     product_id INT(12) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product (product_id)
 );
+
+CREATE TABLE IF NOT EXISTS inventory (
+    inventory_id INT(12) AUTO_INCREMENT PRIMARY KEY,
+    stock_quantity INT(12) NOT NULL,
+    option_id INT(12),
+    product_id INT(12) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product (product_id),
+    FOREIGN KEY (option_id) REFERENCES options (option_id)
+);
+
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
