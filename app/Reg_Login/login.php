@@ -40,8 +40,8 @@
                     <h2>Sign In</h2>
 
                     <div>
-                    <label for="signin-email">Username<span class="star"> *</span></label>
-                    <input type="text" name="username" id="signin-email" placeholder="Enter Username" required>
+                    <label for="signin-email">Email<span class="star"> *</span></label>
+                    <input type="text" name="email" id="signin-email" placeholder="Enter email" required>
                     <label for="signin-password">Password<span class="star"> *</span></label>
                     <input type="password" name="pwd" id="signin-pwd" placeholder="Enter Password" required>
                     </div>
