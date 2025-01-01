@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS inventory (
     stock_quantity INT(12) NOT NULL,
     option_id INT(12),
     product_id INT(12) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES product (product_id)
+    FOREIGN KEY (product_id) REFERENCES product (product_id),
+    FOREIGN KEY (option_id) REFERENCES product (option_id)
 );
 
 CREATE TABLE IF NOT EXISTS options (
@@ -184,6 +185,12 @@ INSERT INTO options (option_colour, option_size, product_id) VALUES
 (NULL, '9.8', 34),
 (NULL, '600', 35),
 (NULL, '700', 35);
+
+INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
+(1, 10, 1, 1),
+(2, 20, 2, 1),
+(3, 12, 3, 1),
+(4, 20, 4, 1);
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;

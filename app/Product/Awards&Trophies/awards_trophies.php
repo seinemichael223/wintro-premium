@@ -1,11 +1,6 @@
 <?php
 require_once '../../includes/dbh-inc.php';
 require_once '../../includes/product_card-inc.php';
-
-// Fetch products in the 'Trophy' category
-$query = "SELECT * FROM product WHERE sub_category_id = 1";
-$result = $pdo->query($query); // Use $conn here for consistency
-
 ?>
 
 <!DOCTYPE html>
