@@ -86,7 +86,7 @@ INSERT INTO sub_category (sub_category_id, sub_category_name, category_id) VALUE
 (21, 'Stopwatch', 6);
 
 INSERT INTO product (product_id, product_name, product_description, product_image, product_unit_price, product_bulk_price, product_created_at, product_upated_at, sub_category_id) VALUES
-(1, 'CT5003F Acrylic Plastic Trophy', '', 'Awards and Trophies/trophy/Acrylic Plastic Trophy.png\r\n', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
+(1, 'CT5003F Acrylic Plastic Trophy', '', 'uploads/Awards and Trophies/trophy/Acrylic Plastic Trophy.png\r\n', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
 (2, 'PT2214F Economic Plastic Trophy', '', 'uploads/Awards and Trophies/trophy/Economic Plastic Trophy.png', 45.00, 42.00, '2024-12-30 04:21:21', '2024-12-30 04:21:21', 1),
 (3, 'XT1709F Exclusive Plastic Trophy', '', 'uploads/Awards and Trophies/trophy/Exclusive Plastic Trophy.png', 143.00, 139.00, '2024-12-30 04:24:23', '2024-12-30 04:24:23', 1),
 (4, 'BAW696 Metal Cup Trophy', '', 'uploads/Awards and Trophies/trophy/Metal Cup Trophy-Blue.png', 24.00, 22.00, '2024-12-30 04:26:08', '2024-12-30 04:26:08', 1),

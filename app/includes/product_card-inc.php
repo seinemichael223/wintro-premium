@@ -3,19 +3,17 @@
 function displayProducts($pdo)
 {
     $sql = "SELECT * FROM product WHERE sub_category_id = 1";
+    // $sql = "SELECT * FROM product WHERE product_id = 1";
     $result = $pdo->query($sql);
 
     echo '<div class="product-grid">';
 
     if ($result->rowCount() > 0) {
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            // Get the image path from the database
-            $image_path = $row['product_image'];  // e.g., uploads/Awards and Trophies/trophy/Acrylic Plastic Trophy.png
+            // Adjust the path to the image based on the folder structure
+            $image_url = "" . htmlspecialchars($row['product_image']); // Correct relative path
 
-            // Construct the full image URL
-            $image_url = "../uploads/" . $image_path;  // Adjusted path
 
-            // Display the product card with the image
             echo '
             <div class="product-card">
                 <div class="card-image">
