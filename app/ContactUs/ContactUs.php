@@ -8,7 +8,13 @@
 
     // Handle form submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $result = process_contact_form($_POST);
+        // Define $data with $_POST
+        $data = $_POST;
+        
+        // Call the process_contact_form function with $data and $pdo
+        $result = process_contact_form($data, $pdo);
+        
+        // Set errors and success flags
         $errors = $result['errors'];
         $success = $result['success'];
     }
