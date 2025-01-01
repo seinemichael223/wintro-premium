@@ -36,7 +36,7 @@
 
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-user"></i>
+                <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
                 <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>
