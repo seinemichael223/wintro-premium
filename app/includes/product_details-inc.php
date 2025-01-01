@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <br>
-    <a href="cart-inc.php">Go to Cart</a>
+    <a href="../MyCart/myCart.php">Go to Cart</a>
 </body>
 </html>
 
