@@ -1,5 +1,4 @@
 <?php
-
 require_once 'dbh-inc.php';
 require_once 'config_session-inc.php';
 
@@ -15,6 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     header('Location: cart-inc.php');
     exit();
+}
+
+// Calculate the total cost of all items in the cart
+$totalCost = 0;
+foreach ($cart as $item) {
+    $totalCost += $item['quantity'] * $item['price'];
 }
 ?>
 
@@ -54,6 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </tr>
             <?php endforeach; ?>
         </table>
+
+        <p><strong>Total Cost: $<?= number_format($totalCost, 2) ?></strong></p>
+
     <?php else: ?>
         <p>Your cart is empty.</p>
     <?php endif; ?>
