@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['action'] == 'delete' && isset($_POST['product_id'])) {
             $productId = intval($_POST['product_id']);
             unset($_SESSION['cart'][$productId]);
+            header('Location: ../MyCart/myCart.php');
         }
     }
-    header('Location: cart-inc.php');
     exit();
 }
 

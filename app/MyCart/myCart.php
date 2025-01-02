@@ -153,9 +153,9 @@ require_once '../includes/cart-inc.php';
                                                 </div>
 
                                                 <div class="item-actions">
-                                                    <form method="post" action="cart.php">
+                                                    <form method="post" action="../includes/cart-inc.php">
                                                         <input type="hidden" name="product_id" value="<?= $id ?>">
-                                                        <button type="submit" name="action" value="delete" class="fa-solid fa-xmark">Remove</button>
+                                                        <button type="submit" name="action" value="delete" class="fa-solid fa-xmark"></button>
                                                     </form>
                                                     <div class="quantity">
                                                         <input type="text" value="<?= intval($item['quantity']) ?>" id="quantity-input">
@@ -181,7 +181,7 @@ require_once '../includes/cart-inc.php';
                     </div>
 
                     <br>
-                    <a href="productDetails.php">Add More Products</a>
+                    <a href="../includes/productDetails.php">Add More Products</a>
                 </div>
             </div>
 
