@@ -225,6 +225,7 @@ require_once '../../includes/product_card-inc.php';
                 <!-- Product Card -->
                 <?php
                 displayProducts($pdo);
+
                 ?>
             </div>
             <!-- Pagination -->

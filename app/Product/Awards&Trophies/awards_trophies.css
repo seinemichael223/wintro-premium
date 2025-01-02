@@ -594,8 +594,13 @@ nav ul li a .fa-angle-down.rotate {
     gap: 20px;
 }
 
+.product-card-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Ensure the text color inherits from the parent */
+}
+
 .product-card {
-    background-color: #e9ecef;
+    background-color: white;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -603,9 +608,27 @@ nav ul li a .fa-angle-down.rotate {
     text-align: center;
 }
 
+.product-card:hover {
+    /* Add hover effects for the card if needed */
+    cursor: pointer; /* Change cursor to indicate it is clickable */
+    opacity: 0.9; /* Subtle hover effect */
+}
+
+/* Set a fixed size for product images */
+.card-image {
+    width: 100%; /* Full width of the product card */
+    height: 300px; /* Fixed height for consistent display */
+    overflow: hidden; /* Hide overflow if image exceeds container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .card-image img {
     width: 100%; /* Adjust to container width */
     height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
 }
 
 .card-title p {

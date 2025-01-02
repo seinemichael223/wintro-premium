@@ -298,7 +298,7 @@ body {
     gap: 10px;
 }
 
-.small-images {
+/* .small-images {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -308,7 +308,7 @@ body {
 .small-images img {
     width: 20%;
     cursor: pointer;
-}
+} */
 
 .big-image {
     display: flex;
@@ -317,7 +317,9 @@ body {
 }
 
 .big-image img {
-    width: 50%;
+    width: 80%;
+    height: auto;
+    object-fit: cover;
     border: 1px solid #ddd;
 }
 
@@ -342,6 +344,7 @@ body {
 }
 
 .type-dropdown label, .color-dropdown label {
+    font-size: 16px;
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -368,7 +371,7 @@ body {
 }
 
 .color-dropdown {
-    width: 100px;
+    width: 150px;
 }
 
 .bulk {
