@@ -201,7 +201,7 @@ INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALU
 (1, 10, 1, 1),
 (2, 20, 2, 1),
 (3, 12, 3, 1),
-(4, 20, 4, 1);
+(4, 20, 4, 1),
 (5, 0, 5, 2),
 (6, 14, 6, 2),
 (7, 32, 7, 2),
