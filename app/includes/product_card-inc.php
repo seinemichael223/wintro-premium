@@ -5,14 +5,14 @@ function displayProducts($pdo, $sql, $bindings = [])
     try {
         $stmt = $pdo->prepare($sql);
 
-        // Bind parameters if provided
-        foreach ($bindings as $key => $value) {
-            $stmt->bindValue($key, $value);
+        // Bind parameters if provided 
+        $i = 1; // Initialize parameter index 
+        foreach ($bindings as $value) {
+            $stmt->bindValue($i, $value, PDO::PARAM_INT);
+            $i++;
         }
 
         $stmt->execute();
-
-        echo '<div class="product-grid">';
 
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -38,8 +38,6 @@ function displayProducts($pdo, $sql, $bindings = [])
         } else {
             echo "<p>No products found.</p>";
         }
-
-        echo '</div>';
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }

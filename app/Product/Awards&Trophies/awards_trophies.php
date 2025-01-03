@@ -2,26 +2,38 @@
 require_once '../../includes/dbh-inc.php';
 require_once '../../includes/product_card-inc.php';
 
-$sql = "
-        SELECT p.* FROM product p
-        JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
-        JOIN category c ON sc.category_id = c.category_id
-        WHERE c.category_id = 1
-    ";
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$products_per_page = 12;  // Number of products per page
+$offset = ($page - 1) * $products_per_page;
+
+$sql_total = "
+    SELECT COUNT(*) FROM product p
+    JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
+    JOIN category c ON sc.category_id = c.category_id
+    WHERE c.category_id = 1
+";
 
 try {
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-
-    // Get the number of results
-    $num_results = $stmt->rowCount();
-
-    // Optionally, fetch all products if needed for display
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt_total = $pdo->prepare($sql_total);
+    $stmt_total->execute();
+    $total_products = $stmt_total->fetchColumn();
+    $total_pages = ceil($total_products / $products_per_page);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit;
 }
+
+$sql = "
+    SELECT p.* FROM product p
+    JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
+    JOIN category c ON sc.category_id = c.category_id
+    WHERE c.category_id = 1
+    LIMIT ? OFFSET ?
+";
+
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(1, $products_per_page, PDO::PARAM_INT);
+$stmt->bindValue(2, $offset, PDO::PARAM_INT);
 
 ?>
 
@@ -240,7 +252,7 @@ try {
             <div class="content-header">
                 <?php
                 // Display the count of results
-                echo "<span>Show $num_results Results</span>";
+                echo "<span>Show $total_products Results</span>";
                 ?>
                 <select>
                     <option>Sort by latest</option>
@@ -249,14 +261,32 @@ try {
             <div class="product-grid">
                 <!-- Product Card -->
                 <?php
-                displayProducts($pdo, $sql);
+                $bindings = [
+                    ':limit' => (int)$products_per_page,
+                    ':offset' => (int)$offset,
+                ];
+                displayProducts($pdo, $sql, $bindings);
                 ?>
             </div>
             <!-- Pagination -->
             <div class="product-pagination">
-                <span class="page-number active">1</span>
-                <span class="page-number">2</span>
-                <span class="page-next">&gt;</span>
+                <?php
+                //Previous page button
+                if ($page > 1) {
+                    echo '<span class = "page-number"><a href="?page=' . ($page - 1) . '">&lt;</a></span>';
+                }
+                // Page number buttons
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo '<span class="page-number' . ($i == $page ? ' active' : '') . '">';
+                    echo '<a href="?page=' . $i . '">' . $i . '</a>';
+                    echo '</span>';
+                }
+
+                // Next page button
+                if ($page < $total_pages) {
+                    echo '<span class="page-next"><a href="?page=' . ($page + 1) . '">&gt;</a></span>';
+                }
+                ?>
             </div>
         </main>
     </div>
