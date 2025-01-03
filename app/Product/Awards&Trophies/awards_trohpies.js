@@ -66,8 +66,6 @@ $('nav ul li').click(function(){
 // Get references to the range inputs, tooltips, and input fields
 const minSlider = document.querySelector('input[name="min_val"]');
 const maxSlider = document.querySelector('input[name="max_val"]');
-const minTooltip = document.querySelector('.min-tooltip');
-const maxTooltip = document.querySelector('.max-tooltip');
 const minInput = document.querySelector('input[name="min_input"]');
 const maxInput = document.querySelector('input[name="max_input"]');
 const sliderTrack = document.querySelector('.slider-track');
@@ -77,12 +75,8 @@ const minGap = 50; // Set the minimum gap
 
 function updatePrice() {
     // Update the min and max input fields with the slider values
-    minInput.value = 'RM ' + minSlider.value;
-    maxInput.value = 'RM ' + maxSlider.value;
-
-    // Update the position and text of the min and max tooltips
-    minTooltip.textContent = 'RM ' + minSlider.value;
-    maxTooltip.textContent = 'RM ' + maxSlider.value;
+    minInput.value = minSlider.value;
+    maxInput.value = maxSlider.value;
 
     // Position the tooltips based on the slider values (below the sliders)
     const minLeft = (minSlider.value / minSlider.max) * 100;
@@ -103,7 +97,7 @@ function updatePrice() {
 // Function to update the slider value based on input field
 function updateSliderFromInput(slider, input) {
     // Get the value from the input field, removing "RM" prefix
-    let value = input.value.replace('RM ', '').trim();
+    let value = input.value;
 
     // Allow an empty input field to reset the slider to 0 if nothing is typed
     if (value === '') {

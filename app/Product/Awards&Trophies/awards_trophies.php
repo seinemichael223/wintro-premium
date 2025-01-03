@@ -23,11 +23,15 @@ try {
     exit;
 }
 
+$min_price = isset($_GET['min_input']) ? intval(str_replace('RM', '', $_GET['min_input'])) : 0;
+$max_price = isset($_GET['max_input']) ? intval(str_replace('RM', '', $_GET['max_input'])) : 500;
+
 $sql = "
     SELECT p.* FROM product p
     JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
     JOIN category c ON sc.category_id = c.category_id
     WHERE c.category_id = 1
+    AND p.product_unit_price BETWEEN ? AND ?
     LIMIT ? OFFSET ?
 ";
 
@@ -220,32 +224,32 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                     </li>
                 </ul>
             </div>
-
-            <div class="double-slider-box">
-                <h3 class="range-title">FILTER BY PRICE</h3>
-                <div class="range-slider">
-                    <span class="slider-track"></span>
-                    <input type="range" name="min_val" class="min_val" min="0" max="500" value="0" oninput="slideMin()">
-                    <input type="range" name="max_val" class="max_val" min="0" max="500" value="500">
-                    <div class="tooltip min-tooltip"></div>
-                    <div class="tooltip max-tooltip"></div>
-                </div>
-
-                <div class="input-box">
-                    <div class="min-box">
-                        <div class="input-wrap">
-                            <span class="dash">-</span>
-                            <input type="text" name="min_input" class="input-field1">
+            <form id="filterForm" method="GET">
+                <div class="double-slider-box">
+                    <h3 class="range-title">FILTER BY PRICE</h3>
+                    <div class="range-slider">
+                        <span class="slider-track"></span>
+                        <input type="range" name="min_val" class="min_val" min="0" max="500" value="<?php echo $min_price ?>" oninput="slideMin()">
+                        <input type="range" name="max_val" class="max_val" min="0" max="500" value="<?php echo $max_price ?>" oninput="slideMax()">
+                        <!-- <div class="tooltip min-tooltip"></div>
+                        <div class="tooltip max-tooltip"></div> -->
+                    </div>
+                    <div class="input-box">
+                        <div class="min-box">
+                            <div class="input-wrap">
+                                <span class="dash">-</span>
+                                <input type="text" name="min_input" class="input-field1" value="<?php echo $min_price ?>">
+                            </div>
+                        </div>
+                        <div class="max-box">
+                            <div class="input-wrap">
+                                <input type="text" name="max_input" class="input-field2 max-input" value="<?php echo $max_price ?>">
+                                <button type="submit" class="filterBtn">Filter</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="max-box">
-                        <div class="input-wrap">
-                            <input type="text" name="max_input" class="input-field2 max-input">
-                            <button class="filterBtn">Filter</button>
-                        </div>
-                    </div>
                 </div>
-            </div>
+            </form>
         </nav>
 
         <main class="main-content">
@@ -262,9 +266,12 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                 <!-- Product Card -->
                 <?php
                 $bindings = [
-                    ':limit' => (int)$products_per_page,
-                    ':offset' => (int)$offset,
+                    ':min_price' => $min_price,
+                    ':max_price' => $max_price,
+                    ':limit' => $products_per_page,
+                    ':offset' => $offset,
                 ];
+
                 displayProducts($pdo, $sql, $bindings);
                 ?>
             </div>
@@ -273,18 +280,18 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                 <?php
                 //Previous page button
                 if ($page > 1) {
-                    echo '<span class = "page-number"><a href="?page=' . ($page - 1) . '">&lt;</a></span>';
+                    echo '<span class = "page-number"><a href="?page=' . ($page - 1) . '&min_input=' . $min_price . '&max_input=' . $max_price . '">&lt;</a></span>';
                 }
                 // Page number buttons
                 for ($i = 1; $i <= $total_pages; $i++) {
                     echo '<span class="page-number' . ($i == $page ? ' active' : '') . '">';
-                    echo '<a href="?page=' . $i . '">' . $i . '</a>';
+                    echo '<a href="?page=' . $i . '&min_input=' . $min_price . '&max_input=' . $max_price . '">' . $i . '</a>';
                     echo '</span>';
                 }
 
                 // Next page button
                 if ($page < $total_pages) {
-                    echo '<span class="page-next"><a href="?page=' . ($page + 1) . '">&gt;</a></span>';
+                    echo '<span class="page-next"><a href="?page=' . ($page + 1) . '&min_input=' . $min_price . '&max_input=' . $max_price . '">&gt;</a></span>';
                 }
                 ?>
             </div>
