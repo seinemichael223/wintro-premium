@@ -1,6 +1,28 @@
 <?php
 require_once '../../includes/dbh-inc.php';
 require_once '../../includes/product_card-inc.php';
+
+$sql = "
+        SELECT p.* FROM product p
+        JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
+        JOIN category c ON sc.category_id = c.category_id
+        WHERE c.category_id = 1
+    ";
+
+try {
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    // Get the number of results
+    $num_results = $stmt->rowCount();
+
+    // Optionally, fetch all products if needed for display
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -216,7 +238,10 @@ require_once '../../includes/product_card-inc.php';
 
         <main class="main-content">
             <div class="content-header">
-                <span>Show xx Results</span>
+                <?php
+                // Display the count of results
+                echo "<span>Show $num_results Results</span>";
+                ?>
                 <select>
                     <option>Sort by latest</option>
                 </select>
@@ -224,8 +249,7 @@ require_once '../../includes/product_card-inc.php';
             <div class="product-grid">
                 <!-- Product Card -->
                 <?php
-                displayProducts($pdo);
-
+                displayProducts($pdo, $sql);
                 ?>
             </div>
             <!-- Pagination -->
