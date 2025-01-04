@@ -9,12 +9,18 @@ CREATE TABLE IF NOT EXISTS users (
     pwd VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
-    address_street VARCHAR(255) NOT NULL,
-    address_city VARCHAR(255) NOT NULL,
-    address_state VARCHAR(255) NOT NULL,
-    address_zip VARCHAR(255) NOT NULL,
-    address_country VARCHAR(255) NOT NULL,
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    uid INT NOT NULL,
+    address_street VARCHAR(255) NOT NULL,
+    address_city VARCHAR(100) NOT NULL,
+    address_state VARCHAR(100) NOT NULL,
+    address_country VARCHAR(10) NOT NULL,
+    address_country VARCHAR(100) NOT NULL,
+    FOREIGN KEY (uid) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS category (
@@ -27,6 +33,17 @@ CREATE TABLE IF NOT EXISTS sub_category (
     sub_category_name VARCHAR(50) NOT NULL,
     category_id INT(12) NOT NULL,
     FOREIGN KEY (category_id) REFERENCES category (category_id)
+);
+
+CREATE TABLE IF NOT EXISTS contact_us (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    company VARCHAR(255),
+    phone VARCHAR(15) NOT NULL,
+    subject VARCHAR(150) NOT NULL,
+    message TEXT NOT NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS product (
@@ -194,29 +211,11 @@ INSERT INTO options (option_colour, option_size, product_id) VALUES
 (NULL, '600', 35),
 (NULL, '700', 35);
 
-CREATE TABLE IF NOT EXISTS contact_us (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    company VARCHAR(255),
-    phone VARCHAR(15) NOT NULL,
-    subject VARCHAR(150) NOT NULL,
-    message TEXT NOT NULL,
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
 (1, 10, 1, 1),
 (2, 20, 2, 1),
 (3, 12, 3, 1),
 (4, 20, 4, 1);
-
-INSERT INTO users (full_name, username, pwd, email, phone_number, address_street, address_city, address_state, address_zip, address_country) VALUES
-('John Doe', 'johndoe', '$2y$10$abcdefghijklmnopqrstuv', 'john@example.com', '019-4567890', '123 Main Street', 'Kuala Lumpur', 'Federal Territory', '50000', 'Malaysia'),
-('Jane Smith', 'jsmith', '$2y$10$abcdefghijklmnopqrstuv', 'jane@example.com', '014-5678901', '456 Park Avenue', 'George Town', 'Penang', '10200', 'Malaysia'),
-('Bob Wilson', 'bwilson', '$2y$10$abcdefghijklmnopqrstuv', 'bob@example.com', '012-6789012', '789 Beach Road', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
-('Alice Brown', 'abrown', '$2y$10$abcdefghijklmnopqrstuv', 'alice@example.com', '011-78901233', '321 Orchard Lane', 'Ipoh', 'Perak', '30000', 'Malaysia'),
-('Charlie Davis', 'cdavis', '$2y$10$abcdefghijklmnopqrstuv', 'charlie@example.com', '012-8901234', '654 Hilltop Drive', 'Melaka', 'Melaka', '75000', 'Malaysia');
-
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;
