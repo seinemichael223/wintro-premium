@@ -40,6 +40,12 @@
                 <li><a class="<?php echo in_array($currentPage, ['products.php', 'create_product.php']) ? 'active' : ''; ?>" href="products.php">Products</a></li>
                 <li><a class="<?php echo $currentPage == 'orders.php' ? 'active' : ''; ?>" href="orders.php">Orders</a></li>
                 <li><a class="<?php echo $currentPage == 'customers.php' ? 'active' : ''; ?>" href="customers.php">Customers</a></li>
+                <li>
+                    <a class="<?php echo $currentPage == 'profile.php' ? 'active' : ''; ?>" href="profile.php">
+                        <i class="fa fa-user"></i> Profile
+                    </a>
+                </li>
+
         </nav>
     </header>
 

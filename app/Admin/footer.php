@@ -13,7 +13,7 @@
         <div class="footer-container">
             <!-- Footer Content -->
             <div class="footer-content">
-                <p>&copy; <?php echo date("Y"); ?> Wintro Premium. All rights reserved.</p>
+                <p>&copy; 2024 Wintro Premium. All rights reserved.</p>
             </div>
 
             <!-- Footer Navigation (Optional) -->

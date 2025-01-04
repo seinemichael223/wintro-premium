@@ -65,156 +65,116 @@ function showOrderDetails(orderId, customerId, totalAmount, orderDate, status) {
           `Last Order Date: ${lastOrderDate}`);
   }
 
-  var form = document.getElementById("myForm"),
-    imgInput = document.querySelector(".img"),
-    file = document.getElementById("imgInput"),
-    userName = document.getElementById("name"),
-    age = document.getElementById("age"),
-    city = document.getElementById("city"),
-    email = document.getElementById("email"),
-    phone = document.getElementById("phone"),
-    post = document.getElementById("post"),
-    sDate = document.getElementById("sDate"),
-    submitBtn = document.querySelector(".submit"),
-    userInfo = document.getElementById("data"),
-    modal = document.getElementById("userForm"),
-    modalTitle = document.querySelector("#userForm .modal-title"),
-    newUserBtn = document.querySelector(".newUser")
+  // Script for Admin Profile Info 
+  function editDetails() {
+      // Hide the Edit button
+      document.getElementById("editButton").style.display = "none";
 
+      const fullName = document.getElementById("fullName").textContent;
+      const birthday = document.getElementById("birthday").textContent;
+      const gender = document.getElementById("gender").textContent;
 
-let getData = localStorage.getItem('userProfile') ? JSON.parse(localStorage.getItem('userProfile')) : []
+      const formHtml = `
+  <tr>
+      <th class="label">Full Name</th>
+      <td><input type="text" id="newFullName" value="${fullName}"></td>
+  </tr>
+  <tr>
+      <th class="label">Birthday</th>
+      <td><input type="date" id="newBirthday" value="${birthday}"></td>
+  </tr>
+  <tr>
+      <th class="label">Gender</th>
+      <td>
+          <select id="newGender">
+              <option value="Male" ${gender === "Male" ? "selected" : ""}>Male</option>
+              <option value="Female" ${gender === "Female" ? "selected" : ""}>Female</option>
+          </select>
+      </td>
+  </tr>
+  <tr>
+      <th class="label">Password</th>
+      <td><input type="password" id="newPassword" placeholder="Enter new password"></td>
+  </tr>
+  <tr>
+      <th class="label">Show Password</th>
+      <td><input type="checkbox" id="showPassword" onclick="togglePassword()"> Show</td>
+  </tr>
+  <tr>
+      <td colspan="2">
+          <button class="btn save-btn" onclick="saveDetails()">Save</button>
+          <button class="btn cancel-btn" onclick="cancelEdit()">Cancel</button>
+      </td>
+  </tr>
+  `;
 
-let isEdit = false, editId
-showInfo()
+      document.getElementById("infoTable").innerHTML = formHtml;
+  }
 
-newUserBtn.addEventListener('click', ()=> {
-    submitBtn.innerText = 'Submit',
-    modalTitle.innerText = "Fill the Form"
-    isEdit = false
-    imgInput.src = "./image/Profile Icon.webp"
-    form.reset()
-})
+  function saveDetails() {
+      const fullName = document.getElementById("newFullName").value;
+      const birthday = document.getElementById("newBirthday").value;
+      const gender = document.getElementById("newGender").value;
+      const password = document.getElementById("newPassword").value;
 
+      // Validate the password
+      if (password) {
+          const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,8}$/;
+          if (!passwordRegex.test(password)) {
+              alert("Password must be between 6-8 characters, include an uppercase letter, a number, and a special character.");
+              return;
+          }
+      }
 
-file.onchange = function(){
-    if(file.files[0].size < 1000000){  // 1MB = 1000000
-        var fileReader = new FileReader();
+      const updatedHtml = `
+  <tr>
+      <th class="label">Full Name</th>
+      <td class="value" id="fullName">${fullName}</td>
+  </tr>
+  <tr>
+      <th class="label">Birthday</th>
+      <td class="value" id="birthday">${birthday}</td>
+  </tr>
+  <tr>
+      <th class="label">Gender</th>
+      <td class="value" id="gender">${gender}</td>
+  </tr>
+  <tr>
+      <th class="label">Email</th>
+      <td class="value" id="email">useremail@example.com</td>
+  </tr>
+  <tr>
+      <th class="label">Password</th>
+      <td class="value" id="password">********</td> <!-- Password is masked here -->
+  </tr>
+  `;
 
-        fileReader.onload = function(e){
-            imgUrl = e.target.result
-            imgInput.src = imgUrl
-        }
+      document.getElementById("infoTable").innerHTML = updatedHtml;
 
-        fileReader.readAsDataURL(file.files[0])
-    }
-    else{
-        alert("This file is too large!")
-    }
-}
+      // Show the Edit button again
+      document.getElementById("editButton").style.display = "block";
 
+      // Optionally store the updated password securely (not shown in UI)
+      if (password) {
+          console.log("Updated password:", password); // For debugging purposes
+      }
+  }
 
-function showInfo(){
-    document.querySelectorAll('.employeeDetails').forEach(info => info.remove())
-    getData.forEach((element, index) => {
-        let createElement = `<tr class="employeeDetails">
-            <td>${index+1}</td>
-            <td><img src="${element.picture}" alt="" width="50" height="50"></td>
-            <td>${element.employeeName}</td>
-            <td>${element.employeeAge}</td>
-            <td>${element.employeeCity}</td>
-            <td>${element.employeeEmail}</td>
-            <td>${element.employeePhone}</td>
-            <td>${element.employeePost}</td>
-            <td>${element.startDate}</td>
+  function togglePassword() {
+      const passwordField = document.getElementById("newPassword");
+      const showPasswordCheckbox = document.getElementById("showPassword");
 
+      passwordField.type = showPasswordCheckbox.checked ? "text" : "password";
+  }
 
-            <td>
-                <button class="btn btn-success" onclick="readInfo('${element.picture}', '${element.employeeName}', '${element.employeeAge}', '${element.employeeCity}', '${element.employeeEmail}', '${element.employeePhone}', '${element.employeePost}', '${element.startDate}')" data-bs-toggle="modal" data-bs-target="#readData"><i class="bi bi-eye"></i></button>
+  function cancelEdit() {
+      location.reload(); // Reloads the page to restore the original content
+  }
 
-                <button class="btn btn-primary" onclick="editInfo(${index}, '${element.picture}', '${element.employeeName}', '${element.employeeAge}', '${element.employeeCity}', '${element.employeeEmail}', '${element.employeePhone}', '${element.employeePost}', '${element.startDate}')" data-bs-toggle="modal" data-bs-target="#userForm"><i class="bi bi-pencil-square"></i></button>
-
-                <button class="btn btn-danger" onclick="deleteInfo(${index})"><i class="bi bi-trash"></i></button>
-                            
-            </td>
-        </tr>`
-
-        userInfo.innerHTML += createElement
-    })
-}
-showInfo()
-
-
-function readInfo(pic, name, age, city, email, phone, post, sDate){
-    document.querySelector('.showImg').src = pic,
-    document.querySelector('#showName').value = name,
-    document.querySelector("#showAge").value = age,
-    document.querySelector("#showCity").value = city,
-    document.querySelector("#showEmail").value = email,
-    document.querySelector("#showPhone").value = phone,
-    document.querySelector("#showPost").value = post,
-    document.querySelector("#showsDate").value = sDate
-}
-
-
-function editInfo(index, pic, name, Age, City, Email, Phone, Post, Sdate){
-    isEdit = true
-    editId = index
-    imgInput.src = pic
-    userName.value = name
-    age.value = Age
-    city.value =City
-    email.value = Email,
-    phone.value = Phone,
-    post.value = Post,
-    sDate.value = Sdate
-
-    submitBtn.innerText = "Update"
-    modalTitle.innerText = "Update The Form"
-}
-
-
-function deleteInfo(index){
-    if(confirm("Are you sure want to delete?")){
-        getData.splice(index, 1)
-        localStorage.setItem("userProfile", JSON.stringify(getData))
-        showInfo()
-    }
-}
-
-
-form.addEventListener('submit', (e)=> {
-    e.preventDefault()
-
-    const information = {
-        picture: imgInput.src == undefined ? "./image/Profile Icon.webp" : imgInput.src,
-        employeeName: userName.value,
-        employeeAge: age.value,
-        employeeCity: city.value,
-        employeeEmail: email.value,
-        employeePhone: phone.value,
-        employeePost: post.value,
-        startDate: sDate.value
-    }
-
-    if(!isEdit){
-        getData.push(information)
-    }
-    else{
-        isEdit = false
-        getData[editId] = information
-    }
-
-    localStorage.setItem('userProfile', JSON.stringify(getData))
-
-    submitBtn.innerText = "Submit"
-    modalTitle.innerHTML = "Fill The Form"
-
-    showInfo()
-
-    form.reset()
-
-    imgInput.src = "./image/Profile Icon.webp"  
-
-    // modal.style.display = "none"
-    // document.querySelector(".modal-backdrop").remove()
-})
+  //Disable receive button
+  function disableButton(button) {
+      button.disabled = true; // Disable the button
+      button.style.backgroundColor = 'black'; // Change the button color to black
+      button.style.color = 'white'; // Change text color to white to maintain visibility
+      button.innerText = 'RECEIVED'; // Change the text inside the button
+  }
