@@ -1,4 +1,6 @@
-<?php include 'data.php'; ?>
+<?php
+require_once '../includes/dbh-inc.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,36 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        // Fetch data from the products table in the database
-                        $sql = "SELECT * FROM products"; // Adjust the query if needed
-                        $result = $con->query($sql);
 
-                        // Check if there are rows to fetch
-                        if ($result->num_rows > 0) {
-                            // Output data for each row
-                            while ($row = $result->fetch_assoc()) {
-                                $categoryId = htmlspecialchars($row['category_id']);
-                                $category = htmlspecialchars($row['category']);
-                                $productId = htmlspecialchars($row['product_id']);
-                                $productName = htmlspecialchars($row['product_name']);
-                                $unitPrice = htmlspecialchars($row['unit_price']);
-                                $bulkPrice = htmlspecialchars($row['bulk_price']);
-                                $stockLevel = htmlspecialchars($row['stock_level']);
-                                echo "<tr>";
-                                echo "<td>{$categoryId}</td>";
-                                echo "<td>{$category}</td>";
-                                echo "<td>{$productId}</td>";
-                                echo "<td>{$productName}</td>";
-                                echo "<td>{$unitPrice}</td>";
-                                echo "<td>{$bulkPrice}</td>";
-                                echo "<td>{$stockLevel}</td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='5'>No data found</td></tr>";
-                        }
-                        ?>
                     </tbody>
                 </table>
             </section>
