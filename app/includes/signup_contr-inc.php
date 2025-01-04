@@ -51,3 +51,7 @@ function create_user(object $pdo, string $fullname, string $username, string $ph
 {
     set_user($pdo, $fullname, $username, $phoneno, $email, $pwd);
 }
+
+function i_go_sleep() {
+
+};
