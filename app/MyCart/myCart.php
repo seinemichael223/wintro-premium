@@ -181,7 +181,7 @@ require_once '../includes/cart-inc.php';
                     </div>
 
                     <br>
-                    <a href="../includes/productDetails.php">Add More Products</a>
+                    <a href="../includes/product_details-inc.php">Add More Products</a>
                 </div>
             </div>
 
