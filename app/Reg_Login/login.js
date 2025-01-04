@@ -56,44 +56,44 @@ togglePassword2.addEventListener("click", () => {
 });
 
 
-// Validate empty field, email and password format for both forms
-function validate(formId) {
-  const form = document.getElementById(formId); // Dynamically select the form using the ID
-  const inputs = form.querySelectorAll("input"); // Get all input fields in the selected form
+// // Validate empty field, email and password format for both forms
+// function validate(formId) {
+//   const form = document.getElementById(formId); // Dynamically select the form using the ID
+//   const inputs = form.querySelectorAll("input"); // Get all input fields in the selected form
 
-  for (const input of inputs) {
-    if (input.value.trim() === "") { //trim() to remove space ensure input clean
-      alert(`Please fill in the ${input.name} field in the ${formId === 'signinForm' ? 'Sign In' : 'Sign Up'} form.`);
-      input.focus(); // Stay at current page
-      return false;
-    }
-  }
+//   for (const input of inputs) {
+//     if (input.value.trim() === "") { //trim() to remove space ensure input clean
+//       alert(`Please fill in the ${input.name} field in the ${formId === 'signinForm' ? 'Sign In' : 'Sign Up'} form.`);
+//       input.focus(); // Stay at current page
+//       return false;
+//     }
+//   }
 
-    const emailField = form.querySelector('input[name="Email"]'); // select email input
+//     const emailField = form.querySelector('input[name="Email"]'); // select email input
     
-    if (emailField) {
-      const email = emailField.value;
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // RegEx for email format
+//     if (emailField) {
+//       const email = emailField.value;
+//       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // RegEx for email format
   
-      if (!emailPattern.test(email)) {
-        alert("Please provide a valid email address.");
-        emailField.focus();
-        return false;
-      }
-    }
+//       if (!emailPattern.test(email)) {
+//         alert("Please provide a valid email address.");
+//         emailField.focus();
+//         return false;
+//       }
+//     }
 
-    const pwdField = form.querySelector('input[name="Password"]'); // select password input
+//     const pwdField = form.querySelector('input[name="Password"]'); // select password input
 
-    if (pwdField) {
-      const password = pwdField.value;
-      const pwdPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,8}$/; //RegEx for pwd format
+//     if (pwdField) {
+//       const password = pwdField.value;
+//       const pwdPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,8}$/; //RegEx for pwd format
 
-      if (!pwdPattern.test(password)) {
-        alert("Invalid password. ");
-        pwdField.focus();
-        return false;
-      }
-    }
+//       if (!pwdPattern.test(password)) {
+//         alert("Invalid password. ");
+//         pwdField.focus();
+//         return false;
+//       }
+//     }
 
-  return true; // Form is valid
-}
+//   return true; // Form is valid
+// }

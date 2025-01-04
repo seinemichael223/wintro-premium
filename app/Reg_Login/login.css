@@ -27,13 +27,13 @@ body {
     overflow: hidden;
     width: 800px;
     max-width:100%;
-    min-height: 480px;
+    min-height: 520px;
     opacity: 0.92;
 }
 
 .sign-up h2 {
   position: absolute;
-  top: 70px;
+  top: 3%;
 }
 
 .sign-in h2 {
@@ -42,7 +42,7 @@ body {
 }
 
 label {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .star {
@@ -69,15 +69,15 @@ a {
   font-size: 12px;
   text-decoration: none;
   position: absolute;
-  bottom: 165px;
+  bottom: 195px;
   right: 45px;
 }
 
 .tips {
-  font-size: 12px;
-  line-height: 10px;
+  font-size: 10px;
+  line-height: 12px;
   position: absolute;
-  top: 339px;
+  top: 415px;
   left:45px;
   right: 30px;
 }
@@ -93,7 +93,7 @@ button {
   font-weight: bold;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-top: 45px;
+  margin-top: 30px;
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@ button.hidden {
 
 .eye1 .fa-eye, .eye1 .fa-eye-slash{
   position: absolute;
-  bottom: 152px;
+  bottom: 121px;
   right: 50px;
   color: lightgrey;
   cursor: pointer;
@@ -117,7 +117,7 @@ button.hidden {
 
 .eye2 .fa-eye, .eye2 .fa-eye-slash{
   position: absolute;
-  bottom: 191px;
+  bottom: 223px;
   right: 50px; 
   color: lightgrey;
   cursor: pointer;
@@ -155,7 +155,7 @@ button.hidden {
 }
 
 .sign-in, .sign-up {
-    padding-top:90px;
+    padding-top:50px;
     padding-left: 40px;
     padding-right: 40px;
 }

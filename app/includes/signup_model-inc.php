@@ -24,9 +24,20 @@ function get_email(object $pdo, string $email)
     return $result;
 }
 
-function set_user(object $pdo, string $pwd, string $username, string $email)
+function get_pwd(object $pdo, string $pwd)
 {
-    $query = "INSERT INTO users (username, pwd, email) VALUES (:username, :pwd, :email);";
+    $query = "SELECT username FROM users WHERE pwd = :pwd;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":pwd", $pwd);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function set_user(object $pdo, string $fullname, string $username, string $phoneno, string $pwd, string $email)
+{
+    $query = "INSERT INTO users (full_name, username, pwd, email, phone_number) VALUES (?, ?, ?, ?, ?);";
     $stmt = $pdo->prepare($query);
 
     $options = [
@@ -35,8 +46,11 @@ function set_user(object $pdo, string $pwd, string $username, string $email)
 
     $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
 
-    $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":pwd", $hashedPwd);
-    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(1, $fullname);
+    $stmt->bindParam(2, $username);
+    $stmt->bindParam(3, $hashedPwd);
+    $stmt->bindParam(4, $email);
+    $stmt->bindParam(5, $phoneno);
+
     $stmt->execute();
 }
