@@ -1,20 +1,84 @@
 <?php
 require_once '../includes/config_session-inc.php';
 require_once '../includes/dbh-inc.php';
-require_once '../includes/fetch_options.php';
 require_once '../includes/fetch_prices.php';
+require_once '../includes/fetch_options.php';
 require_once '../includes/fetch_optionID.php';
 require_once '../includes/fetch_stock.php';
+
+// Handle file upload
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_FILES['files']) && !empty($_FILES['files']['name'][0])) {
+        $uploadDir = 'uploads/';
+        $uploadedFiles = [];
+        $errorMessages = [];
+
+        // Create upload directory if it doesn't exist
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // Loop through files
+        foreach ($_FILES['files']['name'] as $key => $fileName) {
+            $fileError = $_FILES['files']['error'][$key];
+            $fileTmpPath = $_FILES['files']['tmp_name'][$key];
+            $fileSize = $_FILES['files']['size'][$key];
+            $fileType = $_FILES['files']['type'][$key];
+
+            // Check for upload errors
+            if ($fileError !== UPLOAD_ERR_OK) {
+                $errorMessages[] = "File upload error for '$fileName': " . $fileError;
+                continue;
+            }
+
+            // Validate file size and type
+            if ($fileSize > 2 * 1024 * 1024) { // 2MB limit
+                $errorMessages[] = "File '$fileName' exceeds the 2MB size limit.";
+                continue;
+            }
+            if (!in_array($fileType, ['image/jpeg', 'image/png', 'image/gif'])) {
+                $errorMessages[] = "File '$fileName' has an invalid file type.";
+                continue;
+            }
+
+            $filePath = $uploadDir . basename($fileName);
+            if (move_uploaded_file($fileTmpPath, $filePath)) {
+                $uploadedFiles[] = $filePath;
+                // $_SESSION['uploaded_file_path'] = $filePath;
+            } else {
+                $errorMessages[] = "Error uploading file '$fileName'.";
+            }
+        }
+
+        ob_start(); // Start output buffering
+
+        // Respond with errors or success message
+        if (count($errorMessages) > 0) {
+            $response = array('status' => 'error', 'messages' => $errorMessages);
+        } else {
+            $response = array('status' => 'success', 'message' => 'Files uploaded successfully!', 'files' => $uploadedFiles);
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+
+        ob_end_flush(); // End output buffering
+
+        exit; // End after responding to the client
+    }
+}
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']);
     $_SESSION['product_id'] = $product_id;
 } elseif (isset($_SESSION['product_id'])) {
-    $product_id = $_SESSION['product_id']; // Retrieve from session if not in URL
+    $product_id = $_SESSION['product_id'];
 } else {
-    // Redirect if no product ID is found
-    header('Location: ../../productPage.php');
+    header('Location: ../../productPage.php'); //***GONNA BE CHANGED LATER
     exit();
 }
 
@@ -29,16 +93,34 @@ if (!$product) {
     exit();
 }
 
-//fetchOptions
+//Fetch product options
 $options = fetchOptions($pdo, $product_id);
-// Separate sizes and colors from options
 $sizes = array_unique(array_column($options, 'option_size'));
 $colors = array_unique(array_column($options, 'option_colour'));
-
-//fetchPrice
 $prices = fetchPrices($pdo, $product_id);
+//Get selected options
 $selected_size = $_POST['size'] ?? null;
 $selected_color = $_POST['color'] ?? null;
+$quantity = $_POST['quantity'] ?? 1;
+$special_instruction = isset($_POST['instruct_text']) ? htmlspecialchars($_POST['instruct_text']) : '';
+
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+if (isset($_POST['add-to-cart'])) {
+
+    $_SESSION['cart'][] = [
+        'product_id' => $product_id,
+        'product_name' => $product['product_name'],
+        'product_image' => $product['product_image'],
+        'product_price' => $product['product_unit_price'],
+        'size' => $selected_size,
+        'color' => $selected_color,
+        'quantity' => $quantity,
+        'special_instruction' => $special_instruction,
+    ];
+}
 
 ?>
 
@@ -154,8 +236,7 @@ $selected_color = $_POST['color'] ?? null;
             <p>|</p>
             <li><a href="#">Trophy</a></li>
             <p>|</p>
-            <li><a href="#"><span class="colored"><?php echo htmlspecialchars($product['product_name']); ?></span></a></li>
-
+            <li><a href="#"><span class="colored">#Trophy name</span></a></li>
         </ul>
     </div>
 
@@ -170,183 +251,175 @@ $selected_color = $_POST['color'] ?? null;
                         ?>
 
                     </div>
-                    <!-- <div class="small-images">
-                        <img src="image/product-background.jpg" alt="Thumbnail Image 1" onclick="updateMainImage(this)">
-                        <img src="image/trophy.png" alt="Thumbnail Image 2" onclick="updateMainImage(this)">
-                        <img src="image/trophy.png" alt="Thumbnail Image 3" onclick="updateMainImage(this)">
-                    </div> -->
+
                 </div>
-                <!-- Product Details -->
-                <div class="product-details">
-                    <div class="product-title"><?php echo htmlspecialchars($product['product_name']); ?></div>
-                    <div class="price">RM <?php echo htmlspecialchars($product['product_unit_price']); ?></div>
-                    <div class="type-color-dropdown">
-                        <form action="productDetail.php" method="POST" id="product-form">
-                            <!-- Size -->
-                            <div class="type-dropdown">
-                                <label for="size">Size:</label>
-                                <select id="size" name="size" onchange="this.form.submit()" required>
-                                    <option value="" disabled selected>Select a size</option> <!-- Placeholder -->
-                                    <?php
-                                    foreach ($sizes as $size) {
-                                        echo '<option value="' . htmlspecialchars($size) . '" ' . ($selected_size == $size ? 'selected' : '') . '>' . htmlspecialchars($size) . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                <form id="fileUploadForm" action="productDetail.php" method="POST" enctype="multipart/form-data">
+                    <!-- Product Details -->
+                    <div class="product-details">
+                        <div class="product-title"><?php echo htmlspecialchars($product['product_name']); ?></div>
+                        <div class="price">RM <?php echo htmlspecialchars($product['product_unit_price']); ?></div>
 
-                            <!-- Color -->
-                            <div class="color-dropdown">
-                                <label for="color">Color:</label>
-                                <select id="color" name="color" onchange="this.form.submit()" required>
-                                    <option value="" disabled selected>Select a color</option> <!-- Placeholder -->
-                                    <?php
-                                    foreach ($colors as $color) {
-                                        echo '<option value="' . htmlspecialchars($color) . '" ' . ($selected_color == $color ? 'selected' : '') . '>' . htmlspecialchars($color) . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
 
-                    <!-- Stock Display -->
-                    <div>
-                        <span class="stock">Stock:</span>
-                        <?php
-                        // Check if form was submitted
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            // echo "<p>Selected Size: $selected_size</p>";
-                            // echo "<p>Selected Color: $selected_color</p>";
-
-                            if ($selected_size && $selected_color) {
-                                // Get the option_id for the selected size and color
-                                $option_id = fetchOptionId($pdo, $product_id, $selected_size, $selected_color);
-                                // echo "<p>Option ID: $option_id</p>";
-                                if ($option_id) {
-                                    // Fetch stock quantity for the option_id
-                                    $stock = fetchStock($pdo, $option_id);
-                                } else {
-                                    $stock = null; // No matching option_id found
+                        <!-- Size -->
+                        <div class="type-dropdown">
+                            <label for="size">Size:</label>
+                            <select id="size" name="size" onchange="this.form.submit()" required>
+                                <option value="" disabled selected>Select a size</option> <!-- Placeholder -->
+                                <?php
+                                foreach ($sizes as $size) {
+                                    echo '<option value="' . htmlspecialchars($size) . '" ' . ($selected_size == $size ? 'selected' : '') . '>' . htmlspecialchars($size) . '</option>';
                                 }
+                                ?>
+                            </select>
+                        </div>
 
-                                if ($stock) {
-                                    echo htmlspecialchars($stock['stock_quantity']);
-                                } else {
-                                    echo "<p>Out of stock</p>";
+                        <!-- Color -->
+                        <div class="color-dropdown">
+                            <label for="color">Color:</label>
+                            <select id="color" name="color" onchange="this.form.submit()" required>
+                                <option value="" disabled selected>Select a color</option> <!-- Placeholder -->
+                                <?php
+                                foreach ($colors as $color) {
+                                    echo '<option value="' . htmlspecialchars($color) . '" ' . ($selected_color == $color ? 'selected' : '') . '>' . htmlspecialchars($color) . '</option>';
                                 }
-                            } else {
-                                echo "<p>-</p>";
-                            }
-                        }
-                        ?>
-                    </div>
-
-                    <?php
-                    $prices = fetchPrices($pdo, $product_id);
-                    ?>
-
-                    <!-- Bulk Discount -->
-                    <div class="bulk">Bulk Discount:</div>
-                    <table>
-                        <tr>
-                            <th>Unit Price</th>
-                            <th>Bulk Price</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <?= isset($prices['product_unit_price'])
-                                    ? 'RM ' . htmlspecialchars($prices['product_unit_price'])
-                                    : 'N/A'; ?>
-                            </td>
-                            <td>
-                                <?= isset($prices['product_bulk_price'])
-                                    ? 'RM ' . htmlspecialchars($prices['product_bulk_price'])
-                                    : 'N/A'; ?>
-                            </td>
-                        </tr>
-                    </table>
-
-
-                    <!-- Personalization -->
-                    <div class="personalization">
-                        <p>Personalization Options:</p>
-                        <div class="radio">
-                            <input type="radio" name="personalization" id="no-personalization" checked>
-                            <label for="no-personalization">No personalization</label>
+                                ?>
+                            </select>
                         </div>
-                        <div class="radio">
-                            <input type="radio" name="personalization" id="personalization">
-                            <label for="personalization">Personalization - Enter text below</label>
+
+                        <!-- Stock -->
+                        <div><span class="stock">Stock:
+                                <?php
+                                $stock_quantity = 0;  // Initialize stock quantity
+                                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                                    if ($selected_size && $selected_color) {
+                                        $option_id = fetchOptionId($pdo, $product_id, $selected_size, $selected_color);
+                                        // echo "<p>Option ID: $option_id</p>";
+                                        if ($option_id && ($stock = fetchStock($pdo, $option_id))) {
+                                            echo htmlspecialchars($stock['stock_quantity']);
+                                        } else {
+                                            echo "<p>Out of stock</p>";
+                                        }
+                                    } else {
+                                        echo "<p>-</p>";
+                                    }
+                                }
+                                ?>
+
+                            </span>
                         </div>
-                        <div id="items-container">
-                            <div class="item-custom">
-                                <div class="item-title" onclick="toggleDropdown(this)">Item 1<i class="fa-solid fa-angle-down"></i></div>
-                                <div class="form-container">
-                                    <form>
-                                        <input type="text">
-                                        <label>32 characters remaining</label>
-                                        <input type="text">
-                                        <label>32 characters remaining</label>
-                                        <input type="text">
-                                        <label>32 characters remaining</label>
-                                    </form>
+
+                        <!-- Bulk Discount -->
+                        <div class="bulk">Bulk Discount: </div>
+                        <table>
+                            <tr>
+                                <th>Unit Price</th>
+                                <th>Bulk Price</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?= isset($prices['product_unit_price'])
+                                        ? 'RM ' . htmlspecialchars($prices['product_unit_price'])
+                                        : 'N/A'; ?>
+                                </td>
+                                <td>
+                                    <?= isset($prices['product_bulk_price'])
+                                        ? 'RM ' . htmlspecialchars($prices['product_bulk_price'])
+                                        : 'N/A'; ?>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Personalization -->
+                        <div class="personalization">
+                            <p>Personalization Options:</p>
+                            <div class="radio">
+                                <input type="radio" name="personalization" id="no-personalization" checked>
+                                <label for="no-personalization">No personalization</label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="personalization" id="personalization">
+                                <label for="personalization">Personalization - Enter text below</label>
+                            </div>
+                            <div id="items-container">
+                                <div class="item-custom">
+                                    <div class="item-title" onclick="toggleDropdown(this)">Item 1<i class="fa-solid fa-angle-down"></i></div>
+                                    <div class="form-container">
+                                        <form>
+                                            <input type="text">
+                                            <label>32 characters remaining</label>
+                                            <input type="text">
+                                            <label>32 characters remaining</label>
+                                            <input type="text">
+                                            <label>32 characters remaining</label>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button class="add-custom" onclick="addItem()">+ Add items</button>
-                    </div>
-
-                    <!-- File Upload -->
-                    <div class="upload-file">
-                        <div class="upload">Upload Artwork/Logo: </div>
-                        <div class="art-logo">
-                            <input type="radio" name="artwork" id="no-artwork" value="no">
-                            <label for="no-artwork">No Thanks</label>
-                        </div>
-                        <div class="art-logo">
-                            <input type="radio" name="artwork" id="artwork" value="yes">
-                            <label for="artwork">Yes, I would like to upload a logo/ artwork</label>
-                        </div>
-                        <div class="file-drop-area" id="fileDropArea" style="display: none;">
-                            <p>Drop files here</p>
-                            <input type="file" id="fileInput" multiple>
+                            <button class="add-custom" onclick="addItem()">+ Add items</button>
                         </div>
 
-                        <ul class="file-list" id="fileList"></ul>
-                    </div>
+                        <!-- File Upload -->
+                        <div class="upload-file">
+                            <div class="upload">Upload Artwork/Logo: </div>
+                            <!-- Radio Button for selecting upload options -->
+                            <div class="art-logo">
+                                <input type="radio" name="artwork" value="no-artwork" id="no-artwork" checked>
+                                <label for="no-artwork">No Thanks</label>
+                            </div>
+                            <div class="art-logo">
+                                <input type="radio" name="artwork" value="upload-artwork" id="upload-artwork">
+                                <label for="upload-artwork">Yes, I would like to upload a logo/ artwork</label>
+                            </div>
+                            <!-- File input area -->
+                            <div class="file-drop-area" id="fileDropArea">
+                                <p>Drop files here or click to select</p>
+                                <input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
 
-                    <div class="instruct">
-                        <p>Special Instruction: </p>
-                        <textarea name="instruct-text" id="instruct-text"></textarea>
-                    </div>
+                                <!-- File upload information -->
+                                <ul class="file-list" id="fileList"></ul>
+                                <p class="help-text" id="fileHelpText" style="display: none;">
+                                    Maximum file size: 2MB. Accepted formats: JPG, PNG, GIF.
+                                </p>
+                            </div>
 
-                    <!-- Quantity -->
-                    <div class="quantity">
-                        <div class="qty">
-                            <p>Quantity: </p>
-                            <div class="qty-btn">
-                                <button class="decrement" onclick="decreaseValue()">-</button>
-                                <input type="text" id="counterValue" value="1" readonly />
-                                <button class="increment" onclick="increaseValue()">+</button>
+
+                        </div>
+                        <!-- Special Instruction -->
+                        <div class="instruct">
+                            <p>Special Instruction: </p>
+                            <textarea name="instruct_text" id="instruct-text" placeholder="You can leave your comment here..." rows="4" cols="50"></textarea>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="quantity">
+                            <div class="qty">
+                                <p>Quantity: </p>
+                                <div class="qty-btn">
+                                    <button type="button" class="decrement" onclick="decreaseValue()">-</button>
+                                    <input type="number" id="counterValue" name="quantity" value="1" min="1" />
+                                    <button type="button" class="increment" onclick="increaseValue()">+</button>
+                                </div>
+                            </div>
+                            <div id="stock-warning"></div>
+                        </div>
+
+
+                        <!-- Buttons -->
+                        <div class="buttons">
+                            <p>Need to customize this product or have questions?</p>
+                            <div class="yellow">
+                                <button class="send-inquiry"><a href="#">Send Inquiry</a></button>
+                                <button class="chat-now"><a href="#">Chat Now</a></button>
+                            </div>
+                            <div class="blue">
+                                <button type="submit" class="add-to-cart" name="add-to-cart">Add to Cart</button>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Buttons -->
-                    <div class="buttons">
-                        <p>Need to customize this product or have questions?</p>
-                        <div class="yellow">
-                            <button class="send-inquiry"><a href="#">Send Inquiry</a></button>
-                            <button class="chat-now"><a href="#">Chat Now</a></button>
-                        </div>
-                        <div class="blue">
-                            <button class="add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 
     <footer>
@@ -442,6 +515,7 @@ $selected_color = $_POST['color'] ?? null;
     </div>
 
     <script type="text/javascript" src="productDetail.js"></script>
+
 </body>
 
 </html>
