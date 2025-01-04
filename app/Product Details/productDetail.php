@@ -6,72 +6,6 @@ require_once '../includes/fetch_options.php';
 require_once '../includes/fetch_optionID.php';
 require_once '../includes/fetch_stock.php';
 
-// Handle file upload
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_FILES['files']) && !empty($_FILES['files']['name'][0])) {
-        $uploadDir = 'uploads/';
-        $uploadedFiles = [];
-        $errorMessages = [];
-
-        // Create upload directory if it doesn't exist
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
-        // Loop through files
-        foreach ($_FILES['files']['name'] as $key => $fileName) {
-            $fileError = $_FILES['files']['error'][$key];
-            $fileTmpPath = $_FILES['files']['tmp_name'][$key];
-            $fileSize = $_FILES['files']['size'][$key];
-            $fileType = $_FILES['files']['type'][$key];
-
-            // Check for upload errors
-            if ($fileError !== UPLOAD_ERR_OK) {
-                $errorMessages[] = "File upload error for '$fileName': " . $fileError;
-                continue;
-            }
-
-            // Validate file size and type
-            if ($fileSize > 2 * 1024 * 1024) { // 2MB limit
-                $errorMessages[] = "File '$fileName' exceeds the 2MB size limit.";
-                continue;
-            }
-            if (!in_array($fileType, ['image/jpeg', 'image/png', 'image/gif'])) {
-                $errorMessages[] = "File '$fileName' has an invalid file type.";
-                continue;
-            }
-
-            $filePath = $uploadDir . basename($fileName);
-            if (move_uploaded_file($fileTmpPath, $filePath)) {
-                $uploadedFiles[] = $filePath;
-                // $_SESSION['uploaded_file_path'] = $filePath;
-            } else {
-                $errorMessages[] = "Error uploading file '$fileName'.";
-            }
-        }
-
-        ob_start(); // Start output buffering
-
-        // Respond with errors or success message
-        if (count($errorMessages) > 0) {
-            $response = array('status' => 'error', 'messages' => $errorMessages);
-        } else {
-            $response = array('status' => 'success', 'message' => 'Files uploaded successfully!', 'files' => $uploadedFiles);
-        }
-
-        header('Content-Type: application/json');
-        echo json_encode($response);
-
-        ob_end_flush(); // End output buffering
-
-        exit; // End after responding to the client
-    }
-}
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
 if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']);
     $_SESSION['product_id'] = $product_id;
@@ -121,7 +55,9 @@ if (isset($_POST['add-to-cart'])) {
         'special_instruction' => $special_instruction,
     ];
 }
-
+// echo '<pre>';
+// print_r($_SESSION); // Outputs the entire session array
+// echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -253,7 +189,7 @@ if (isset($_POST['add-to-cart'])) {
                     </div>
 
                 </div>
-                <form id="fileUploadForm" action="productDetail.php" method="POST" enctype="multipart/form-data">
+                <form id="fileUploadForm" action="productDetail.php" method="POST">
                     <!-- Product Details -->
                     <div class="product-details">
                         <div class="product-title"><?php echo htmlspecialchars($product['product_name']); ?></div>
@@ -330,92 +266,38 @@ if (isset($_POST['add-to-cart'])) {
                             </tr>
                         </table>
 
-                        <!-- Personalization -->
-                        <div class="personalization">
-                            <p>Personalization Options:</p>
-                            <div class="radio">
-                                <input type="radio" name="personalization" id="no-personalization" checked>
-                                <label for="no-personalization">No personalization</label>
-                            </div>
-                            <div class="radio">
-                                <input type="radio" name="personalization" id="personalization">
-                                <label for="personalization">Personalization - Enter text below</label>
-                            </div>
-                            <div id="items-container">
-                                <div class="item-custom">
-                                    <div class="item-title" onclick="toggleDropdown(this)">Item 1<i class="fa-solid fa-angle-down"></i></div>
-                                    <div class="form-container">
-                                        <form>
-                                            <input type="text">
-                                            <label>32 characters remaining</label>
-                                            <input type="text">
-                                            <label>32 characters remaining</label>
-                                            <input type="text">
-                                            <label>32 characters remaining</label>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="add-custom" onclick="addItem()">+ Add items</button>
-                        </div>
+                    </div>
+                    <!-- Special Instruction -->
+                    <div class="instruct">
+                        <p>Special Instruction: </p>
+                        <textarea name="instruct_text" id="instruct-text" placeholder="You can leave your comment here..." rows="4" cols="50"></textarea>
+                    </div>
 
-                        <!-- File Upload -->
-                        <div class="upload-file">
-                            <div class="upload">Upload Artwork/Logo: </div>
-                            <!-- Radio Button for selecting upload options -->
-                            <div class="art-logo">
-                                <input type="radio" name="artwork" value="no-artwork" id="no-artwork" checked>
-                                <label for="no-artwork">No Thanks</label>
-                            </div>
-                            <div class="art-logo">
-                                <input type="radio" name="artwork" value="upload-artwork" id="upload-artwork">
-                                <label for="upload-artwork">Yes, I would like to upload a logo/ artwork</label>
-                            </div>
-                            <!-- File input area -->
-                            <div class="file-drop-area" id="fileDropArea">
-                                <p>Drop files here or click to select</p>
-                                <input type="file" id="fileInput" name="files[]" accept="image/*" multiple style="display: none;">
-
-                                <!-- File upload information -->
-                                <ul class="file-list" id="fileList"></ul>
-                                <p class="help-text" id="fileHelpText" style="display: none;">
-                                    Maximum file size: 2MB. Accepted formats: JPG, PNG, GIF.
-                                </p>
-                            </div>
-
-
-                        </div>
-                        <!-- Special Instruction -->
-                        <div class="instruct">
-                            <p>Special Instruction: </p>
-                            <textarea name="instruct_text" id="instruct-text" placeholder="You can leave your comment here..." rows="4" cols="50"></textarea>
-                        </div>
-
-                        <!-- Quantity -->
-                        <div class="quantity">
-                            <div class="qty">
-                                <p>Quantity: </p>
-                                <div class="qty-btn">
-                                    <button type="button" class="decrement" onclick="decreaseValue()">-</button>
-                                    <input type="number" id="counterValue" name="quantity" value="1" min="1" />
-                                    <button type="button" class="increment" onclick="increaseValue()">+</button>
-                                </div>
-                            </div>
-                            <div id="stock-warning"></div>
-                        </div>
-
-
-                        <!-- Buttons -->
-                        <div class="buttons">
-                            <p>Need to customize this product or have questions?</p>
-                            <div class="yellow">
-                                <button class="send-inquiry"><a href="#">Send Inquiry</a></button>
-                                <button class="chat-now"><a href="#">Chat Now</a></button>
-                            </div>
-                            <div class="blue">
-                                <button type="submit" class="add-to-cart" name="add-to-cart">Add to Cart</button>
+                    <!-- Quantity -->
+                    <div class="quantity">
+                        <div class="qty">
+                            <p>Quantity: </p>
+                            <div class="qty-btn">
+                                <button type="button" class="decrement" onclick="decreaseValue()">-</button>
+                                <input type="number" id="counterValue" name="quantity" value="1" min="1" />
+                                <button type="button" class="increment" onclick="increaseValue()">+</button>
                             </div>
                         </div>
+                        <div id="stock-warning"></div>
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="buttons">
+                        <p>Need to customize this product or have questions?</p>
+                        <div class="yellow">
+                            <button class="send-inquiry"><a href="#">Send Inquiry</a></button>
+                            <button class="chat-now"><a href="#">Chat Now</a></button>
+                        </div>
+                        <div class="blue">
+                            <button type="submit" class="add-to-cart" name="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
