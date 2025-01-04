@@ -1,4 +1,6 @@
 <?php
+$pageTitle = "Home";
+include '../header.php';
 require_once '../includes/config_session-inc.php';
 ?>
 
@@ -15,107 +17,6 @@ require_once '../includes/config_session-inc.php';
 </head>
 
 <body>
-    <div class="container">
-        <div class="header1">
-            <div class="info1">
-                <p>Call Us +60 12 345 6789</p>
-            </div>
-            <div class="info2">
-                <p>Free Shipping for Orders over RM199.90</p>
-            </div>
-        </div>
-
-        <div class="header2">
-            <div class="search">
-                <i class="fa-solid fa-bars"></i>
-                <div class="input-container">
-                    <input type="text" name="search" id="search" placeholder="Search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </div>
-
-            <div class="logo">
-                <img src="image/wpLogo2.png" alt="logo">
-            </div>
-
-            <div class="icons">
-                <i class="fa-regular fa-heart"></i>
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
-                    <a href="../includes/logout-inc.php">Logout</a>
-                    <a href="../includes/product_details-inc.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                <?php else: ?>
-                    <a href="../Reg_Login/login.php">Login</a>
-                <?php endif; ?>
-                <p>RM 0.00</p>
-            </div>
-        </div>
-
-        <div class="navBar">
-            <div class="navBtn">
-                <li><a href="../Homepage/homepage.php"><span>HOME</span></a></li>
-                <li><a href="../AboutUs/aboutUs.html">ABOUT US</a></li>
-                <li class="dropdown">
-                    <a href="#" id="product-link">PRODUCT</a>
-                    <div class="dropdown-overlay" id="product-dropdown">
-                        <div class="dropdown-content">
-                            <div class="column">
-                                <h4><a href="../Product/Awards&Trophies/awards_trophies.php">Awards and Trophies</a></h4>
-                                <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
-                                </ul>
-                                <h4><a href="#">Gifts & Souvenirs</a></h4>
-                                <ul>
-                                    <li><a href="#">Stationary Hamper</a></li>
-                                    <li><a href="#">Food Hamper</a></li>
-                                </ul>
-                                <h4><a href="#">Nametags</a></h4>
-                            </div>
-                            <div class="column">
-                                <h4><a href="#">Clothing</a></h4>
-                                <ul>
-                                    <li><a href="#">Jersey</a></li>
-                                    <li><a href="#">T-shirt</a></li>
-                                    <li><a href="#">Uniform</a></li>
-                                    <li><a href="#">Corporate</a></li>
-                                </ul>
-                                <h4><a href="#">Printings</a></h4>
-                                <ul>
-                                    <li><a href="#">Sticker</a></li>
-                                    <li><a href="#">Certificate</a></li>
-                                    <li><a href="#">Banner</a></li>
-                                    <li><a href="#">Signboard</a></li>
-                                </ul>
-                            </div>
-                            <div class="column">
-                                <h4><a href="#">Office Equipment</a></h4>
-                                <ul>
-                                    <li><a href="#">Pre Inked Stamp & Cop</a></li>
-                                </ul>
-                                <h4><a href="#">Sport Equipment</a></h4>
-                                <ul>
-                                    <li><a href="#">Basketball</a></li>
-                                    <li><a href="#">Badminton</a></li>
-                                    <li><a href="#">Football</a></li>
-                                    <li><a href="#">Table Tennis</a></li>
-                                    <li><a href="#">Futsal</a></li>
-                                    <li><a href="#">Stopwatch</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li><a href="../Services/service.html">SERVICES</a></li>
-                <li><a href="../ContactUs/ContactUs.php">CONTACT US</a></li>
-                <li><a href="../HowToOrder/HowToOrder.html">HOW TO ORDER</a></li>
-            </div>
-        </div>
-    </div>
-
     <div class="slider">
         <div class="slides">
             <input type="radio" name="radio-btn" id="radio1">
@@ -268,100 +169,7 @@ require_once '../includes/config_session-inc.php';
         </div>
     </div>
 
-    <footer>
-        <div class="foot1">
-            <div class="foot1-logo">
-                <img src="image/wp_Logo1.png" alt="Footer-Logo">
-            </div>
-            <div class="company">
-                <div class="CompanyName">
-                    <p>Wintro Premium Enterprise</p>
-                </div>
-                <div class="CompanyAddress">
-                    <p>34, Jalan Teratai & Taman Johor Jaya, 81100 Johor Bahru Johor</p>
-                </div>
-                <div class="followUs">
-                    <p>FOLLOW US</p>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-square-instagram"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="foot2">
-            <div class="foot2-title">
-                <p>Company Information</p>
-            </div>
-            <ul class="info-list">
-                <li class="info">
-                    <a href="../AboutUs/aboutUs.html">About Us</a>
-                </li>
-                <li class="info">
-                    <a href="../Services/service.html">Our Services</a>
-                </li>
-                <li class="info">
-                    <a href="../ContactUs/ContactUs.php">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="foot3">
-            <div class="foot3-title">
-                <p>Products</p>
-            </div>
-            <ul class="product-list">
-                <li class="product">
-                    <a href="#">Awards & Trophies</a>
-                </li>
-                <li class="product">
-                    <a href="#">Gift & Souvenirs</a>
-                </li>
-                <li class="product">
-                    <a href="#">Clothing</a>
-                </li>
-                <li class="product">
-                    <a href="#">Printing</a>
-                </li>
-                <li class="product">
-                    <a href="#">Office Equipment</a>
-                </li>
-                <li class="product">
-                    <a href="#">Sport Equipment</a>
-                </li>
-                <li class="product">
-                    <a href="#">Nametags</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="foot4">
-            <div class="foot4-title">
-                <p>Quick Links</p>
-            </div>
-            <ul class="links-list">
-                <li class="link">
-                    <a href="../Terms & Conditions/terms.html">Terms & Conditions</a>
-                </li>
-                <li class="link">
-                    <a href="../Policy/policy.html">Privacy Policy</a>
-                </li>
-                <li class="link">
-                    <a href="../FAQs/faqs.html">FAQs</a>
-                </li>
-            </ul>
-            <div class="chatWithUs">
-                <i class="fa-regular fa-message"></i>
-                <a href="#">CHAT WITH US</a>
-            </div>
-        </div>
-    </footer>
-
-    <div class="footer-bottom">
-        <p>© 2024 Wintro Premium Enterprise. All rights reserved.</p>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="homepage.js"></script>
+    <?php include '../footer.php'; ?>
 </body>
 
 </html>
