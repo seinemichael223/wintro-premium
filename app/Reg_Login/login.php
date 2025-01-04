@@ -29,7 +29,6 @@
                         placeholder="Enter Full Name"
                         required
                         aria-required="true"
-                        pattern="[a-zA-Z\s]+"
                         title="Full name should only contain letters and spaces.">
 
                     <!--Username-->
@@ -41,7 +40,6 @@
                         placeholder="Enter Username"
                         required
                         aria-required="true"
-                        pattern="[a-zA-Z\s]+">
 
                     <!--Phone Number-->
                     <label for="signup-phoneno">Phone Number<span class="star"> *</span></label>
@@ -52,8 +50,6 @@
                         placeholder="011-234-5678"
                         required
                         aria-required="true"
-                        pattern="^\d{3}-\d{3}-\d{4}$"
-                        title="Phone number must be in the format 011-234-5678.">
 
                     <!--Email-->
                     <label for="signup-email">Email<span class="star"> *</span></label>
@@ -74,7 +70,6 @@
                         placeholder="Enter Password"
                         required
                         aria-required="true"
-                        pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,8}"
                         title="Password must be 6-8 characters long, include an uppercase letter, a number, and a special character.">
                 </div>
                 <div class="eye1">
