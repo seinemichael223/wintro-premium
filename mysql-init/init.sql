@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS user_address (
     address_street VARCHAR(255) NOT NULL,
     address_city VARCHAR(100) NOT NULL,
     address_state VARCHAR(100) NOT NULL,
-    address_country VARCHAR(10) NOT NULL,
+    address_zip VARCHAR(12) NOT NULL,
     address_country VARCHAR(100) NOT NULL,
     FOREIGN KEY (uid) REFERENCES users(id) ON DELETE CASCADE
 );
