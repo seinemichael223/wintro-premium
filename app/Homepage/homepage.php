@@ -55,8 +55,8 @@ require_once '../includes/config_session-inc.php';
 
         <div class="navBar">
             <div class="navBtn">
-                <li><a href="../Homepage/homepage.php">HOME</a></li>
-                <li><a href="../AboutUs/aboutUs.html"><span>ABOUT US</span></a></li>
+                <li><a href="../Homepage/homepage.php"><span>HOME</span></a></li>
+                <li><a href="../AboutUs/aboutUs.html">ABOUT US</a></li>
                 <li class="dropdown">
                     <a href="#" id="product-link">PRODUCT</a>
                     <div class="dropdown-overlay" id="product-dropdown">
@@ -64,10 +64,10 @@ require_once '../includes/config_session-inc.php';
                             <div class="column">
                                 <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="../Product/product_pages/awards_trophies.php">Trophy</a></li>
-                                    <li><a href="../Product/product_pages/awards_trophies.php">Medal</a></li>
-                                    <li><a href="../Product/product_pages/awards_trophies.php">Crystal</a></li>
-                                    <li><a href="../Product/product_pages/awards_trophies.php">Pewter Award</a></li>
+                                    <li><a href="../../Product/product_pages/trophy.php">Trophy</a></li>
+                                    <li><a href="../../Product/product_pages/medal.php">Medal</a></li>
+                                    <li><a href="../../Product/product_pages/crystal.php">Crystal</a></li>
+                                    <li><a href="../../Product/product_pages/pewter.php">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="../Product/product_pages/awards_trophies.php">Gifts & Souvenirs</a></h4>
                                 <ul>

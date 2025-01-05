@@ -88,7 +88,7 @@ $stmt->bindValue(4, $offset, PDO::PARAM_INT);
         <div class="navBar">
             <div class="navBtn">
                 <li><a href="../../Homepage/homepage.php">HOME</a></li>
-                <li><a href="#">ABOUT US</a></li>
+                <li><a href="../AboutUs/aboutUs.html">ABOUT US</a></li>
                 <li class="dropdown">
                     <a href="#" id="product-link">PRODUCT</a>
                     <div class="dropdown-overlay" id="product-dropdown">
