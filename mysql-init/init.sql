@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS transaction_details (
     FOREIGN KEY (tid) REFERENCES transactions(tid) ON DELETE CASCADE
 );
 
-INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
+INSERT INTO users (full_name, username, pwd, email, phone_number, date_created) VALUES 
 ('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1'),
-('John Doe', 'john_doe', 'password123', 'john.doe@example.com', '0123456789'),
+('John Doe', 'john_doe', 'password123', 'john.doe@example.com', '0123456789', NULL),
 ('Jane Smith', 'jane_smith', 'securepwd456', 'jane.smith@example.com', '0112233445'),
 ('Michael Brown', 'michael_b', 'hashedpwd789', 'michael.brown@example.com', '0133344556'),
 ('Susan White', 'susan_white', 'adminpass321', 'susan.white@example.com', '0125566778'),
