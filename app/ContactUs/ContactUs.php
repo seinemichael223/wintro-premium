@@ -23,7 +23,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>Contact Us</title>
         <meta charset="Utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="stylesheet" rel="stylesheet" type="text/css" href="ContactUs.css">

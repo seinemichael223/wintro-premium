@@ -5,7 +5,7 @@ require_once '../includes/cart-inc.php';
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>My Cart</title>
         <meta charset="Utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="stylesheet" rel="stylesheet" type="text/css" href="myCart.css">
