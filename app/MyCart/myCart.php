@@ -138,17 +138,22 @@ require_once '../includes/cart-inc.php';
                                 <?php foreach ($cart as $id => $item): ?>
                                     <div class="item">
                                         <div class="item-image">
-                                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
+                                            <img src="<?= htmlspecialchars($item['product_image']) ?>" alt="<?= htmlspecialchars($item['product_name']) ?>">
                                         </div>
 
                                         <div class="item-info">
                                             <div class="info">
                                                 <div class="column1">
                                                     <div class="item-name">
-                                                        <p><?= htmlspecialchars($item['name']) ?></p>
+                                                        <p><?= htmlspecialchars($item['product_name']) ?></p>
                                                     </div>
                                                     <div class="item-details">
-                                                        <p>Quantity: <?= intval($item['quantity']) ?></p>
+                                                        <ul>
+                                                            <li><strong>Size:</strong> <?= htmlspecialchars($item['size'] ?? 'N/A') ?></li>
+                                                            <li><strong>Color:</strong> <?= htmlspecialchars($item['color'] ?? 'N/A') ?></li>
+                                                            <li><strong>Special Instruction:</strong> <?= htmlspecialchars($item['special_instruction'] ?? 'None') ?></li>
+                                                            <li><strong>Quantity:</strong> <?= intval($item['quantity']) ?></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
 
@@ -161,7 +166,7 @@ require_once '../includes/cart-inc.php';
                                                         <input type="text" value="<?= intval($item['quantity']) ?>" id="quantity-input">
                                                     </div>
 
-                                                    <p><span class="item-price">RM<?= number_format($item['price'], 2) ?></span></p>
+                                                    <p><span class="item-price">RM<?= number_format($item['product_price'], 2) ?></span></p>
                                                 </div>
                                             </div>
 
@@ -171,7 +176,7 @@ require_once '../includes/cart-inc.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <?php $totalCost += intval($item['quantity']) * floatval($item['price']); ?>
+                                    <?php $totalCost += intval($item['quantity']) * floatval($item['product_price']); ?>
                                 <?php endforeach; ?>
                             </div>
                             <p><strong>Total Cost: RM<?= number_format($totalCost, 2) ?></strong></p>
@@ -183,7 +188,6 @@ require_once '../includes/cart-inc.php';
                     <br>
                     <a href="../includes/product_details-inc.php">Add More Products</a>
                 </div>
-            </div>
 
             <div class="subtitle">
                 <p> - Recently Viewed - </p>
