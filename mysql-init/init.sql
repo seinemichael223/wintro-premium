@@ -232,9 +232,22 @@ INSERT INTO options (option_colour, option_size, product_id) VALUES
 
 INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
 (1, 10, 1, 1),
-(2, 20, 2, 1),
-(3, 12, 3, 1),
-(4, 20, 4, 1);
+(2, 4, 2, 1),
+(3, 0, 3, 1),
+(4, 20, 4, 1),
+(5, 40, 5, 2),
+(6, 3, 6, 2),
+(7, 50, 7, 2),
+(8, 17, 8, 3),
+(9, 32, 9, 3),
+(10, 42, 10, 3),
+(11, 12, 11, 4),
+(12, 9, 12, 4),
+(13, 5, 13, 4),
+(14, 4, 14, 4),
+(15, 23, 15, 4),
+(16, 45, 16, 4);
+
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;
