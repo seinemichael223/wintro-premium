@@ -55,9 +55,9 @@ if (isset($_POST['add-to-cart'])) {
         'special_instruction' => $special_instruction,
     ];
 }
-echo '<pre>';
-print_r($_SESSION); // Outputs the entire session array
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION); // Outputs the entire session array
+// echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +96,7 @@ echo '</pre>';
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-user"></i>
-                <a href="../../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="../../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>
         </div>

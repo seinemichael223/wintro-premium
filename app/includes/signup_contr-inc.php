@@ -49,7 +49,7 @@ function is_pwd_fulfill(object $pdo, string $pwd)
 
 function create_user(object $pdo, string $fullname, string $username, string $phoneno, string $pwd, string $email)
 {
-    set_user($pdo, $fullname, $username, $phoneno, $email, $pwd);
+    set_user($pdo, $fullname, $username, $phoneno, $pwd, $email);
 }
 
 function i_go_sleep() {
