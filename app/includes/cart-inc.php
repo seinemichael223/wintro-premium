@@ -21,5 +21,4 @@ $totalCost = 0;
 foreach ($cart as $item) {
     $totalCost += $item['quantity'] * $item['product_price'];
 }
-?>
 

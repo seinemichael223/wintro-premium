@@ -77,6 +77,21 @@ CREATE TABLE IF NOT EXISTS inventory (
     FOREIGN KEY (option_id) REFERENCES options (option_id)
 );
 
+CREATE TABLE IF NOT EXISTS transactions (
+    tid INT(12) AUTO_INCREMENT PRIMARY KEY,
+    payment_amount DECIMAL(10, 2) NOT NULL,
+    payment_status VARCHAR(30) NOT NULL DEFAULT 'INCOMPLETE',
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payer_id INT(12) NOT NULL,
+    payer_email VARCHAR(80) NOT NULL,
+    address_street VARCHAR(255) NOT NULL,
+    address_city VARCHAR(100) NOT NULL,
+    address_state VARCHAR(100) NOT NULL,
+    address_zip VARCHAR(12) NOT NULL,
+    address_country VARCHAR(100) NOT NULL,
+    FOREIGN KEY (payer_id) REFERENCES users (id)
+);
+
 INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
 ('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1');
 

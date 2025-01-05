@@ -180,7 +180,7 @@ require_once '../includes/cart-inc.php';
                                 <?php endforeach; ?>
                             </div>
                             <p><strong>Total Cost: RM<?= number_format($totalCost, 2) ?></strong></p>
-                            <form action="../includes/cart-inc.php" method="post">
+                            <form action="../includes/paypal-inc.php" method="post">
                                 <div class="paypal">
                                     <button type="submit" name="paypal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></button>
                                 </div>
