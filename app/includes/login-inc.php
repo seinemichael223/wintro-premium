@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_regenerate_id(true); // Regenerate session ID securely
 
         $_SESSION["user_id"] = $result["id"];
+        $_SESSION["username"] = $result["username"];
         $_SESSION["user_email"] = htmlspecialchars($result["email"]);
         $_SESSION["is_admin"] = ($result["is_admin"]);
         $_SESSION["last_regeneration"] = time();

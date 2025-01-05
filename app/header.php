@@ -41,7 +41,7 @@ require_once 'includes/config_session-inc.php';
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
+                    <a href="../Profile/profile.php"><i class="fa-regular fa-user"></i></a>
                     <a href="../includes/logout-inc.php">Logout</a>
                     <a href="../includes/product_details-inc.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <?php else: ?>
