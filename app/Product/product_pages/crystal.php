@@ -10,11 +10,8 @@ $min_price = isset($_GET['min_input']) ? intval(str_replace('RM', '', $_GET['min
 $max_price = isset($_GET['max_input']) ? intval(str_replace('RM', '', $_GET['max_input'])) : 500;
 
 $sql_total = "
-    SELECT COUNT(*) FROM product p
-    JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
-    JOIN category c ON sc.category_id = c.category_id
-    WHERE c.category_id = 1
-    AND p.product_unit_price BETWEEN ? AND ?
+    SELECT COUNT(*) FROM product WHERE sub_category_id = 3 
+    AND product_unit_price BETWEEN ? AND ?
 ";
 
 try {
@@ -30,19 +27,18 @@ try {
 }
 
 $sql = "
-    SELECT p.* FROM product p
-    JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
-    JOIN category c ON sc.category_id = c.category_id
-    WHERE c.category_id = 1
-    AND p.product_unit_price BETWEEN ? AND ?
-    LIMIT ? OFFSET ?
+    SELECT * FROM product WHERE sub_category_id = 3 
+    AND product_unit_price BETWEEN ? AND ?
+    LIMIT ? OFFSET ?;
+
 ";
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(1, $min_price, PDO::PARAM_INT);
 $stmt->bindValue(2, $max_price, PDO::PARAM_INT);
-$stmt->bindValue(3, $products_per_page, PDO::PARAM_INT);
-$stmt->bindValue(4, $offset, PDO::PARAM_INT);
+$stmt->bindValue(1, $products_per_page, PDO::PARAM_INT);
+$stmt->bindValue(2, $offset, PDO::PARAM_INT);
+
 ?>
 
 <!DOCTYPE html>
@@ -88,18 +84,18 @@ $stmt->bindValue(4, $offset, PDO::PARAM_INT);
         <div class="navBar">
             <div class="navBtn">
                 <li><a href="../../Homepage/homepage.php">HOME</a></li>
-                <li><a href="#">ABOUT US</a></li>
+                <li><a href="../../AboutUs/aboutUs.html">ABOUT US</a></li>
                 <li class="dropdown">
                     <a href="#" id="product-link">PRODUCT</a>
                     <div class="dropdown-overlay" id="product-dropdown">
                         <div class="dropdown-content">
                             <div class="column">
-                                <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
+                                <h4><a href="#">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="../../Product/product_pages/trophy.php">Trophy</a></li>
-                                    <li><a href="../../Product/product_pages/medal.php">Medal</a></li>
-                                    <li><a href="../../Product/product_pages/crystal.php">Crystal</a></li>
-                                    <li><a href="../../Product/product_pages/pewter.php">Pewter Award</a></li>
+                                    <li><a href="#">Trophy</a></li>
+                                    <li><a href="#">Medal</a></li>
+                                    <li><a href="#">Crystal</a></li>
+                                    <li><a href="#">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="#">Gifts & Souvenirs</a></h4>
                                 <ul>
@@ -153,13 +149,15 @@ $stmt->bindValue(4, $offset, PDO::PARAM_INT);
         <ul>
             <li><a href="../../Homepage/homepage.php">Home</a></li>
             <p>|</p>
-            <li><a href="#"><span class="colored">Awards and Trophies</span></a></li>
+            <li><a href="../../Product/product_pages/awards_trophies.php">Awards and Trophies</span></a></li>
+            <p>|</p>
+            <li><a href="#"><span class="colored">Crystal</span></a></li>
         </ul>
     </div>
 
     <div class="product-title">
         <div class="background-darker">
-            <h2>AWARDS AND TROPHIES</h2>
+            <h2>CRYSTAL</h2>
         </div>
     </div>
 
@@ -171,9 +169,9 @@ $stmt->bindValue(4, $offset, PDO::PARAM_INT);
                     <li>
                         <a href="#" class="award-btn"><span class="cat-title">AWARDS & TROPHIES<span class="fas fa-angle-down first"></span></span></a>
                         <ul class="award-show">
-                            <li><a href="#"><span class="highlighted">Trophy</span></a></li>
+                            <li><a href="#">Trophy</span></a></li>
                             <li><a href="#">Medal</a></li>
-                            <li><a href="#">Crystal</a></li>
+                            <li><a href="#"><span class="highlighted">Crystal</a></li>
                             <li><a href="#">Pewter Award</a></li>
                         </ul>
                     </li>
