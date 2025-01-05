@@ -30,7 +30,7 @@
                 <a href="../Services/service.html">Our Services</a>
             </li>
             <li class="info">
-                <a href="../ContactUs/ContactUs.php">Contact Us</a>
+                <a href="../ContactUs/ContactUs.html">Contact Us</a>
             </li>
         </ul>
     </div>
@@ -91,7 +91,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script type="text/javascript" src="footer.js"></script>
+<script type="text/javascript" src="homepage.js"></script>
 </body>
 
 </html>

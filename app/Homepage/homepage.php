@@ -1,6 +1,7 @@
 <?php
 require_once '../includes/config_session-inc.php';
-include '../includes/whatsapp-float.html';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -14,14 +15,15 @@ include '../includes/whatsapp-float.html';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header1">
             <div class="info1">
-            <p>Call Us +60 12 345 6789</p>
+                <p>Call Us +60 12 345 6789</p>
             </div>
             <div class="info2">
-            <p>Free Shipping for Orders over RM199.90</p>
+                <p>Free Shipping for Orders over RM199.90</p>
             </div>
         </div>
 
@@ -53,67 +55,67 @@ include '../includes/whatsapp-float.html';
 
         <div class="navBar">
             <div class="navBtn">
-                <li><a href="../Homepage/homepage.php"><span>HOME</span></a></li>
-                <li><a href="../AboutUs/aboutUs.html">ABOUT US</a></li>
+                <li><a href="../Homepage/homepage.php">HOME</a></li>
+                <li><a href="../AboutUs/aboutUs.html"><span>ABOUT US</span></a></li>
                 <li class="dropdown">
-                    <a href="../Product/product_pages/awards_trophies.php" id="product-link">PRODUCT</a>
+                    <a href="#" id="product-link">PRODUCT</a>
                     <div class="dropdown-overlay" id="product-dropdown">
                         <div class="dropdown-content">
                             <div class="column">
-                                <h4><a href="#">Awards and Trophies</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Trophy</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Medal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Crystal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Pewter Award</a></li>
                                 </ul>
-                                <h4><a href="#">Gifts & Souvenirs</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Gifts & Souvenirs</a></h4>
                                 <ul>
-                                    <li><a href="#">Stationary Hamper</a></li>
-                                    <li><a href="#">Food Hamper</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Stationary Hamper</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Food Hamper</a></li>
                                 </ul>
-                                <h4><a href="#">Nametags</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Nametags</a></h4>
                             </div>
                             <div class="column">
-                                <h4><a href="#">Clothing</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Clothing</a></h4>
                                 <ul>
-                                    <li><a href="#">Jersey</a></li>
-                                    <li><a href="#">T-shirt</a></li>
-                                    <li><a href="#">Uniform</a></li>
-                                    <li><a href="#">Corporate</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Jersey</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">T-shirt</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Uniform</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Corporate</a></li>
                                 </ul>
-                                <h4><a href="#">Printings</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Printings</a></h4>
                                 <ul>
-                                    <li><a href="#">Sticker</a></li>
-                                    <li><a href="#">Certificate</a></li>
-                                    <li><a href="#">Banner</a></li>
-                                    <li><a href="#">Signboard</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Sticker</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Certificate</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Banner</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Signboard</a></li>
                                 </ul>
                             </div>
                             <div class="column">
-                                <h4><a href="#">Office Equipment</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Office Equipment</a></h4>
                                 <ul>
-                                    <li><a href="#">Pre Inked Stamp & Cop</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Pre Inked Stamp & Cop</a></li>
                                 </ul>
-                                <h4><a href="#">Sport Equipment</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Sport Equipment</a></h4>
                                 <ul>
-                                    <li><a href="#">Basketball</a></li>
-                                    <li><a href="#">Badminton</a></li>
-                                    <li><a href="#">Football</a></li>
-                                    <li><a href="#">Table Tennis</a></li>
-                                    <li><a href="#">Futsal</a></li>
-                                    <li><a href="#">Stopwatch</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Basketball</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Badminton</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Football</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Table Tennis</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Futsal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Stopwatch</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </li>
-
                 <li><a href="../Services/service.html">SERVICES</a></li>
                 <li><a href="../ContactUs/ContactUs.php">CONTACT US</a></li>
                 <li><a href="../HowToOrder/HowToOrder.html">HOW TO ORDER</a></li>
             </div>
-        </div>               
+        </div>
+
     </div>
     <div class="slider">
         <div class="slides">
@@ -182,43 +184,43 @@ include '../includes/whatsapp-float.html';
             <ul class="card-list swiper-wrapper">
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/trophy_n_award.jpg" alt="card image" class="card-image">
+                        <img src="../image/trophy_n_award.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/sport_equip.jpg" alt="card image" class="card-image">
+                        <img src="../image/sport_equip.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/printings.jpg" alt="card image" class="card-image">
+                        <img src="../image/printings.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/office_equip.jpg" alt="card image" class="card-image">
+                        <img src="../image/office_equip.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/gift_n_souvenir.jpeg" alt="card image" class="card-image">
+                        <img src="../image/gift_n_souvenir.jpeg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/Category/clothing.jpg" alt="card image" class="card-image">
+                        <img src="../image/clothing.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <!-- <img src="image/nametags.webg" alt="card image" class="card-image"> -->
+                        <img src="../image/nametags.webp" alt="card image" class="card-image">
                     </a>
                 </li>
             </ul>
@@ -277,6 +279,9 @@ include '../includes/whatsapp-float.html';
     </div>
 
     <?php include '../footer.php'; ?>
+    <?php
+    include '../includes/whatsapp-float.html';
+    ?>
 </body>
 
 </html>

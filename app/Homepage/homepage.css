@@ -225,12 +225,12 @@ body {
 
 .aboutUs h5 {
     text-align: center;
-    font-size:24px;
+    font-size:18px;
     padding-bottom: 30px;
 }
 
 .aboutUs p {
-    text-align: center;
+    text-align: left;
     font-size: 16px;
 }
 
@@ -272,7 +272,7 @@ body {
 }
 
 .categoryTitle h5 {
-    font-size: 24px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -292,13 +292,14 @@ body {
     overflow: hidden;
 }
 
-.card-image { 
-    width: 100%;
-    max-width: 140px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 12px;
-    cursor: pointer;
+.card-image {
+    width: 150px; /* Fixed width for consistent size */
+    height: 250px; /* Fixed height for consistent size */
+    object-fit: cover; /* Ensures the image fills the container without distortion */
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    display: block; /* Ensures proper alignment inside flexbox or block containers */
+    margin: auto; /* Centers the image if used in a flex or block layout */
 }
 
 .card-list {
@@ -319,7 +320,7 @@ body {
     margin-bottom: 30px;
     padding-left: 50px;
     padding-right: 50px;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .service {
@@ -338,12 +339,8 @@ body {
     font-size: 16px;
 }
 
-.subtitle{
-    font-weight: bold;
-}
-
 .quotation-paragraph {
-    text-align: center;
+    text-align: left;
     padding-left: 50px;
     width: 80%;
     margin-left: 10%;
@@ -377,6 +374,10 @@ button:hover {
     align-items: stretch;
     gap: 20px;
     padding: 20px;
+}
+
+.subtitle{
+    font-weight: bold;
 }
 
 .sections > div {
