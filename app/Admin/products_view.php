@@ -71,7 +71,7 @@ if (isset($_SESSION['error'])) {
                 <td><?= htmlspecialchars($product['product_name']); ?></td>
                 <td>
                     <?php
-                    $baseDir = '../Product/Awards&Trophies/uploads/';
+                    $baseDir = '../Product/uploads/';
                     if (!empty($product['product_image'])) {
                         $imagePath = str_replace('uploads/', '', $product['product_image']);
                         $fullPath = $baseDir . $imagePath;
