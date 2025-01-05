@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
     pwd VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS user_address (
@@ -75,6 +76,9 @@ CREATE TABLE IF NOT EXISTS inventory (
     FOREIGN KEY (product_id) REFERENCES product (product_id),
     FOREIGN KEY (option_id) REFERENCES options (option_id)
 );
+
+INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
+('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1');
 
 
 INSERT INTO category (category_name) VALUES
