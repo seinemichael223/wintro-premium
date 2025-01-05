@@ -70,21 +70,23 @@ if (isset($_SESSION['error'])) {
                 <td><?= htmlspecialchars($product['product_id']); ?></td>
                 <td><?= htmlspecialchars($product['product_name']); ?></td>
                 <td>
-                    <?php
-                    $baseDir = '../Product/uploads/';
-                    if (!empty($product['product_image'])) {
-                        $imagePath = str_replace('uploads/', '', $product['product_image']);
-                        $fullPath = $baseDir . $imagePath;
-                        
-                        if (file_exists($fullPath)) {
-                            echo '<img src="' . htmlspecialchars($fullPath) . '" alt="Product Image" width="100">';
-                        } else {
-                            echo '<p>No image available</p>';
-                        }
+                <?php
+                    // Define the correct base directory and URL
+                    $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/Product/uploads/';
+                    $baseURL = '/Product/uploads/';
+                    $imagePath = $product['product_image'];
+
+                    // Remove redundant prefixes if present
+                    $imagePath = str_replace('Product/uploads/', '', $imagePath);
+                    $serverPath = $baseDir . $imagePath;
+
+                    // Check and display image
+                    if (file_exists($serverPath)) {
+                        echo '<img src="' . htmlspecialchars($baseURL . $imagePath) . '" alt="Product Image" width="100">';
                     } else {
-                        echo '<p>No image available (No path)</p>';
+                        echo '<img src="/path/to/default-image.png" alt="No Image Available" width="100">';
                     }
-                    ?>
+                ?>
                 </td>
                 <td><?= htmlspecialchars($product['category_name']); ?></td>
                 <td><?= htmlspecialchars($product['sub_category_name']); ?></td>
