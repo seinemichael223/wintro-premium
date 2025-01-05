@@ -3,23 +3,12 @@ session_start();
 require_once '../includes/dbh-inc.php';
 require_once 'customers_search.php';
 
-//Get search query if exists
+// Get search query if exists
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-//Get customers using the search function
+// Get customers using the search function
 $customers = searchCustomers($pdo, $search);
-
-//Handle success/error messages
-if (isset($_SESSION['success'])) {
-    echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    echo "<div class='alert alert-danger'>{$_SESSION['error']}</div>";
-    unset($_SESSION['error']);
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,9 +21,21 @@ if (isset($_SESSION['error'])) {
 </head>
 <body>
     <div class="container mt-4">
+        <?php
+        // Handle success/error messages
+        if (isset($_SESSION['success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['error'])) {
+            echo "<div class='alert alert-danger'>{$_SESSION['error']}</div>";
+            unset($_SESSION['error']);
+        }
+        ?>
+
         <h2>Customer List</h2>
 
-        <!-- Search Container -->
+        <!-- Rest of your HTML remains the same -->
         <div class="d-flex align-items-center mb-3">
             <div class="input-group" style="width: 300px;">
                 <input type="text" 
@@ -64,9 +65,9 @@ if (isset($_SESSION['error'])) {
                 <tbody>
                     <?php foreach ($customers as $customer): ?>
                         <tr>
-                            <td><?= htmlspecialchars($customer['id'] ?? '') ?></td>
-                            <td><?= htmlspecialchars($customer['full_name'] ?? '') ?></td>
-                            <td><?= htmlspecialchars($customer['username'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($customer['id']) ?></td>
+                            <td><?= htmlspecialchars($customer['full_name']) ?></td>
+                            <td><?= htmlspecialchars($customer['username']) ?></td>
                             <td>
                                 <?php if (!empty($customer['email'])): ?>
                                     <a href="mailto:<?= htmlspecialchars($customer['email']) ?>">
@@ -74,13 +75,18 @@ if (isset($_SESSION['error'])) {
                                     </a>
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($customer['phone_number'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($customer['phone_number']) ?></td>
                             <td>
-                                <?= htmlspecialchars($customer['address_street']?? '') ?>, 
-                                <?= htmlspecialchars($customer['address_city']?? '') ?>, 
-                                <?= htmlspecialchars($customer['address_state']?? '') ?>, 
-                                <?= htmlspecialchars($customer['address_zip']?? '') ?>, 
-                                <?= htmlspecialchars($customer['address_country']?? '') ?>
+                                <?php
+                                $addressParts = array_filter([
+                                    $customer['address_street'] ?? '',
+                                    $customer['address_city'] ?? '',
+                                    $customer['address_state'] ?? '',
+                                    $customer['address_zip'] ?? '',
+                                    $customer['address_country'] ?? ''
+                                ]);
+                                echo htmlspecialchars(implode(', ', $addressParts));
+                                ?>
                             </td>
                             <td><?= !empty($customer['date_created']) ? date('Y-m-d H:i', strtotime($customer['date_created'])) : '' ?></td>
                             <td>
@@ -103,7 +109,7 @@ if (isset($_SESSION['error'])) {
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to delete this customer?</p>
-                                                <p><strong>Customer:</strong> <?= htmlspecialchars($customer['full_name'] ?? 'Unknown') ?></p>
+                                                <p><strong>Customer:</strong> <?= htmlspecialchars($customer['full_name']) ?></p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

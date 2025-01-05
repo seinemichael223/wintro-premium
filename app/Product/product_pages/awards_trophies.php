@@ -139,7 +139,7 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                     </div>
                 </li>
                 <li><a href="../../Services/service.html">SERVICES</a></li>
-                <li><a href="../../ContactUs/ContactUs.html">CONTACT US</a></li>
+                <li><a href="../../ContactUs/ContactUs.php">CONTACT US</a></li>
                 <li><a href="../../HowToOrder/HowToOrder.html">HOW TO ORDER</a></li>
             </div>
         </div>
