@@ -105,7 +105,23 @@ INSERT INTO users (full_name, username, pwd, email, phone_number, is_admin) VALU
 ('Jane Smith', 'jane_smith', 'securepwd456', 'jane.smith@example.com', '0112233445', FALSE),
 ('Michael Brown', 'michael_b', 'hashedpwd789', 'michael.brown@example.com', '0133344556', FALSE),
 ('Susan White', 'susan_white', 'adminpass321', 'susan.white@example.com', '0125566778', FALSE),
-('Emma Green', 'emma_g', 'userpwd654', 'emma.green@example.com', '0146677889', FALSE);
+('Emma Green', 'emma_g', 'userpwd654', 'emma.green@example.com', '0146677889', FALSE),
+('Li Chen', 'li_chen88', '$2y$12$5F43...hashedPwd', 'li.chen@example.com', '011-7894561', FALSE),
+('Karen Adams', 'karen_adams', '$2y$12$5H87...hashedPwd', 'karen.adams@example.com', '012-2233445', FALSE),
+('Robert Wilson', 'robert_wilson', '$2y$12$6F54...hashedPwd', 'robert.wilson@example.com', '016-3344556', FALSE),
+('Olivia Jones', 'olivia_j', '$2y$12$8G23...hashedPwd', 'olivia.jones@example.com', '012-4455667', FALSE),
+('Steve Rogers', 'steve_r', '$2y$12$9H42...hashedPwd', 'steve.rogers@example.com', '017-1234567', FALSE),
+('Nancy Carter', 'nancy_c', '$2y$12$4G12...hashedPwd', 'nancy.carter@example.com', '018-7654321', FALSE),
+('Ethan Morris', 'ethan_m', '$2y$12$7D98...hashedPwd', 'ethan.morris@example.com', '014-6677888', FALSE),
+('Mia Anderson', 'mia_a', '$2y$12$3E87...hashedPwd', 'mia.anderson@example.com', '019-3456789', FALSE),
+('Lucas King', 'lucas_k', '$2y$12$6F12...hashedPwd', 'lucas.king@example.com', '011-5566778', FALSE),
+('Amelia Turner', 'amelia_t', '$2y$12$2A89...hashedPwd', 'amelia.turner@example.com', '018-3344559', FALSE),
+('Dylan Hill', 'dylan_h', '$2y$12$8E23...hashedPwd', 'dylan.hill@example.com', '016-1122334', FALSE),
+('Harper Wong', 'harper_w', '$2y$12$9B76...hashedPwd', 'harper.wong@example.com', '017-2233445', FALSE),
+('Jackson Lee', 'jackson_l', '$2y$12$5C87...hashedPwd', 'jackson.lee@example.com', '014-6677889', FALSE),
+('Chloe Harris', 'chloe_h', '$2y$12$1D45...hashedPwd', 'chloe.harris@example.com', '013-2233445', FALSE);
+
+
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
@@ -285,7 +301,29 @@ INSERT INTO transactions (payment_amount, payment_status, transaction_date, paye
 (50.00, 'FAILED', '2025-01-02 09:00:00', 3, 'michael.brown@example.com', '789 Pine St', 'George Town', 'Penang', '10200', 'Malaysia'),
 (300.00, 'SUCCESS', '2025-01-02 16:20:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
 (120.75, 'SUCCESS', '2025-01-03 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
-(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia');
+(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia'),
+(150.00, 'SUCCESS', '2025-01-01 10:30:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
+(200.50, 'SUCCESS', '2025-01-01 14:45:00', 2, 'jane.smith@example.com', '456 Elm St', 'Petaling Jaya', 'Selangor', '46000', 'Malaysia'),
+(50.00, 'FAILED', '2025-01-02 09:00:00', 3, 'michael.brown@example.com', '789 Pine St', 'George Town', 'Penang', '10200', 'Malaysia'),
+(300.00, 'SUCCESS', '2025-01-02 16:20:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
+(120.75, 'SUCCESS', '2025-01-03 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
+(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia'),
+(250.50, 'SUCCESS', '2024-12-28 15:20:00', 7, 'li.chen@example.com', '456 Cedar St', 'Kuching', 'Sarawak', '93000', 'Malaysia'),
+(75.00, 'FAILED', '2025-01-05 09:50:00', 8, 'karen.adams@example.com', '101 Bamboo St', 'Melaka', 'Melaka', '75000', 'Malaysia'),
+(450.25, 'SUCCESS', '2024-11-20 16:40:00', 9, 'robert.wilson@example.com', '21 River Rd', 'Shah Alam', 'Selangor', '40000', 'Malaysia'),
+(85.00, 'SUCCESS', '2025-01-06 10:00:00', 10, 'olivia.jones@example.com', '88 Blossom Ave', 'Kota Kinabalu', 'Sabah', '88000', 'Malaysia'),
+(300.00, 'FAILED', '2024-10-15 14:30:00', 11, 'steve.rogers@example.com', '512 Hill St', 'Alor Setar', 'Kedah', '05000', 'Malaysia'),
+(100.00, 'SUCCESS', '2025-01-07 11:45:00', 12, 'nancy.carter@example.com', '201 Pearl St', 'Seremban', 'Negeri Sembilan', '70000', 'Malaysia'),
+(65.25, 'SUCCESS', '2024-09-10 13:00:00', 13, 'ethan.morris@example.com', '712 Ocean Blvd', 'Kota Bharu', 'Kelantan', '15000', 'Malaysia'),
+(500.00, 'SUCCESS', '2023-12-31 22:15:00', 14, 'mia.anderson@example.com', '904 Moonlight Rd', 'Sibu', 'Sarawak', '96000', 'Malaysia'),
+(250.75, 'SUCCESS', '2025-01-08 14:15:00', 15, 'lucas.king@example.com', '405 Sunny Ln', 'Miri', 'Sarawak', '98000', 'Malaysia'),
+(220.00, 'SUCCESS', '2024-07-14 17:00:00', 16, 'amelia.turner@example.com', '601 Sunset Dr', 'Sandakan', 'Sabah', '90000', 'Malaysia'),
+(120.00, 'FAILED', '2025-01-09 11:30:00', 17, 'dylan.hill@example.com', '15 Pineapple St', 'Klang', 'Selangor', '41050', 'Malaysia'),
+(300.00, 'SUCCESS', '2024-05-06 10:50:00', 18, 'harper.wong@example.com', '730 Crystal Ave', 'Tawau', 'Sabah', '91000', 'Malaysia'),
+(275.50, 'SUCCESS', '2023-11-08 15:25:00', 19, 'jackson.lee@example.com', '801 Maple Grove', 'Bintulu', 'Sarawak', '97000', 'Malaysia'),
+(325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia');
+
+
 
 INSERT INTO transaction_details (tid, product_name, quantity) VALUES
 (1, 'CT5003F Acrylic Plastic Trophy', 1),
@@ -297,7 +335,27 @@ INSERT INTO transaction_details (tid, product_name, quantity) VALUES
 (4, '7502 Pewter Tray', 2),
 (5, 'MT301 Exclusive Zinc Alloy Medal', 1),
 (5, 'RC8806 Resin Trophy', 1),
-(6, 'MT301 Exclusive Zinc Alloy Medal', 1);
+(6, 'MT301 Exclusive Zinc Alloy Medal', 1),
+(7, 'PT2214F Economic Plastic Trophy', 3),
+(8, 'XT1709F Exclusive Plastic Trophy', 1),
+(8, 'RC8806 Resin Trophy', 2),
+(9, '7503 Pewter Tray', 1),
+(9, 'MT301 Exclusive Zinc Alloy Medal', 3),
+(10, 'BAW696 Metal Cup Trophy', 2),
+(11, 'XT1709F Exclusive Plastic Trophy', 2),
+(12, 'MT301 Exclusive Zinc Alloy Medal', 1),
+(13, '7502 Pewter Tray', 4),
+(14, 'BAW696 Metal Cup Trophy', 3),
+(15, 'CT5003F Acrylic Plastic Trophy', 2),
+(16, '7503 Pewter Tray', 2),
+(17, 'RC8806 Resin Trophy', 3),
+(18, 'MT301 Exclusive Zinc Alloy Medal', 2),
+(19, '7502 Pewter Tray', 3),
+(20, 'PT2214F Economic Plastic Trophy', 4),
+(20, 'BAW696 Metal Cup Trophy', 1),
+(20, 'RC8806 Resin Trophy', 2),
+(19, 'CT5003F Acrylic Plastic Trophy', 1),
+(18, '7503 Pewter Tray', 1);
 
 
 
