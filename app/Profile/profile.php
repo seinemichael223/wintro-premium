@@ -1,3 +1,11 @@
+<?php
+require_once '../includes/dbh-inc.php'; // Include your database connection file
+require_once '../includes/config_session-inc.php'; // Include your session configuration file
+
+// Set default values if session variables are not set
+$username = $_SESSION['username'] ?? 'Guest';
+$email = $_SESSION['user_email'] ?? 'Not Provided';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -110,57 +118,55 @@
         </div>
 
         <div class="management-container">
-            <div class="title">
-                <div class="title-content">
-                    <div class="profile-picture-container">
-                        <label for="profile-picture-input">
-                            <div class="profile-picture" id="profile-picture">
-                                <span>Upload</span>
-                            </div>
-                        </label>
-                        <input type="file" id="profile-picture-input" accept="image/*" hidden>
+
+            <div class="management-container">
+                <div class="title">
+                    <div class="title-content">
+                        <div class="profile-picture-container">
+                            <label for="profile-picture-input">
+                                <div class="profile-picture" id="profile-picture">
+                                    <span>Upload</span>
+                                </div>
+                            </label>
+                            <input type="file" id="profile-picture-input" accept="image/*" hidden>
+                        </div>
+                        <div class="welcome">
+                            <div>Welcome, <?php echo htmlspecialchars($username); ?></div>
+                            <div>User email: <?php echo htmlspecialchars($email); ?> <a href="../Reg_Login/login.html">Log Out</a></div>
+                        </div>
                     </div>
-                    <div class="welcome">
-                        <div>Welcome</div>
-                        <div>User email <a href="../Reg_Login/login.html">Log Out</a></div>
+                </div>
+
+                <div class="manage-account-info" id="info-section">
+                    <div class="account-bar">
+                        <div class="info" onclick="showSection('info')"><p>Account Info</p></div>
+                        <div class="address" onclick="showSection('address')"><p>Address Book</p></div>
+                        <div class="orders" onclick="showSection('orders')"><p>My Orders</p></div>
+                    </div>
+                
+                    <div class="info-content" id="info-content">
+                        <div class="edit" id="editButton" onclick="editDetails()">EDIT</div>
+                        <div class="change" id="changeButton" onclick="changePassword()">CHANGE</div>
+                        <table id="infoTable">
+                            <tr>
+                                <th class="label">Full Name</th>
+                                <td class="value" id="fullName"><?php echo htmlspecialchars($username); ?></td>
+                            </tr>
+                            <tr>
+                                <th class="label">Email</th>
+                                <td class="value" id="email"><?php echo htmlspecialchars($email); ?></td>
+                            </tr>
+                            <tr>
+                                <th class="label">Password</th>
+                                <td class="value" id="password">********</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <div class="manage-account-info" id="info-section">
-                <div class="account-bar">
-                    <div class="info" onclick="showSection('info')"><p>Account Info</p></div>
-                    <div class="address" onclick="showSection('address')"><p>Address Book</p></div>
-                    <div class="orders" onclick="showSection('orders')"><p>My Orders</p></div>
-                </div>
-            
-                <div class="info-content" id="info-content">
-                    <div class="edit" id="editButton" onclick="editDetails()">EDIT</div>
-                    <div class="change" id="changeButton" onclick="changePassword()">CHANGE</div>
-                    <table id="infoTable">
-                        <tr>
-                            <th class="label">Full Name</th>
-                            <td class="value" id="fullName">Adam Wong</td>
-                        </tr>
-                        <tr>
-                            <th class="label">Birthday</th>
-                            <td class="value" id="birthday">2000-01-01</td>
-                        </tr>
-                        <tr>
-                            <th class="label">Gender</th>
-                            <td class="value" id="gender">Male</td>
-                        </tr>
-                        <tr>
-                            <th class="label">Email</th>
-                            <td class="value" id="email">useremail@example.com</td>
-                        </tr>
-                        <tr>
-                            <th class="label">Password</th>
-                            <td class="value" id="password">********</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+
+
             
             <div class="manage-account-address hidden" id="address-section">
                 <div class="account-bar">

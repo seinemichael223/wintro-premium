@@ -51,97 +51,98 @@ if (isset($_SESSION['error'])) {
         </div>
 
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Image</th>
-                    <th>Category</th>
-                    <th>Sub-Category</th>
-                    <th>Description</th>
-                    <th>Options</th>
-                    <th>Unit Price (RM)</th>
-                    <th>Bulk Price (RM)</th>
-                    <th>Total Stock</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="productsTableBody">
-                <?php foreach ($products as $product): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($product['product_id']); ?></td>
-                        <td><?= htmlspecialchars($product['product_name']); ?></td>
-                        <td>
-                            <?php
-                            $baseDir = '../Product/Awards&Trophies/uploads/';
-                            if (!empty($product['product_image'])) {
-                                $imagePath = str_replace('uploads/', '', $product['product_image']);
-                                $fullPath = $baseDir . $imagePath;
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Sub-Category</th>
+                <th>Description</th>
+                <th>Options</th>
+                <th>Unit Price (RM)</th>
+                <th>Bulk Price (RM)</th>
+                <th>Total Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="productsTableBody">
+        <?php foreach ($products as $product): ?>
+            <tr>
+                <td><?= htmlspecialchars($product['product_id']); ?></td>
+                <td><?= htmlspecialchars($product['product_name']); ?></td>
+                <td>
+                <?php
+                    // Define the correct base directory and URL
+                    $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/Product/uploads/';
+                    $baseURL = '/Product/uploads/';
+                    $imagePath = $product['product_image'];
 
-                                if (file_exists($fullPath)) {
-                                    echo '<img src="' . htmlspecialchars($fullPath) . '" alt="Product Image" width="100">';
-                                } else {
-                                    echo '<p>No image available (File not found)</p>';
-                                }
-                            } else {
-                                echo '<p>No image available (No path)</p>';
-                            }
-                            ?>
-                        </td>
-                        <td><?= htmlspecialchars($product['category_name']); ?></td>
-                        <td><?= htmlspecialchars($product['sub_category_name']); ?></td>
-                        <td class="product-description">
-                            <?php
-                            $description = $product['product_description'] ?? '';
-                            $description = str_replace(
-                                ['â€™', 'â€³', 'â€"'],
-                                ['\'', '"', '-'],
-                                $description
-                            );
-                            echo nl2br(htmlspecialchars($description));
-                            ?>
-                        </td>
-                        <td>
-                            <?php if (!empty($product['options'])): ?>
-                                <table class="table table-sm table-borderless mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Color</th>
-                                            <th>Size</th>
-                                            <th>Stock</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($product['options'] as $option): ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($option['option_colour'] ?? 'N/A'); ?></td>
-                                                <td><?= htmlspecialchars($option['option_size']); ?></td>
-                                                <td><?= number_format($option['stock_quantity']); ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            <?php else: ?>
-                                <p>No options available</p>
-                            <?php endif; ?>
-                        </td>
-                        <td><?= number_format($product['product_unit_price'], 2); ?></td>
-                        <td><?= number_format($product['product_bulk_price'], 2); ?></td>
-                        <td><?= number_format($product['total_stock']); ?></td>
-                        <td>
-                            <div class="action-buttons">
-                                <a href="products_edit.php?id=<?= $product['product_id']; ?>"
-                                    class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
-                                <button type="button"
-                                    class="btn btn-danger btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal<?= $product['product_id']; ?>">
-                                    Delete
-                                </button>
-                            </div>
+                    // Remove redundant prefixes if present
+                    $imagePath = str_replace('Product/uploads/', '', $imagePath);
+                    $serverPath = $baseDir . $imagePath;
 
+                    // Check and display image
+                    if (file_exists($serverPath)) {
+                        echo '<img src="' . htmlspecialchars($baseURL . $imagePath) . '" alt="Product Image" width="100">';
+                    } else {
+                        echo '<img src="/path/to/default-image.png" alt="No Image Available" width="100">';
+                    }
+                ?>
+                </td>
+                <td><?= htmlspecialchars($product['category_name']); ?></td>
+                <td><?= htmlspecialchars($product['sub_category_name']); ?></td>
+                <td class="product-description">
+                    <?php 
+                    $description = $product['product_description'] ?? '';
+                    $description = str_replace(
+                        ['â€™', 'â€³', 'â€"'],
+                        ['\'', '"', '-'],
+                        $description
+                    );
+                    echo nl2br(htmlspecialchars($description)); 
+                    ?>
+                </td>
+                <td>
+                    <?php if (!empty($product['options'])): ?>
+                        <table class="table table-sm table-borderless mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Color</th>
+                                    <th>Size</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($product['options'] as $option): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($option['option_colour'] ?? 'N/A'); ?></td>
+                                        <td><?= htmlspecialchars($option['option_size']); ?></td>
+                                        <td><?= number_format($option['stock_quantity']); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <p>No options available</p>
+                    <?php endif; ?>
+                </td>
+                <td><?= number_format($product['product_unit_price'], 2); ?></td>
+                <td><?= number_format($product['product_bulk_price'], 2); ?></td>
+                <td><?= number_format($product['total_stock']); ?></td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="products_edit.php?id=<?= $product['product_id']; ?>" 
+                        class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+                        <button type="button" 
+                                class="btn btn-danger btn-sm" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteModal<?= $product['product_id']; ?>">
+                            Delete
+                        </button>
+                    </div>
                             <!-- Delete Confirmation Modal -->
                             <div class="modal fade delete-modal" id="deleteModal<?= $product['product_id']; ?>" tabindex="-1">
                                 <div class="modal-dialog">

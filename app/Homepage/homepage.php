@@ -43,7 +43,7 @@ require_once '../includes/config_session-inc.php';
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
+                    <a href="../Profile/profile.php"><i class="fa-regular fa-user"></i></a>
                     <a href="../includes/logout-inc.php">Logout</a>
                     <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
                         <a href="../Admin/dashboard.php">Admin Dashboard</a>
