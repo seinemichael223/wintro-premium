@@ -183,7 +183,7 @@ if (isset($_POST['add-to-cart'])) {
                 <div class="product-images">
                     <div class="big-image">
                         <?php
-                        echo '<img id="mainImage" src="../../Product/Awards&Trophies/' . htmlspecialchars($product['product_image']) . '" alt="Main Product Image">';
+                        echo '<img id="mainImage" src="../' . htmlspecialchars($product['product_image']) . '" alt="Main Product Image">';
                         ?>
 
                     </div>
