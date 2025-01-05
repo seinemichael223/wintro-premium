@@ -99,6 +99,16 @@ CREATE TABLE IF NOT EXISTS transaction_details (
     FOREIGN KEY (tid) REFERENCES transactions(tid) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    total_amount DECIMAL(10,2) NOT NULL,
+    shipping_address TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
 ('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1');
 
