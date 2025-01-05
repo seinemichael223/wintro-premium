@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
     pwd VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS user_address (
@@ -75,6 +76,31 @@ CREATE TABLE IF NOT EXISTS inventory (
     FOREIGN KEY (product_id) REFERENCES product (product_id),
     FOREIGN KEY (option_id) REFERENCES options (option_id)
 );
+
+CREATE TABLE IF NOT EXISTS transactions (
+    tid INT(12) AUTO_INCREMENT PRIMARY KEY,
+    payment_amount DECIMAL(10, 2) NOT NULL,
+    payment_status VARCHAR(30) NOT NULL DEFAULT 'INCOMPLETE',
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payer_id INT(12) NOT NULL,
+    payer_email VARCHAR(80) NOT NULL,
+    address_street VARCHAR(255) NOT NULL,
+    address_city VARCHAR(100) NOT NULL,
+    address_state VARCHAR(100) NOT NULL,
+    address_zip VARCHAR(12) NOT NULL,
+    address_country VARCHAR(100) NOT NULL,
+    FOREIGN KEY (payer_id) REFERENCES users (id)
+);
+
+CREATE TABLE IF NOT EXISTS transaction_details (
+    tid INT(12), -- Transaction ID (foreign key)
+    product_name VARCHAR(255) NOT NULL,
+    quantity INT(11) NOT NULL,
+    FOREIGN KEY (tid) REFERENCES transactions(tid) ON DELETE CASCADE
+);
+
+INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
+('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1');
 
 
 INSERT INTO category (category_name) VALUES
@@ -232,9 +258,22 @@ INSERT INTO options (option_colour, option_size, product_id) VALUES
 
 INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
 (1, 10, 1, 1),
-(2, 20, 2, 1),
-(3, 12, 3, 1),
-(4, 20, 4, 1);
+(2, 4, 2, 1),
+(3, 0, 3, 1),
+(4, 20, 4, 1),
+(5, 40, 5, 2),
+(6, 3, 6, 2),
+(7, 50, 7, 2),
+(8, 17, 8, 3),
+(9, 32, 9, 3),
+(10, 42, 10, 3),
+(11, 12, 11, 4),
+(12, 9, 12, 4),
+(13, 5, 13, 4),
+(14, 4, 14, 4),
+(15, 23, 15, 4),
+(16, 45, 16, 4);
+
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;

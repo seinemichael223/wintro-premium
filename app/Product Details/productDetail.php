@@ -55,9 +55,9 @@ if (isset($_POST['add-to-cart'])) {
         'special_instruction' => $special_instruction,
     ];
 }
-echo '<pre>';
-print_r($_SESSION); // Outputs the entire session array
-echo '</pre>';
+// echo '<pre>';
+// print_r($_SESSION); // Outputs the entire session array
+// echo '</pre>';
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +96,7 @@ echo '</pre>';
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-user"></i>
-                <a href="../../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="../../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>
         </div>
@@ -109,12 +109,12 @@ echo '</pre>';
                     <div class="dropdown-overlay" id="product-dropdown">
                         <div class="dropdown-content">
                             <div class="column">
-                                <h4><a href="#">Awards and Trophies</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Trophy</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Medal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Crystal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="#">Gifts & Souvenirs</a></h4>
                                 <ul>

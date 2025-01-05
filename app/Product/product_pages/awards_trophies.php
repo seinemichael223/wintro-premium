@@ -6,15 +6,21 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $products_per_page = 12;  // Number of products per page
 $offset = ($page - 1) * $products_per_page;
 
+$min_price = isset($_GET['min_input']) ? intval(str_replace('RM', '', $_GET['min_input'])) : 0;
+$max_price = isset($_GET['max_input']) ? intval(str_replace('RM', '', $_GET['max_input'])) : 500;
+
 $sql_total = "
     SELECT COUNT(*) FROM product p
     JOIN sub_category sc ON p.sub_category_id = sc.sub_category_id
     JOIN category c ON sc.category_id = c.category_id
     WHERE c.category_id = 1
+    AND p.product_unit_price BETWEEN ? AND ?
 ";
 
 try {
     $stmt_total = $pdo->prepare($sql_total);
+    $stmt_total->bindValue(1, $min_price, PDO::PARAM_INT);
+    $stmt_total->bindValue(2, $max_price, PDO::PARAM_INT);
     $stmt_total->execute();
     $total_products = $stmt_total->fetchColumn();
     $total_pages = ceil($total_products / $products_per_page);
@@ -22,9 +28,6 @@ try {
     echo "Error: " . $e->getMessage();
     exit;
 }
-
-$min_price = isset($_GET['min_input']) ? intval(str_replace('RM', '', $_GET['min_input'])) : 0;
-$max_price = isset($_GET['max_input']) ? intval(str_replace('RM', '', $_GET['max_input'])) : 500;
 
 $sql = "
     SELECT p.* FROM product p
@@ -36,9 +39,10 @@ $sql = "
 ";
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(1, $products_per_page, PDO::PARAM_INT);
-$stmt->bindValue(2, $offset, PDO::PARAM_INT);
-
+$stmt->bindValue(1, $min_price, PDO::PARAM_INT);
+$stmt->bindValue(2, $max_price, PDO::PARAM_INT);
+$stmt->bindValue(3, $products_per_page, PDO::PARAM_INT);
+$stmt->bindValue(4, $offset, PDO::PARAM_INT);
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +81,7 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-user"></i>
-                <a href="../../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="../../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
             </div>
         </div>
@@ -90,12 +94,12 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                     <div class="dropdown-overlay" id="product-dropdown">
                         <div class="dropdown-content">
                             <div class="column">
-                                <h4><a href="#">Awards and Trophies</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
+                                    <li><a href="../../Product/product_pages/trophy.php">Trophy</a></li>
+                                    <li><a href="../../Product/product_pages/medal.php">Medal</a></li>
+                                    <li><a href="../../Product/product_pages/crystal.php">Crystal</a></li>
+                                    <li><a href="../../Product/product_pages/pewter.php">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="#">Gifts & Souvenirs</a></h4>
                                 <ul>
@@ -155,7 +159,7 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
 
     <div class="product-title">
         <div class="background-darker">
-            <h2>TROPHY</h2>
+            <h2>AWARDS AND TROPHIES</h2>
         </div>
     </div>
 

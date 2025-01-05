@@ -5,7 +5,7 @@ require_once '../includes/cart-inc.php';
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>My Cart</title>
         <meta charset="Utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="stylesheet" rel="stylesheet" type="text/css" href="myCart.css">
@@ -37,7 +37,7 @@ require_once '../includes/cart-inc.php';
                 <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-user"></i>
-                <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
                 </div>
             </div>
@@ -50,12 +50,12 @@ require_once '../includes/cart-inc.php';
                         <div class="dropdown-overlay" id="product-dropdown">
                             <div class="dropdown-content">
                                 <div class="column">
-                                    <h4><a href="#">Awards and Trophies</a></h4>
+                                    <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                     <ul>
-                                        <li><a href="#">Trophy</a></li>
-                                        <li><a href="#">Medal</a></li>
-                                        <li><a href="#">Crystal</a></li>
-                                        <li><a href="#">Pewter Award</a></li>
+                                        <li><a href="../Product/product_pages/awards_trophies.php">Trophy</a></li>
+                                        <li><a href="../Product/product_pages/awards_trophies.php">Medal</a></li>
+                                        <li><a href="../Product/product_pages/awards_trophies.php">Crystal</a></li>
+                                        <li><a href="../Product/product_pages/awards_trophies.php">Pewter Award</a></li>
                                     </ul>
                                     <h4><a href="#">Gifts & Souvenirs</a></h4>
                                     <ul>
@@ -138,17 +138,22 @@ require_once '../includes/cart-inc.php';
                                 <?php foreach ($cart as $id => $item): ?>
                                     <div class="item">
                                         <div class="item-image">
-                                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
+                                            <img src="<?= htmlspecialchars($item['product_image']) ?>" alt="<?= htmlspecialchars($item['product_name']) ?>">
                                         </div>
 
                                         <div class="item-info">
                                             <div class="info">
                                                 <div class="column1">
                                                     <div class="item-name">
-                                                        <p><?= htmlspecialchars($item['name']) ?></p>
+                                                        <p><?= htmlspecialchars($item['product_name']) ?></p>
                                                     </div>
                                                     <div class="item-details">
-                                                        <p>Quantity: <?= intval($item['quantity']) ?></p>
+                                                        <ul>
+                                                            <li><strong>Size:</strong> <?= htmlspecialchars($item['size'] ?? 'N/A') ?></li>
+                                                            <li><strong>Color:</strong> <?= htmlspecialchars($item['color'] ?? 'N/A') ?></li>
+                                                            <li><strong>Special Instruction:</strong> <?= htmlspecialchars($item['special_instruction'] ?? 'None') ?></li>
+                                                            <li><strong>Quantity:</strong> <?= intval($item['quantity']) ?></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
 
@@ -161,7 +166,7 @@ require_once '../includes/cart-inc.php';
                                                         <input type="text" value="<?= intval($item['quantity']) ?>" id="quantity-input">
                                                     </div>
 
-                                                    <p><span class="item-price">RM<?= number_format($item['price'], 2) ?></span></p>
+                                                    <p><span class="item-price">RM<?= number_format($item['product_price'], 2) ?></span></p>
                                                 </div>
                                             </div>
 
@@ -171,19 +176,23 @@ require_once '../includes/cart-inc.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <?php $totalCost += intval($item['quantity']) * floatval($item['price']); ?>
+                                    <?php $totalCost += intval($item['quantity']) * floatval($item['product_price']); ?>
                                 <?php endforeach; ?>
                             </div>
                             <p><strong>Total Cost: RM<?= number_format($totalCost, 2) ?></strong></p>
+                            <form action="../includes/paypal-inc.php" method="post">
+                                <div class="paypal">
+                                    <button type="submit" name="paypal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></button>
+                                </div>
+                            </form>
                         <?php else: ?>
                             <p>Your cart is empty.</p>
                         <?php endif; ?>
                     </div>
 
                     <br>
-                    <a href="../includes/product_details-inc.php">Add More Products</a>
+                    <a href="../Product/product_pages/awards_trophies.php">Add More Products</a>
                 </div>
-            </div>
 
             <div class="subtitle">
                 <p> - Recently Viewed - </p>

@@ -274,7 +274,7 @@ body {
 .product-title {
     position: relative;
     height: 250px;
-    background-image: url("image/product-background2.jpg");
+    background-image: url("../image/product-background2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

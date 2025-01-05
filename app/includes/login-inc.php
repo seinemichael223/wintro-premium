@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $_SESSION["user_id"] = $result["id"];
         $_SESSION["user_email"] = htmlspecialchars($result["email"]);
+        $_SESSION["is_admin"] = ($result["is_admin"]);
         $_SESSION["last_regeneration"] = time();
 
         header("Location: ../Homepage/homepage.php?login=success");

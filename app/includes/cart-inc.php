@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Calculate the total cost of all items in the cart
 $totalCost = 0;
 foreach ($cart as $item) {
-    $totalCost += $item['quantity'] * $item['price'];
+    $totalCost += $item['quantity'] * $item['product_price'];
 }
-?>
 
