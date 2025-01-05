@@ -107,7 +107,8 @@ INSERT INTO sub_category (sub_category_id, sub_category_name, category_id) VALUE
 (18, 'Football', 6),
 (19, 'Table Tennis', 6),
 (20, 'Futsal', 6),
-(21, 'Stopwatch', 6);
+(21, 'Stopwatch', 6),
+(22, 'Nametags', 7);
 
 INSERT INTO product (product_id, product_name, product_description, product_image, product_unit_price, product_bulk_price, product_created_at, product_upated_at, sub_category_id) VALUES
 (1, 'CT5003F Acrylic Plastic Trophy', '', '../Product/Awards&Trophies/uploads/Awards and Trophies/Trophy/Acrylic Plastic Trophy.png', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
@@ -144,7 +145,19 @@ INSERT INTO product (product_id, product_name, product_description, product_imag
 (32, 'NAKAMA S7 Sapphira Rubber Bat', '', 'uploads/Sport Equipment/Table Tennis/NAKAMA S7 Sapphira Rubber Bat.png', 243.60, 241.00, '2024-12-30 05:41:50', '2024-12-30 05:41:50', 19),
 (33, 'carlton SOLAR 600 Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/carlton SOLAR 600 Badminton Rackets.png', 50.00, 49.00, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17),
 (34, 'ARMO SPEED Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/ARMO SPEED Badminton Rackets.png', 39.90, 38.90, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17),
-(35, 'TS POWER Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/TS POWER Badminton Rackets.png', 39.90, 38.90, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17);
+(35, 'TS POWER Badminton Racket', 'Aluminium Shaft / Steel Frame', 'uploads/Sport Equipment/Badminton/TS POWER Badminton Rackets.png', 39.90, 38.90, '2024-12-31 03:20:20', '2024-12-31 03:20:20', 17),
+(37, 'FH3441 Food Hamper B', NULL, 'GiftsAndSouvenirs/Food Hamper/FH3441 Food Hamper B.webp', 89.99, 88.00, '2025-01-04 23:49:01', '2025-01-04 23:56:30', 6),
+(38, 'FH3440 Food Hamper C', NULL, 'GiftsAndSouvenirs/Food Hamper/FH3440 Food Hamper C.webp', 89.99, 88.00, '2025-01-04 23:49:01', '2025-01-04 23:56:30', 6),
+(39, 'FH3449 Food Hamper D', NULL, 'GiftsAndSouvenirs/Food Hamper/FH3449 Food Hamper D.webp', 79.99, 77.00, '2025-01-04 23:49:01', '2025-01-04 23:56:30', 6),
+(40, 'SH1101 Stationary Hamper Set A', '', 'GiftsAndSouvenirs/Stationary Hamper/SH1101 Stationary Hamper Set A.png', 19.50, 19.00, '2025-01-04 23:49:01', '2025-01-04 23:49:01', 5),
+(41, 'SH1102 Stationary Hamper Set B', NULL, 'GiftsAndSouvenirs/Stationary Hamper/SH1102 Stationary Hamper Set B.png', 15.70, 15.00, '2025-01-04 23:49:01', '2025-01-04 23:49:01', 5),
+(42, 'SH1103 Stationary Hamper Set C', '', 'GiftsAndSouvenirs/Stationary Hamper/SH1103 Stationary Hamper Set C.png', 20.50, 19.80, '2025-01-04 23:49:01', '2025-01-04 23:49:01', 5),
+(43, 'PC1233 Pre Inked Stamp', NULL, 'OfficeEquipment/PC1233 Pre Inked Stamp.jpg', 31.50, 31.00, '2025-01-04 23:55:05', '2025-01-04 23:55:05', 15),
+(44, 'PC1234 Pre Inked Stamp', NULL, 'OfficeEquipment/PC1234 Pre Inked Stamp.jpg', 31.50, 31.00, '2025-01-04 23:55:05', '2025-01-04 23:55:05', 15),
+(45, 'PC1235 Pre Inked Stamp', NULL, 'OfficeEquipment/PC1235 Pre Inked Stamp.jpg', 31.50, 31.00, '2025-01-04 23:55:05', '2025-01-04 23:55:05', 15),
+(46, 'PC1236 Pre Inked Stamp', NULL, 'OfficeEquipment/PC1236 Pre Inked Stamp.jpg', 31.50, 31.00, '2025-01-04 23:55:05', '2025-01-04 23:55:05', 15),
+(47, 'TG1276 Nametag', NULL, 'Nametags/TG1276 Nametag.webp', 20.00, 18.00, '2025-01-04 23:58:47', '2025-01-05 00:01:37', 7),
+(48, 'TG1278 Nametag', '', 'Nametags/TG1278 Nametag.jpg', 20.00, 18.00, '2025-01-04 23:58:47', '2025-01-05 00:01:37', 7);
 
 INSERT INTO options (option_colour, option_size, product_id) VALUES
 ('Gold', '400mm(H)x 120mm(L)x 120mm(W)', 1),
@@ -209,7 +222,13 @@ INSERT INTO options (option_colour, option_size, product_id) VALUES
 (NULL, '9.9', 34),
 (NULL, '9.8', 34),
 (NULL, '600', 35),
-(NULL, '700', 35);
+(NULL, '700', 35),
+('Silver', '1\'\' x 3\'\'', 47),
+('Gold', '1\'\' x 3\'\'', 47),
+('Brown', '1\'\' x 3\'\'', 48),
+('Gold', '1\'\' x 3\'\'', 48),
+('Silver', '1\'\' x 3\'\'', 48),
+('Black', '1\'\' x 3\'\'', 48);
 
 INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALUES
 (1, 10, 1, 1),

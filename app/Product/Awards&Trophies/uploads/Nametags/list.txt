@@ -1,0 +1,7 @@
+TG1276 Nametag
+Color: White, Silver, Gold
+RM20
+
+TG1278 Nametag
+Color: Brown, Gold, Silver, Black
+RM20

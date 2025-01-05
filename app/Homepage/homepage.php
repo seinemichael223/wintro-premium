@@ -2,6 +2,7 @@
 $pageTitle = "Home";
 include '../header.php';
 require_once '../includes/config_session-inc.php';
+include '../includes/whatsapp-float.html';
 ?>
 
 <!DOCTYPE html>
@@ -84,37 +85,43 @@ require_once '../includes/config_session-inc.php';
             <ul class="card-list swiper-wrapper">
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/trophy_n_award.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/sport_equip.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/printings.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/office_equip.jpg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/gift_n_souvenir.jpeg" alt="card image" class="card-image">
                     </a>
                 </li>
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/trophy.png" alt="card image" class="card-image">
+                        <img src="image/Category/clothing.jpg" alt="card image" class="card-image">
+                    </a>
+                </li>
+
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                        <img src="image/nametags.webg" alt="card image" class="card-image">
                     </a>
                 </li>
             </ul>
@@ -132,9 +139,9 @@ require_once '../includes/config_session-inc.php';
 
     <div class="service">
         <div class="quotation">
-            <p>ONLINE QUOTATION</p>
+            <p class="subtitle">ONLINE QUOTATION</p>
             <div class="quotation-paragraph">
-                <p>This is quotation paragraph. This is quotation paragraph.This is quotation paragraph.This is quotation paragraph.This is quotation paragraph.</p>
+                <p>We are the leading trophy maker with affordable prices. Send us an online quotation and our staff will reply to you as soon as possible.</p>
             </div>
             <div class="btn1">
                 <div class="btn1">
@@ -147,21 +154,24 @@ require_once '../includes/config_session-inc.php';
     <div class="sections">
         <div class="instant-support">
             <div class="sentence4">
-                <p>INSTANT SUPPORT</p>
+                <p class="subtitle">INSTANT SUPPORT</p>
             </div>
             <div class="paragraph4">
-                <p>This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.This is instant support paragraph.</p>
+                <p>Our instant live chat and remarkable customer support & service is what we pride ourselves as a trophy supplier to suit out client's needs.</p>
             </div>
             <div class="btn2">
-                <button>Chat With Us</button>
+                <a href="https://wa.me/194832932" target="_blank">
+                    <button>Chat With Us</button>
+                </a>
+
             </div>
         </div>
         <div class="custom-design">
             <div class="sentence5">
-                <p>CUSTOMIZATION DESIGN</p>
+                <p class="subtitle">CUSTOMIZATION DESIGN</p>
             </div>
             <div class="paragraph5">
-                <p>This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.This is customization content.</p>
+                <p>All our trophies listed on the website and our catalogue are fully customizable and you can customize it to pretty much any style you desire.</p>
             </div>
             <div class="btn3">
                 <button>Shop Now</button>
