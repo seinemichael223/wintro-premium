@@ -109,12 +109,12 @@ if (isset($_POST['add-to-cart'])) {
                     <div class="dropdown-overlay" id="product-dropdown">
                         <div class="dropdown-content">
                             <div class="column">
-                                <h4><a href="#">Awards and Trophies</a></h4>
+                                <h4><a href="../Product/product_pages/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Trophy</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Medal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Crystal</a></li>
+                                    <li><a href="../Product/product_pages/awards_trophies.php">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="#">Gifts & Souvenirs</a></h4>
                                 <ul>
