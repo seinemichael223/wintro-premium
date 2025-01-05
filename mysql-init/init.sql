@@ -111,7 +111,7 @@ INSERT INTO sub_category (sub_category_id, sub_category_name, category_id) VALUE
 (22, 'Nametags', 7);
 
 INSERT INTO product (product_id, product_name, product_description, product_image, product_unit_price, product_bulk_price, product_created_at, product_upated_at, sub_category_id) VALUES
-(1, 'CT5003F Acrylic Plastic Trophy', '', 'Product/uploads/AwardsAndTrophies/Trophy/Acrylic Plastic Trophy.png', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
+(1, 'CT5003F Acrylic Plastic Trophy', '', 'app/Product/uploads/AwardsAndTrophies/Trophy/Acrylic Plastic Trophy.png', 129.00, 109.00, '2024-12-30 02:18:56', '2024-12-30 02:18:56', 1),
 (2, 'PT2214F Economic Plastic Trophy', '', 'Product/uploads/AwardsAndTrophies/Trophy/Economic Plastic Trophy.png', 45.00, 42.00, '2024-12-30 04:21:21', '2024-12-30 04:21:21', 1),
 (3, 'XT1709F Exclusive Plastic Trophy', '', 'Product/uploads/AwardsAndTrophies/Trophy/Exclusive Plastic Trophy.png', 143.00, 139.00, '2024-12-30 04:24:23', '2024-12-30 04:24:23', 1),
 (4, 'BAW696 Metal Cup Trophy', '', 'Product/uploads/AwardsAndTrophies/Trophy/Metal Cup Trophy-Blue.png', 24.00, 22.00, '2024-12-30 04:26:08', '2024-12-30 04:26:08', 1),
@@ -123,9 +123,9 @@ INSERT INTO product (product_id, product_name, product_description, product_imag
 (10, '8355 Exclusive Crystal Plaque', '', 'Product/uploads/AwardsAndTrophies/Crystal/8355 Exclusive Crystal Plaque.png', 29.00, 28.80, '2024-12-30 04:37:13', '2024-12-30 04:37:13', 3),
 (11, '8348 Exclusive Crystal Plaque', '', 'Product/uploads/AwardsAndTrophies/Crystal/8348 Exclusive Crystal Plaque.png', 29.00, 28.80, '2024-12-30 04:37:13', '2024-12-30 04:37:13', 3),
 (12, '8349 Exclusive Crystal Plaque', '', 'Product/uploads/AwardsAndTrophies/Crystal/8349 Exclusive Crystal Plaque.png', 29.00, 28.80, '2024-12-30 04:37:13', '2024-12-30 04:37:13', 3),
-(13, '7502 Pewter Tray', '', 'uploads/Awards and Trophies/Pewter/7502 Pewter Tray.png', 19.00, 18.70, '2024-12-30 04:41:27', '2024-12-30 04:41:27', 4),
-(14, '7503 Pewter Tray', '', 'uploads/Awards and Trophies/Pewter/7503 Pewter Tray.png', 19.00, 18.70, '2024-12-30 04:41:27', '2024-12-30 04:41:27', 4),
-(15, 'HS3V Stopwatch', 'Brand: Casio\r\nMeasuring unit :1/100th of a second\r\nMeasuring capacity : 9:59’59.99″\r\nMode : Net time, split time, 1st/2nd place times', 'uploads/Sport Equipment/Stopwatch/HS3V.png', 165.00, 164.65, '2024-12-30 05:04:21', '2024-12-30 05:04:21', 21),
+(13, '7502 Pewter Tray', '', 'Product/uploads/AwardsAndTrophies/Pewter/7502 Pewter Tray.png', 19.00, 18.70, '2024-12-30 04:41:27', '2024-12-30 04:41:27', 4),
+(14, '7503 Pewter Tray', '', 'Product/uploads/AwardsAndTrophies/Pewter/7503 Pewter Tray.png', 19.00, 18.70, '2024-12-30 04:41:27', '2024-12-30 04:41:27', 4),
+(15, 'HS3V Stopwatch', 'Brand: Casio\r\nMeasuring unit :1/100th of a second\r\nMeasuring capacity : 9:59’59.99″\r\nMode : Net time, split time, 1st/2nd place times', 'Product/uploads/Sport Equipment/Stopwatch/HS3V.png', 165.00, 164.65, '2024-12-30 05:04:21', '2024-12-30 05:04:21', 21),
 (16, 'F-011 Stopwatch', 'Brand: Flott\r\nMeasuring unit :1/100th of a second\r\nMeasuring capacity : 9:59’59.99″\r\nMode : Calendar, calendar', 'uploads/Sport Equipment/Stopwatch/F-011.png', 25.00, 24.90, '2024-12-30 05:04:21', '2024-12-30 05:04:21', 21),
 (17, 'BG3800 Synthetic Rubber Basketball', NULL, 'uploads/Sport Equipment/Basketball/BG3800 Synthetic Rubber.png', 190.00, 188.00, '2024-12-30 05:12:03', '2024-12-30 05:12:03', 16),
 (18, 'BG3000 Synthetic Rubber Basketball', NULL, 'uploads/Sport Equipment/Basketball/BG3000 Synthetic Rubber.png', 119.00, 118.00, '2024-12-30 05:12:03', '2024-12-30 05:12:03', 16),
