@@ -121,7 +121,7 @@ include '../includes/whatsapp-float.html';
 
                 <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
-                        <img src="image/nametags.webg" alt="card image" class="card-image">
+                        <!-- <img src="image/nametags.webg" alt="card image" class="card-image"> -->
                     </a>
                 </li>
             </ul>

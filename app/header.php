@@ -62,7 +62,7 @@ require_once 'includes/config_session-inc.php';
                             <div class="column">
                                 <h4><a href="../Product/Awards&Trophies/awards_trophies.php">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
+                                    <li><a href="../Product/Awards&Trophies/trophy.php">Trophy</a></li>
                                     <li><a href="#">Medal</a></li>
                                     <li><a href="#">Crystal</a></li>
                                     <li><a href="#">Pewter Award</a></li>
