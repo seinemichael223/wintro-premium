@@ -51,7 +51,6 @@ if (isset($_SESSION['error'])) {
         </div>
 
         <table class="table table-bordered">
-<<<<<<< HEAD
         <thead>
             <tr>
                 <th>Product ID</th>
@@ -144,34 +143,6 @@ if (isset($_SESSION['error'])) {
                             Delete
                         </button>
                     </div>
-=======
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Image</th>
-                    <th>Category</th>
-                    <th>Sub-Category</th>
-                    <th>Description</th>
-                    <th>Options</th>
-                    <th>Unit Price (RM)</th>
-                    <th>Bulk Price (RM)</th>
-                    <th>Total Stock</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="productsTableBody">
-                <?php foreach ($products as $product): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($product['product_id']); ?></td>
-                        <td><?= htmlspecialchars($product['product_name']); ?></td>
-                        <td>
-                            <?php
-                            $baseDir = '../Product/Awards&Trophies/uploads/';
-                            if (!empty($product['product_image'])) {
-                                $imagePath = str_replace('uploads/', '', $product['product_image']);
-                                $fullPath = $baseDir . $imagePath;
->>>>>>> ac46c9f143bf28dc229c38cfb4019b0fec831764
 
                                 if (file_exists($fullPath)) {
                                     echo '<img src="' . htmlspecialchars($fullPath) . '" alt="Product Image" width="100">';
