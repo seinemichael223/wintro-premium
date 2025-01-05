@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die();
         }
 
-        create_user($pdo, $fullname, $username, $phoneno, $email, $pwd);
+        create_user($pdo, $fullname, $username, $phoneno, $pwd, $email);
 
         header("Location: ../Reg_Login/login.php?signup=success");
 
