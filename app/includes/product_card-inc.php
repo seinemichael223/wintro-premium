@@ -26,7 +26,7 @@ function displayProducts($pdo, $sql, $bindings = [])
                 <a href="../../Product Details/productDetail.php?id=' . $product_id . '" class="product-card-link">
                     <div class="product-card">
                         <div class="card-image">
-                            <img src="' . $image_url . '" alt="' . $product_name . '">
+                            <img src="../' . $image_url . '" alt="' . $product_name . '">
                         </div>
                         <div class="card-title">
                             <h5>' . $product_name . '</h5>

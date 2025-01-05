@@ -72,7 +72,7 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                 </div>
             </div>
             <div class="logo">
-                <img src="image/wpLogo2.png" alt="logo">
+                <img src="../image/wpLogo2.png" alt="logo">
             </div>
             <div class="icons">
                 <i class="fa-regular fa-heart"></i>
