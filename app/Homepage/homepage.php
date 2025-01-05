@@ -39,10 +39,15 @@ include '../includes/whatsapp-float.html';
             </div>
 
             <div class="icons">
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-regular fa-user"></i>
-            <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
-            <p>RM 0.00</p>
+                <i class="fa-regular fa-heart"></i>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
+                    <a href="../includes/logout-inc.php">Logout</a>
+                    <a href="../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
+                <?php else: ?>
+                    <a href="../Reg_Login/login.php">Login</a>
+                <?php endif; ?>
+                <p>RM 0.00</p>
             </div>
         </div>
 
