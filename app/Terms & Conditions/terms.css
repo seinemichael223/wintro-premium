@@ -280,6 +280,30 @@ body {
     font-weight: bold;
 }
 
+.terms-content {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-para {
+    width: 80%;
+}
+
+.content-para p, ul {
+    font-size: 16px;
+}
+
+.content-para ul {
+    list-style: none;
+}
+
+.black {
+    font-weight: bold;
+}
+
 /* Terms Content*/
 
 /* Reusable Footer*/
