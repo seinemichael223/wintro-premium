@@ -99,27 +99,6 @@ CREATE TABLE IF NOT EXISTS transaction_details (
     FOREIGN KEY (tid) REFERENCES transactions(tid) ON DELETE CASCADE
 );
 
-INSERT INTO transactions (payment_amount, payment_status, transaction_date, payer_id, payer_email, address_street, address_city, address_state, address_zip, address_country) VALUES
-(150.00, 'SUCCESS', '2025-01-01 10:30:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
-(200.50, 'SUCCESS', '2025-01-01 14:45:00', 2, 'jane.smith@example.com', '456 Elm St', 'Petaling Jaya', 'Selangor', '46000', 'Malaysia'),
-(50.00, 'FAILED', '2025-01-02 09:00:00', 3, 'michael.brown@example.com', '789 Pine St', 'George Town', 'Penang', '10200', 'Malaysia'),
-(300.00, 'SUCCESS', '2025-01-02 16:20:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
-(120.75, 'SUCCESS', '2025-01-03 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
-(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia');
-
-INSERT INTO transaction_details (tid, product_name, quantity) VALUES
-(1, 'CT5003F Acrylic Plastic Trophy', 1),
-(1, 'PT2214F Economic Plastic Trophy', 2),
-(2, 'XT1709F Exclusive Plastic Trophy', 1),
-(2, 'BAW696 Metal Cup Trophy', 1),
-(3, 'BAW696 Metal Cup Trophy', 1),
-(4, '7503 Pewter Tray', 1),
-(4, '7502 Pewter Tray', 2),
-(5, 'MT301 Exclusive Zinc Alloy Medal', 1),
-(5, 'RC8806 Resin Trophy', 1),
-(6, 'MT301 Exclusive Zinc Alloy Medal', 1);
-
-
 INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, is_admin) VALUES 
 ('Alice Wong', 'aliceRabbit21', '$2y$12$nlEDNGNL384lafKuiryfI.KwsQ0JH.d0k./K/nGvlbw3ZOiwyV5Yy', 'alice@gmail.com', '012-222-5555', '2025-01-05 07:36:35', '1'),
 ('John Doe', 'john_doe', 'password123', 'john.doe@example.com', '0123456789'),
@@ -127,7 +106,6 @@ INSERT INTO users (full_name, username, pwd, email, phone_number, date_created, 
 ('Michael Brown', 'michael_b', 'hashedpwd789', 'michael.brown@example.com', '0133344556'),
 ('Susan White', 'susan_white', 'adminpass321', 'susan.white@example.com', '0125566778'),
 ('Emma Green', 'emma_g', 'userpwd654', 'emma.green@example.com', '0146677889');
-
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
@@ -299,6 +277,29 @@ INSERT INTO inventory (inventory_id, stock_quantity, option_id, product_id) VALU
 (14, 4, 14, 4),
 (15, 23, 15, 4),
 (16, 45, 16, 4);
+
+
+INSERT INTO transactions (payment_amount, payment_status, transaction_date, payer_id, payer_email, address_street, address_city, address_state, address_zip, address_country) VALUES
+(150.00, 'SUCCESS', '2025-01-01 10:30:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
+(200.50, 'SUCCESS', '2025-01-01 14:45:00', 2, 'jane.smith@example.com', '456 Elm St', 'Petaling Jaya', 'Selangor', '46000', 'Malaysia'),
+(50.00, 'FAILED', '2025-01-02 09:00:00', 3, 'michael.brown@example.com', '789 Pine St', 'George Town', 'Penang', '10200', 'Malaysia'),
+(300.00, 'SUCCESS', '2025-01-02 16:20:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
+(120.75, 'SUCCESS', '2025-01-03 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
+(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia');
+
+INSERT INTO transaction_details (tid, product_name, quantity) VALUES
+(1, 'CT5003F Acrylic Plastic Trophy', 1),
+(1, 'PT2214F Economic Plastic Trophy', 2),
+(2, 'XT1709F Exclusive Plastic Trophy', 1),
+(2, 'BAW696 Metal Cup Trophy', 1),
+(3, 'BAW696 Metal Cup Trophy', 1),
+(4, '7503 Pewter Tray', 1),
+(4, '7502 Pewter Tray', 2),
+(5, 'MT301 Exclusive Zinc Alloy Medal', 1),
+(5, 'RC8806 Resin Trophy', 1),
+(6, 'MT301 Exclusive Zinc Alloy Medal', 1);
+
+
 
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
