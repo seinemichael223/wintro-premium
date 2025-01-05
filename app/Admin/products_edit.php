@@ -3,7 +3,7 @@ session_start();
 require_once '../includes/dbh-inc.php';
 
 // Define upload directory path
-$target_dir = "../Product/Awards&Trophies/uploads/";
+$target_dir = "../Product/uploads/";
 
 // Create uploads directory if it doesn't exist
 if (!file_exists($target_dir)) {
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->commit();
         
         $_SESSION['success'] = "Product updated successfully";
-        header("Location: ../admin/admin_ProductManagement.php");
+        header("Location: products_view.php");
         exit;
         
     } catch (Exception $e) {

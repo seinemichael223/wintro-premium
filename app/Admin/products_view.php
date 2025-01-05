@@ -79,7 +79,7 @@ if (isset($_SESSION['error'])) {
                         if (file_exists($fullPath)) {
                             echo '<img src="' . htmlspecialchars($fullPath) . '" alt="Product Image" width="100">';
                         } else {
-                            echo '<p>No image available (File not found)</p>';
+                            echo '<p>No image available</p>';
                         }
                     } else {
                         echo '<p>No image available (No path)</p>';
