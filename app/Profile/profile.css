@@ -271,400 +271,102 @@ body {
 }
 
 /* Profile Content */
-.management-container {
+/* General Section Styling */
+.manage-account {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    width: 100%;
-}
-
-.title {
-    width: 100%;
-    background-color: rgb(3,32,98);
-    padding-left: 30px;
-    height: 150px;
-}
-
-.title-content {
-    position: relative;
-}
-
-.welcome {
-    position: absolute;
-    color: white;
-    top: 100px;
-    left: 160px;
-    font-weight: bold;
-}
-
-.welcome a {
-    color: black;
-    font-style: italic;
-}
-
-.welcome a:hover {
-    color: white;
-}
-
-.profile-picture-container {
-    position: absolute;
-    top: 50px;
-    width: 150px;
-    height: 150px;
-}
-
-.profile-picture {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-    border: 2px solid #ccc;
-    background-color: #ccc;
-}
-
-.profile-picture span {
-    color: #666;
-    font-size: 14px;
-    text-align: center;
-}
-
-.profile-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.manage-account-info, .manage-account-address, .manage-account-orders {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    margin: 20px auto;
     width: 80%;
-    margin-top: 100px;
-    background-color: #fff;
-    margin-bottom: 30px;
+}
+
+h2 {
+    display:flex;
+    justify-content: center;
 }
 
 .account-bar {
     display: flex;
-    gap: 20px;
-}
-
-.manage-account-info .info {
-    border-bottom: 4px solid black;
-    padding: 0px 5px;
-}
-
-.manage-account-address .address {
-    border-bottom: 4px solid black;
-    padding: 0px 5px;
-}
-
-.manage-account-orders .orders {
-    border-bottom: 4px solid black;
-    padding: 0px 5px;
-    
-}
-
-.info, .address, .orders {
-    cursor: pointer;
-}
-
-.info-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    margin-top: 50px;
-}
-
-.info-content table {
-    width: 100%;
-}
-
-table, th, td {
-    text-align: left;
-    line-height: 50px;
-}
-
-.edit {
-    position: absolute;
-    right: 10px;
-    top: 123px;
-    border-bottom: 1px solid black;
-    line-height: 15px;
-    cursor: pointer;
-}
-
-.change {
-    position: absolute;
-    right: 6px;
-    top: 223px;
-    border-bottom: 1px solid black;
-    line-height: 15px;
-    cursor: pointer;
-}
-
-.btn, .add-new-btn {
-    background-color: rgb(3,32,98);
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    width: 30%;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 2px 5px;
-}
-
-.save-btn:hover, .cancel-btn:hover {
-    background-color: black;
-}
-
-input, select:focus {
-    outline: none;
-    accent-color: black;
-}
-
-input[type="checkbox"] {
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-.address-content {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items: flex-start;
-    margin-top: 60px;
-    gap: 50px;
-}
-
-.shipping-address h5, .billing-address h5{
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 30px;
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-}
-
-.address-edit p, .delete p, .add p {
-    border-bottom: 1px solid black;
-    line-height: 15px;
-    cursor: pointer;
-}
-
-.pipe p {
-    line-height: 15px;
-}
-
-.shipping-address, .billing-address {
-    width: 80%;
-}
-
-.row {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align items to the start */
-    justify-content: flex-start; /* Align items at the start */
-    width: 100%; /* Ensure full-width */
-}
-
-.fieldset5 , .fieldset6 {
-    width: 60%;
-    padding: 20px;
-    border: 1px solid black;
-}
-
-legend {
-    font-weight: bold;
-}
-
-.shipping-form, .billing-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
-    width: 100%;
-    padding: 10px 20px;
-}
-
-form .column {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-}
-
-form .input-box {
-    width: 100%;
-}
-
-form label {
-    font-size: 14px;
-}
-
-form input[type=text], form input[type=tel] {
-    width: 100%;
-    font-size: 14px;
-    padding: 2px 5px;
-    margin-top: 0px;
-    margin-bottom: 7px;
-    display: inline-block;
-    border: 1.5px solid black;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-form input[type=text], form input[type=tel], form select:focus {
-    outline: none;
-}
-
-form .star {
-    color: red;
-}
-
-form select {
-    width: 48%;
-    font-size: 14px;
-    padding: 4px 5px;
-    margin-top: 0px;
-    margin-bottom: 7px;
-    display: inline-block;
-    border: 1.5px solid black;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.select-state {
-    display: flex;
-    flex-direction: column;
-}
-
-.options {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 7px;
-}
-
-input[type="checkbox"] {
-    accent-color: lightgrey;
-    cursor: pointer;
-}
-
-.form-btn {
-    display: flex;
-    justify-content: center;
-    padding: 0px 10px;
-    gap: 20px;
-    width: 100%;
-}
-
-.form-btn button {
-    border: none;
-    background-color: rgb(3,32,98);
-    color: white;
-    font-weight: bold;
-    padding: 10px 50px;
-    margin-top: 20px;
-    box-shadow: 0px 3px 5px lightgrey;
-    width: 100%;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: black;
-}
-
-.ship-list, .bill-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.orders-content {
-    width: 80%;
-    margin-top: 60px;
-    padding: 10px;
-}
-
-.order-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    width: 100%; 
-}
-
-.order-card {
-    border-bottom: 1px solid black;
-    color: black;
-    padding: 20px 20px 50px 20px;
+    justify-content: space-around;
     margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+    border-bottom: 2px solid #ccc;
+}
 
-  .order-card img {
-    width: 100px;
-    height: 100px;
-    background-color: #d9d9d9;
-    border-radius: 5px;
-    margin-right: 20px;
-    text-align: center;
-  }
+.account-bar button {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-  .order-details {
-    flex-grow: 1;
-  }
-
-  .order-details p {
-    margin: 5px 0;
-  }
-
-  .order-details p span {
-    font-weight: bold;
-  }
-
-  .receipt-button {
-    color: black;
-    font-size: 14px;
-  }
-
-  .status-button {
+.account-bar button.active,
+.account-bar button:hover {
     background-color: rgb(3,32,98);
     color: white;
+}
+
+/* Section Styling */
+.section {
+    display: none;
+    width: 100%;
+    text-align: left;
+}
+
+.section h3 {
+    color: rgb(3,32,98);
+    margin-bottom: 15px;
+}
+
+.info-table,
+.address-card {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.info-table th,
+.info-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.edit-btn {
+    margin: 10px 0;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    padding: 5px 10px;
     border-radius: 5px;
-    font-size: 14px;
     cursor: pointer;
-  }
+}
 
-  .status-button:hover {
-    background-color: black;
-  }
+.edit-btn:hover {
+    background-color: #45a049;
+}
 
-  .cols3 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
+/* Address Card Styling */
+.address-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Order List */
+#orders-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+#orders-content ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
 
   /* Reusable Footer*/
 footer {
