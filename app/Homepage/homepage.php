@@ -45,6 +45,9 @@ require_once '../includes/config_session-inc.php';
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="../Profile/profile.html"><i class="fa-regular fa-user"></i></a>
                     <a href="../includes/logout-inc.php">Logout</a>
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                        <a href="../Admin/dashboard.php">Admin Dashboard</a>
+                    <?php endif; ?>
                     <a href="../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
                 <?php else: ?>
                     <a href="../Reg_Login/login.php">Login</a>
