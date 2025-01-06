@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 CREATE TABLE IF NOT EXISTS transaction_details (
-    tid INT(12), -- Transaction ID (foreign key)
+    tid INT(12), 
     product_name VARCHAR(255) NOT NULL,
     quantity INT(11) NOT NULL,
     FOREIGN KEY (tid) REFERENCES transactions(tid) ON DELETE CASCADE
@@ -104,7 +104,9 @@ CREATE TABLE IF NOT EXISTS orders (
     user_id INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    transaction_id INT(12),
+    FOREIGN KEY (transaction_id) REFERENCES transactions(tid),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE   
 );
 
 INSERT INTO users (full_name, username, pwd, email, phone_number, is_admin) VALUES 
@@ -365,48 +367,37 @@ INSERT INTO transaction_details (tid, product_name, quantity) VALUES
 (19, 'CT5003F Acrylic Plastic Trophy', 1),
 (18, '7503 Pewter Tray', 1);
 
--- First, insert some users
-INSERT INTO users (id, username, email) VALUES
-(1, 'ahmad_shah', 'ahmad@email.com'),
-(2, 'siti_nur', 'siti@email.com'),
-(3, 'raj_kumar', 'raj@email.com');
+-- Insert test users
+INSERT INTO users (full_name, username, pwd, email, phone_number, is_admin) VALUES
+('Ahmad bin Ibrahim', 'ahmad123', '$2y$10$abcdefghijklmnopqrstuv', 'ahmad@email.com', '0123456789', 0),
+('Siti Nurhaliza', 'siti_n', '$2y$10$abcdefghijklmnopqrstuv', 'siti@email.com', '0167891234', 0),
+('Raj Kumar', 'raj_k', '$2y$10$abcdefghijklmnopqrstuv', 'raj@email.com', '0198765432', 0);
 
--- Insert orders
-INSERT INTO orders (id, user_id, order_date, status) VALUES
-(1, 1, '2024-01-05 10:30:00', 'processing'),
-(2, 2, '2024-01-06 14:15:00', 'pending'),
-(3, 3, '2024-01-06 09:20:00', 'delivered'),
-(4, 1, '2024-01-06 16:45:00', 'shipped'),
-(5, 2, '2024-01-05 11:30:00', 'cancelled');
+-- Insert user addresses
+INSERT INTO user_address (uid, address_street, address_city, address_state, address_zip, address_country) VALUES
+(1, 'No. 123, Jalan Merdeka', 'Shah Alam', 'Selangor', '40150', 'Malaysia'),
+(2, 'Block A-12-3, Pangsapuri Bukit Indah', 'Johor Bahru', 'Johor', '81200', 'Malaysia'),
+(3, 'No. 45, Lorong Bukit Bintang', 'Kuala Lumpur', 'Wilayah Persekutuan', '50250', 'Malaysia');
 
 -- Insert transactions
-INSERT INTO transactions (tid, payment_amount, payment_status, transaction_date, payer_id, payer_email, 
-    address_street, address_city, address_state, address_zip, address_country) VALUES
-(1, 299.99, 'COMPLETED', '2024-01-05 10:30:00', 1, 'ahmad@email.com',
-    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
-    
-(2, 159.50, 'COMPLETED', '2024-01-06 14:15:00', 2, 'siti@email.com',
-    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
-    
-(3, 75.25, 'COMPLETED', '2024-01-06 09:20:00', 3, 'raj@email.com',
-    'Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
-    
-(4, 499.99, 'COMPLETED', '2024-01-06 16:45:00', 1, 'ahmad@email.com',
-    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
-    
-(5, 199.99, 'CANCELLED', '2024-01-05 11:30:00', 2, 'siti@email.com',
-    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia');
+INSERT INTO transactions (payment_amount, payment_status, payer_id, payer_email, address_street, address_city, address_state, address_zip, address_country) VALUES
+(299.99, 'COMPLETED', 1, 'ahmad@email.com', 'No. 123, Jalan Merdeka', 'Shah Alam', 'Selangor', '40150', 'Malaysia'),
+(150.50, 'PENDING', 2, 'siti@email.com', 'Block A-12-3, Pangsapuri Bukit Indah', 'Johor Bahru', 'Johor', '81200', 'Malaysia'),
+(458.00, 'PROCESSING', 3, 'raj@email.com', 'No. 45, Lorong Bukit Bintang', 'Kuala Lumpur', 'Wilayah Persekutuan', '50250', 'Malaysia');
 
 -- Insert transaction details
 INSERT INTO transaction_details (tid, product_name, quantity) VALUES
-(1, 'Samsung Galaxy S23', 1),
-(1, 'Phone Case', 2),
-(2, 'Wireless Earbuds', 1),
-(2, 'Screen Protector', 2),
-(3, 'Smart Watch', 1),
-(4, 'iPhone 15', 1),
-(4, 'AirPods Pro', 1),
-(5, 'iPad Air', 1);
+(1, 'CT5003F Acrylic Plastic Trophy', 1),
+(1, '7502 Pewter Tray', 2),
+(2, 'XT1709F Exclusive Plastic Trophy', 1),
+(3, 'XT1709F Exclusive Plastic Trophy', 2),
+(3, 'CT5003F Acrylic Plastic Trophy', 1);
+
+-- Insert orders
+INSERT INTO orders (user_id, status, transaction_id) VALUES
+(1, 'delivered', 1),
+(2, 'pending', 2),
+(3, 'processing', 3);
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;

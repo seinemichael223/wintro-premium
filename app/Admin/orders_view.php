@@ -2,26 +2,31 @@
 require_once '../includes/dbh-inc.php';
 require_once '../includes/config_session-inc.php';
 
-// Handle status update
 if (isset($_POST['update_status'])) {
-    $order_id = $_POST['order_id'];
+    $transaction_id = $_POST['transaction_id'];
     $new_status = $_POST['new_status'];
     
     try {
         $pdo->beginTransaction();
         
-        // Update order status instead of payment status
-        $stmt = $pdo->prepare("UPDATE orders SET status = ? WHERE id = ?");
-        $stmt->execute([$new_status, $order_id]);
+        // Update the order status directly using transaction_id
+        $updateStmt = $pdo->prepare("UPDATE orders SET status = ? WHERE transaction_id = ?");
+        $result = $updateStmt->execute([$new_status, $transaction_id]);
         
-        $pdo->commit();
-        $_SESSION['success_msg'] = "Order #$order_id status updated to $new_status successfully";
+        if ($result) {
+            $pdo->commit();
+            $_SESSION['success_msg'] = "Order #$transaction_id status updated to $new_status successfully";
+        } else {
+            throw new Exception("Update failed");
+        }
+        
     } catch (Exception $e) {
         $pdo->rollBack();
-        $_SESSION['error_msg'] = "Error updating order #$order_id status. Please try again.";
+        error_log("Error updating order: " . $e->getMessage());
+        $_SESSION['error_msg'] = "Error updating order #$transaction_id status. Please try again.";
     }
     
-    header("Location: orders_view.php");
+    header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 }
 
@@ -30,63 +35,88 @@ $status_filter = $_GET['status'] ?? 'all';
 $date_filter = $_GET['date'] ?? 'all';
 $search = $_GET['search'] ?? '';
 
-// Build query
+// Build base query
 $query = "SELECT 
-            o.id as order_id,
-            o.status as order_status,
+            t.tid,
+            o.id AS order_id,
+            o.status AS order_status,
             o.order_date,
             t.payment_amount,
-            t.payer_email,
-            t.address_street,
-            t.address_city,
-            t.address_state,
-            t.address_zip,
-            t.address_country,
+            u.email,
+            t.transaction_date,
+            ua.address_street,
+            ua.address_city,
+            ua.address_state,
+            ua.address_zip,
+            ua.address_country,
             u.username,
             GROUP_CONCAT(
                 CONCAT(td.quantity, 'x ', td.product_name) 
                 SEPARATOR ', '
-            ) as order_items,
-            SUM(td.quantity) as total_quantity
-          FROM orders o
-          JOIN transactions t ON o.id = t.tid
-          JOIN users u ON o.user_id = u.id
-          LEFT JOIN transaction_details td ON t.tid = td.tid
-          WHERE 1=1";
+            ) AS order_items,
+            SUM(td.quantity) AS total_quantity
+        FROM orders o
+        JOIN transactions t ON o.transaction_id = t.tid
+        JOIN users u ON o.user_id = u.id
+        LEFT JOIN transaction_details td ON t.tid = td.tid
+        LEFT JOIN user_address ua ON u.id = ua.uid
+        WHERE 1 = 1";
 
 $params = [];
 
+// Add filters
 if ($status_filter !== 'all') {
-    $query .= " AND o.status = ?";  // Changed from t.payment_status to o.status
+    $query .= " AND o.status = ?";
     $params[] = $status_filter;
 }
 
 if ($date_filter !== 'all') {
     switch ($date_filter) {
         case 'today':
-            $query .= " AND DATE(o.order_date) = CURDATE()";
+            $query .= " AND DATE(t.transaction_date) = CURDATE()";
             break;
         case 'week':
-            $query .= " AND o.order_date >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+            $query .= " AND t.transaction_date >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
             break;
         case 'month':
-            $query .= " AND o.order_date >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+            $query .= " AND t.transaction_date >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
             break;
     }
 }
 
 if ($search) {
-    $query .= " AND (u.username LIKE ? OR t.payer_email LIKE ? OR t.tid LIKE ?)";
+    $query .= " AND (
+        u.username LIKE ? 
+        OR u.email LIKE ? 
+        OR t.tid LIKE ?
+        OR DATE(t.transaction_date) = STR_TO_DATE(?, '%Y-%m-%d')
+        OR DATE(t.transaction_date) = STR_TO_DATE(?, '%d-%m-%Y')
+        OR DATE(t.transaction_date) = STR_TO_DATE(?, '%m/%d/%Y')
+    )";
     $search_param = "%$search%";
-    $params = array_merge($params, [$search_param, $search_param, $search_param]);
+    $params = array_merge($params, [
+        $search_param, 
+        $search_param, 
+        $search_param,
+        $search,
+        $search,
+        $search
+    ]);
 }
 
-$query .= " GROUP BY t.tid ORDER BY t.transaction_date DESC";
+$query .= " GROUP BY t.tid, o.id, o.status, o.order_date, t.payment_amount, u.email, 
+            t.transaction_date, ua.address_street, ua.address_city, ua.address_state, 
+            ua.address_zip, ua.address_country, u.username
+            ORDER BY t.transaction_date DESC";
 
 // Execute query
 $stmt = $pdo->prepare($query);
-$stmt->execute($params);
+if (!$stmt->execute($params)) {
+    echo "SQL Error: " . htmlspecialchars(print_r($stmt->errorInfo(), true));
+    exit();
+}
 $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -156,71 +186,71 @@ $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <!-- Orders Table -->
-        <div class="orders-table-container">
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Order Items</th>
-                        <th>Total Qty</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Shipping Address</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($transactions as $transaction): ?>
-                        <tr>
-                        <td>#<?php echo htmlspecialchars($transaction['tid'] ?? ''); ?></td>
-                        <td>
-                            <div class="customer-info">
-                                <span class="customer-name"><?php echo htmlspecialchars($transaction['username'] ?? ''); ?></span>
-                                <span class="customer-email"><?php echo htmlspecialchars($transaction['payer_email'] ?? ''); ?></span>
-                            </div>
-                        </td>
-                        <td><?php echo htmlspecialchars($transaction['order_items'] ?? ''); ?></td>
-                        <td><?php echo htmlspecialchars($transaction['total_quantity'] ?? '0'); ?></td>
-                        <td><?php echo date('M d, Y H:i', strtotime($transaction['transaction_date'] ?? 'now')); ?></td>
-                        <td>RM <?php echo number_format($transaction['payment_amount'] ?? 0, 2); ?></td>
-                        <td>
-                            <span class="status-badge status-<?php echo strtolower($transaction['order_status'] ?? 'pending'); ?>">
-                                <?php echo htmlspecialchars(ucfirst($transaction['order_status'] ?? 'Pending')); ?>
-                            </span>
-                        </td>
-                        <td>
-                            <?php 
-                                echo htmlspecialchars($transaction['address_street'] ?? '') . ', ' .
-                                    htmlspecialchars($transaction['address_city'] ?? '') . ', ' .
-                                    htmlspecialchars($transaction['address_state'] ?? '') . ' ' .
-                                    htmlspecialchars($transaction['address_zip'] ?? '') . ', ' .
-                                    htmlspecialchars($transaction['address_country'] ?? '');
-                            ?>
-                        </td>
-                            <td>
-                                <button onclick="viewOrder(<?php echo $transaction['tid']; ?>)" class="action-btn view-btn">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button onclick="updateStatus(<?php echo $transaction['tid']; ?>)" class="action-btn edit-btn">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="orders-table-container">
+    <?php if (empty($transactions)): ?>
+        <p>No orders found for the selected filters.</p>
+    <?php else: ?>
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Order Items</th>
+                    <th>Total Qty</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Order Status</th>
+                    <th>Shipping Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($transactions as $transaction): ?>
+                <tr>
+                    <td>#<?php echo htmlspecialchars($transaction['tid']); ?></td>
+                    <td>
+                        <div class="customer-info">
+                            <span class="customer-name"><?php echo htmlspecialchars($transaction['username']); ?></span>
+                            <span class="customer-email"><?php echo htmlspecialchars($transaction['email'] ?? ''); ?></span>
+                        </div>
+                    </td>
+                    <td><?php echo htmlspecialchars($transaction['order_items']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['total_quantity']); ?></td>
+                    <td><?php echo date('M d, Y H:i', strtotime($transaction['transaction_date'])); ?></td>
+                    <td>RM <?php echo number_format($transaction['payment_amount'], 2); ?></td>
+                    <td>
+                        <span class="status-badge status-<?php echo strtolower($transaction['order_status']); ?>">
+                            <?php echo htmlspecialchars(ucfirst($transaction['order_status'])); ?>
+                        </span>
+                    </td>
+                    <td>
+                        <?php 
+                            echo htmlspecialchars($transaction['address_street']) . ', ' . 
+                                 htmlspecialchars($transaction['address_city']) . ', ' .
+                                 htmlspecialchars($transaction['address_state']) . ' ' .
+                                 htmlspecialchars($transaction['address_zip']) . ', ' . 
+                                 htmlspecialchars($transaction['address_country']);
+                        ?>
+                    </td>
+                    <td>
+                        <button onclick="updateStatus('<?php echo $transaction['tid']; ?>')" class="action-btn edit-btn">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>
 
     <!-- Status Update Modal -->
-    <div id="statusModal" class="modal">
+    <div id="statusModal" class="modal" style="display: none;">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Update Order Status</h2>
         <form id="updateStatusForm" method="POST">
-            <input type="hidden" name="order_id" id="modal_order_id">
+            <input type="hidden" name="transaction_id" id="modal_transaction_id">
             <div class="form-group">
                 <label for="new_status">Status:</label>
                 <select name="new_status" id="new_status" required>
@@ -234,8 +264,6 @@ $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <button type="submit" name="update_status" class="submit-btn">Update Status</button>
         </form>
     </div>
-</div>
-
     <script src="orders_view.js"></script>
 </body>
 </html>

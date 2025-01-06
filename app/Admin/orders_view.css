@@ -63,8 +63,15 @@
 }
 
 .orders-table th {
-    background: #f5f5f5;
-    font-weight: bold;
+    background: #f8f9fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+.orders-table tr:hover {
+    background-color: #f8f9fa;
 }
 
 .customer-info {
@@ -77,7 +84,7 @@
     color: #666;
 }
 
-/* Update existing status badges for the new order states */
+/* Status badges */
 .status-badge {
     padding: 6px 12px;
     border-radius: 20px;
@@ -112,7 +119,7 @@
     color: #c2185b; 
 }
 
-/* Enhanced action buttons */
+/* Action buttons */
 .action-btn {
     background: none;
     border: none;
@@ -138,12 +145,13 @@
     color: #f57c00;
 }
 
-.view-btn:hover, .edit-btn:hover {
+.view-btn:hover, 
+.edit-btn:hover {
     transform: translateY(-2px);
     filter: brightness(95%);
 }
 
-/* Enhanced alert messages */
+/* Alert messages */
 .alert {
     padding: 15px 20px;
     border-radius: 8px;
@@ -182,6 +190,96 @@
     color: #dc3545;
 }
 
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+}
+
+.modal-content h2 {
+    margin: 0 0 20px;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Form inside modal */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.submit-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+/* Animations */
 @keyframes slideIn {
     from {
         transform: translateY(-20px);
@@ -193,43 +291,18 @@
     }
 }
 
-/* Enhanced modal styles */
-.modal-content {
-    background: white;
-    margin: 10% auto;
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.submit-btn {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.submit-btn:hover {
-    background: #218838;
-}
-
-/* Optional: Enhanced table styles */
-.orders-table th {
-    background: #f8f9fa;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    letter-spacing: 0.5px;
-}
-
-.orders-table tr:hover {
-    background-color: #f8f9fa;
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
