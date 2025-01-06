@@ -330,7 +330,11 @@ INSERT INTO transactions (payment_amount, payment_status, transaction_date, paye
 (300.00, 'SUCCESS', '2025-12-06 10:50:00', 18, 'harper.wong@example.com', '730 Crystal Ave', 'Tawau', 'Sabah', '91000', 'Malaysia'),
 (275.50, 'SUCCESS', '2024-12-14 15:25:00', 19, 'jackson.lee@example.com', '801 Maple Grove', 'Bintulu', 'Sarawak', '97000', 'Malaysia'),
 (325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia');
-
+(299.99, 'SUCCESS', '2024-12-05 10:30:00', 6, 'ahmad@email.com','Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+(159.50, 'SUCCESS', '2024-04-01 14:15:00', 2, 'siti@email.com','Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
+(75.25, 'SUCCESS', '2024-12-23 09:20:00', 3, 'raj@email.com','Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
+(499.99, 'SUCCESS', '2024-12-05 16:45:00', 10, 'ahmad@email.com','Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+(199.99, 'SUCCESS', '2024-01-05 11:30:00', 2, 'siti@email.com','Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia');
 
 
 INSERT INTO transaction_details (tid, product_name, quantity) VALUES
@@ -365,12 +369,6 @@ INSERT INTO transaction_details (tid, product_name, quantity) VALUES
 (19, 'CT5003F Acrylic Plastic Trophy', 1),
 (18, '7503 Pewter Tray', 1);
 
--- First, insert some users
-INSERT INTO users (id, username, email) VALUES
-(1, 'ahmad_shah', 'ahmad@email.com'),
-(2, 'siti_nur', 'siti@email.com'),
-(3, 'raj_kumar', 'raj@email.com');
-
 -- Insert orders
 INSERT INTO orders (id, user_id, order_date, status) VALUES
 (1, 1, '2024-01-05 10:30:00', 'processing'),
@@ -378,24 +376,6 @@ INSERT INTO orders (id, user_id, order_date, status) VALUES
 (3, 3, '2024-01-06 09:20:00', 'delivered'),
 (4, 1, '2024-01-06 16:45:00', 'shipped'),
 (5, 2, '2024-01-05 11:30:00', 'cancelled');
-
--- Insert transactions
-INSERT INTO transactions (tid, payment_amount, payment_status, transaction_date, payer_id, payer_email, 
-    address_street, address_city, address_state, address_zip, address_country) VALUES
-(1, 299.99, 'COMPLETED', '2024-01-05 10:30:00', 1, 'ahmad@email.com',
-    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
-    
-(2, 159.50, 'COMPLETED', '2024-01-06 14:15:00', 2, 'siti@email.com',
-    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
-    
-(3, 75.25, 'COMPLETED', '2024-01-06 09:20:00', 3, 'raj@email.com',
-    'Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
-    
-(4, 499.99, 'COMPLETED', '2024-01-06 16:45:00', 1, 'ahmad@email.com',
-    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
-    
-(5, 199.99, 'CANCELLED', '2024-01-05 11:30:00', 2, 'siti@email.com',
-    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia');
 
 -- Insert transaction details
 INSERT INTO transaction_details (tid, product_name, quantity) VALUES
