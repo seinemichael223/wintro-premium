@@ -169,7 +169,7 @@ try {
             <!-- Account Info Section -->
             <div id="info-content" class="section">
                 <h3>Account Information</h3>
-                <button onclick="editDetails()" class="edit-btn">Edit Details</button>
+                <button onclick="window.location.href='../includes/edit_info.php';" class="edit-btn">Edit Details</button>
                 <table class="info-table">
                     <tr>
                         <th>Full Name</th>
