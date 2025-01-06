@@ -201,29 +201,6 @@ canvas {
   height: 400px !important; /* Set the height of the chart */
 }
 
-/* Generate PDF Report button */
-.export__file .export__file-btn {
-    float: right;
-    width: auto;
-    padding: 9.6px 19.2px;
-    background-color: #BDC6E6;
-    color: #032062;
-    border: none;
-    border-radius: 4.8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-    text-align: center;
-}
-
-.export__file .export__file-btn:hover {
-    background-color: #BDC6E6;
-    transform: scale(1.05);
-}
-
-.export__file .export__file-options {
-    display: none;
-}
 .button-group {
   margin-bottom: 20px;
   display: flex;

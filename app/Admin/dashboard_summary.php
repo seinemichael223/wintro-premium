@@ -23,6 +23,3 @@ function getTotalSalesForCurrentMonth($pdo)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['total_sales'] ?? 0; // Return 0 if no sales
 }
-
-// Calculate total sales for the current month
-$totalSales = getTotalSalesForCurrentMonth($pdo);

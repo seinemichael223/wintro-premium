@@ -1,5 +1,10 @@
 <?php
 require_once '../includes/dbh-inc.php';
+include 'dashboard_summary.php';
+// Calculate total sales for the current month
+$totalSales = getTotalSalesForCurrentMonth($pdo);
+
+
 ?>
 
 <!DOCTYPE html>
