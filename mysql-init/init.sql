@@ -129,9 +129,13 @@ INSERT INTO users (full_name, username, pwd, email, phone_number, is_admin) VALU
 ('Dylan Hill', 'dylan_h', '$2y$12$8E23...hashedPwd', 'dylan.hill@example.com', '016-1122334', FALSE),
 ('Harper Wong', 'harper_w', '$2y$12$9B76...hashedPwd', 'harper.wong@example.com', '017-2233445', FALSE),
 ('Jackson Lee', 'jackson_l', '$2y$12$5C87...hashedPwd', 'jackson.lee@example.com', '014-6677889', FALSE),
-('Chloe Harris', 'chloe_h', '$2y$12$1D45...hashedPwd', 'chloe.harris@example.com', '013-2233445', FALSE);
+('Chloe Harris', 'chloe_h', '$2y$12$1D45...hashedPwd', 'chloe.harris@example.com', '013-2233445', FALSE),
+('Ahmad Mohammad', 'harper_w', '$2y$12$9B76...hashedPwd', 'ahmad@email.com', '017-2233485', FALSE),
+('Siti Khalifah', 'jackson_l', '$2y$12$5C87...hashedPwd', 'siti@email.com', '014-6077889', FALSE),
+('Raj Kumar', 'chloe_h', '$2y$12$1D45...hashedPwd', 'raj@email.com', '013-2239445', FALSE);
 
-
+INSERT INTO user_address (uid, address_street, address_city, address_state, address_zip, address_country) VALUES
+(1, 'Wisma Saberkas', 'Sibu', 'Sarawak', '696969', 'Malaysia');
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
@@ -316,23 +320,27 @@ INSERT INTO transactions (payment_amount, payment_status, transaction_date, paye
 (200.50, 'SUCCESS', '2025-01-01 14:45:00', 2, 'jane.smith@example.com', '456 Elm St', 'Petaling Jaya', 'Selangor', '46000', 'Malaysia'),
 (50.00, 'FAILED', '2025-01-02 09:00:00', 3, 'michael.brown@example.com', '789 Pine St', 'George Town', 'Penang', '10200', 'Malaysia'),
 (300.00, 'SUCCESS', '2025-01-02 16:20:00', 6, 'john.doe@example.com', '123 Main St', 'Kuala Lumpur', 'Selangor', '50000', 'Malaysia'),
-(120.75, 'SUCCESS', '2025-01-03 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
-(180.25, 'SUCCESS', '2025-01-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia'),
+(120.75, 'SUCCESS', '2024-12-16 11:10:00', 4, 'susan.white@example.com', '321 Oak St', 'Johor Bahru', 'Johor', '80000', 'Malaysia'),
+(180.25, 'SUCCESS', '2024-12-04 12:30:00', 5, 'emma.green@example.com', '987 Maple St', 'Ipoh', 'Perak', '30000', 'Malaysia'),
 (250.50, 'SUCCESS', '2024-12-28 15:20:00', 7, 'li.chen@example.com', '456 Cedar St', 'Kuching', 'Sarawak', '93000', 'Malaysia'),
 (75.00, 'FAILED', '2025-01-05 09:50:00', 8, 'karen.adams@example.com', '101 Bamboo St', 'Melaka', 'Melaka', '75000', 'Malaysia'),
 (450.25, 'SUCCESS', '2024-11-20 16:40:00', 9, 'robert.wilson@example.com', '21 River Rd', 'Shah Alam', 'Selangor', '40000', 'Malaysia'),
 (85.00, 'SUCCESS', '2025-01-06 10:00:00', 10, 'olivia.jones@example.com', '88 Blossom Ave', 'Kota Kinabalu', 'Sabah', '88000', 'Malaysia'),
 (300.00, 'FAILED', '2024-10-15 14:30:00', 11, 'steve.rogers@example.com', '512 Hill St', 'Alor Setar', 'Kedah', '05000', 'Malaysia'),
-(100.00, 'SUCCESS', '2025-01-07 11:45:00', 12, 'nancy.carter@example.com', '201 Pearl St', 'Seremban', 'Negeri Sembilan', '70000', 'Malaysia'),
-(65.25, 'SUCCESS', '2024-09-10 13:00:00', 13, 'ethan.morris@example.com', '712 Ocean Blvd', 'Kota Bharu', 'Kelantan', '15000', 'Malaysia'),
-(500.00, 'SUCCESS', '2023-12-31 22:15:00', 14, 'mia.anderson@example.com', '904 Moonlight Rd', 'Sibu', 'Sarawak', '96000', 'Malaysia'),
-(250.75, 'SUCCESS', '2025-01-08 14:15:00', 15, 'lucas.king@example.com', '405 Sunny Ln', 'Miri', 'Sarawak', '98000', 'Malaysia'),
+(100.00, 'SUCCESS', '2024-12-27 11:45:00', 12, 'nancy.carter@example.com', '201 Pearl St', 'Seremban', 'Negeri Sembilan', '70000', 'Malaysia'),
+(65.25, 'SUCCESS', '2024-12-10 13:00:00', 13, 'ethan.morris@example.com', '712 Ocean Blvd', 'Kota Bharu', 'Kelantan', '15000', 'Malaysia'),
+(500.00, 'SUCCESS', '2024-12-31 22:15:00', 14, 'mia.anderson@example.com', '904 Moonlight Rd', 'Sibu', 'Sarawak', '96000', 'Malaysia'),
+(250.75, 'SUCCESS', '2024-12-28 14:15:00', 15, 'lucas.king@example.com', '405 Sunny Ln', 'Miri', 'Sarawak', '98000', 'Malaysia'),
 (220.00, 'SUCCESS', '2024-07-14 17:00:00', 16, 'amelia.turner@example.com', '601 Sunset Dr', 'Sandakan', 'Sabah', '90000', 'Malaysia'),
-(120.00, 'FAILED', '2025-01-09 11:30:00', 17, 'dylan.hill@example.com', '15 Pineapple St', 'Klang', 'Selangor', '41050', 'Malaysia'),
-(300.00, 'SUCCESS', '2024-05-06 10:50:00', 18, 'harper.wong@example.com', '730 Crystal Ave', 'Tawau', 'Sabah', '91000', 'Malaysia'),
-(275.50, 'SUCCESS', '2023-11-08 15:25:00', 19, 'jackson.lee@example.com', '801 Maple Grove', 'Bintulu', 'Sarawak', '97000', 'Malaysia'),
-(325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia');
-
+(120.00, 'FAILED', '2024-12-29 11:30:00', 17, 'dylan.hill@example.com', '15 Pineapple St', 'Klang', 'Selangor', '41050', 'Malaysia'),
+(300.00, 'SUCCESS', '2024-12-06 10:50:00', 18, 'harper.wong@example.com', '730 Crystal Ave', 'Tawau', 'Sabah', '91000', 'Malaysia'),
+(275.50, 'SUCCESS', '2024-12-14 15:25:00', 19, 'jackson.lee@example.com', '801 Maple Grove', 'Bintulu', 'Sarawak', '97000', 'Malaysia'),
+(325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia'),
+(299.99, 'SUCCESS', '2024-12-05 10:30:00', 21, 'ahmad@email.com','Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+(159.50, 'SUCCESS', '2024-04-01 14:15:00', 22, 'siti@email.com','Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
+(75.25, 'SUCCESS', '2024-12-23 09:20:00', 23, 'raj@email.com','Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
+(499.99, 'SUCCESS', '2024-12-05 16:45:00', 21, 'ahmad@email.com','Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+(199.99, 'SUCCESS', '2024-01-05 11:30:00', 22, 'siti@email.com','Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia');
 
 
 INSERT INTO transaction_details (tid, product_name, quantity) VALUES

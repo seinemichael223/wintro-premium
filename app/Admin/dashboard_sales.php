@@ -1,3 +1,7 @@
+<?php
+require_once '../includes/config_session-inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,16 +30,6 @@
         <button id="nextMonth" onclick="changeMonth(1)">→</button>
     </div>
 
-    <div class="export__file">
-        <button
-            id="dailyPDF"
-            class="export__file-btn"
-            title="Generate PDF"
-            onclick="generatePDF()">
-            Generate PDF
-        </button>
-    </div>
-
     <div>
         <canvas id="dailyChart"></canvas>
     </div>
@@ -45,12 +39,6 @@
         <button id="prevWeek" onclick="changeWeek(-1)">←</button>
         <span id="currentWeek">Week 1 of 2024</span>
         <button id="nextWeek" onclick="changeWeek(1)">→</button>
-    </div>
-
-    <div class="export__file" id="weeklyPDF">
-        <button id="weeklyPDF" class="export__file-btn" title="Generate PDF">
-            Generate PDF
-        </button>
     </div>
 
     <div>
@@ -64,12 +52,6 @@
             <span id="currentYear">2024</span>
             <button onclick="changeYear(1)">→</button>
         </div>
-    </div>
-
-    <div class="export__file" id="monthlyPDF">
-        <button id="monthlyPDF" class="export__file-btn" title="Generate PDF">
-            Generate PDF
-        </button>
     </div>
 
     <div>

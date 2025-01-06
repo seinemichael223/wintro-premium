@@ -1,5 +1,10 @@
 <?php
 require_once '../includes/dbh-inc.php';
+include 'dashboard_summary.php';
+// Calculate total sales for the current month
+$totalSales = getTotalSalesForCurrentMonth($pdo);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +33,7 @@ require_once '../includes/dbh-inc.php';
         </div>
         <div id="card2">
           <h2>Total Sales of This Month</h2><br>
-          <p>RM<?php echo number_format($totalSales, 2); ?></p>
+          <h1>RM<?php echo number_format($totalSales, 2); ?></h1>
         </div>
         <div id="card3">
           <h2>Top-Selling Category</h2><br>

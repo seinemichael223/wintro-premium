@@ -1,8 +1,3 @@
-<?php
-// require_once 'signup-inc.php';
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +34,9 @@
                         id="signup-un"
                         placeholder="Enter Username"
                         required
-                        aria-required="true"
+                        aria-required="true">
 
-                    <!--Phone Number-->
+                    <!-- Phone Number -->
                     <label for="signup-phoneno">Phone Number<span class="star"> *</span></label>
                     <input
                         type="tel"
@@ -49,7 +44,7 @@
                         id="signup-phoneno"
                         placeholder="011-234-5678"
                         required
-                        aria-required="true"
+                        aria-required="true">
 
                     <!--Email-->
                     <label for="signup-email">Email<span class="star"> *</span></label>

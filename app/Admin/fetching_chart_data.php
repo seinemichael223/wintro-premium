@@ -43,7 +43,7 @@ function getMonthlySales($pdo, $year)
               WHERE payment_status = 'SUCCESS'
               AND YEAR(transaction_date) = :year
               GROUP BY YEAR(transaction_date), MONTH(transaction_date)
-              ORDER BY YEAR(transaction_date) DESC, MONTH(transaction_date) DESC";
+              ORDER BY YEAR(transaction_date) DESC, MONTH(transaction_date)";
     $stmt = $pdo->prepare($query);
     $stmt->execute([':year' => $year]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

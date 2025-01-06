@@ -20,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $phone = $_POST['phone_number'];
-    
+
     // Update user information
     $updateStmt = $pdo->prepare("UPDATE users SET full_name = ?, username = ?, email = ?, phone_number = ? WHERE id = ?");
-    
+
     try {
-        $updateStmt->execute([$fullName, $email, $phone, $userId]);
+        $updateStmt->execute([$fullName, $username, $email, $phone, $userId]);
         $_SESSION['message'] = "Profile updated successfully!";
-        header("Location: profile.php");
+        header("Location: ../Profile/profile.php");
         exit();
     } catch (PDOException $e) {
         $error = "Error updating profile: " . $e->getMessage();
@@ -37,14 +37,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Edit Profile</title>
     <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
     <div class="management-container">
         <h2>Edit Profile Information</h2>
-        
+
         <form method="POST" onsubmit="return validateForm('edit-profile-form')" id="edit-profile-form">
             <div class="form-group">
                 <label for="full_name">Full Name</label>
@@ -52,25 +54,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="form-group">
-                <label for="username">Full Name</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required disabled>
+                <input type="hidden" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
             </div>
-            
+
+
             <div class="form-group">
                 <label for="phone_number">Phone Number</label>
                 <input type="tel" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($user['phone_number']); ?>" required>
             </div>
-            
+
             <button type="submit" class="edit-btn">Save Changes</button>
-            <button type="button" class="edit-btn" onclick="window.location.href='profile.php'">Cancel</button>
+            <button type="button" class="edit-btn" onclick="window.location.href='../Profile/profile.php'">Cancel</button>
         </form>
     </div>
-    
+
     <script src="profile.js"></script>
 </body>
+
 </html>
