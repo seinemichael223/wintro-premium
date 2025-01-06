@@ -169,10 +169,10 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                     <li>
                         <a href="#" class="award-btn"><span class="cat-title">AWARDS & TROPHIES<span class="fas fa-angle-down first"></span></span></a>
                         <ul class="award-show">
-                            <li><a href="#">Trophy</span></a></li>
-                            <li><a href="#">Medal</a></li>
-                            <li><a href="#">Crystal</a></li>
-                            <li><a href="#"><span class="highlighted">Pewter Award</a></li>
+                            <li><a href="../../Product/product_pages/trophy.php">Trophy</a></li>
+                            <li><a href="../../Product/product_pages/medal.php">Medal</a></li>
+                            <li><a href="../../Product/product_pages/crystal.php">Crystal</a></li>
+                            <li><a href="../../Product/product_pages/pewter.php">Pewter Award</a></li>
                         </ul>
                     </li>
 

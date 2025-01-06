@@ -92,10 +92,10 @@ $stmt->bindValue(2, $offset, PDO::PARAM_INT);
                             <div class="column">
                                 <h4><a href="#">Awards and Trophies</a></h4>
                                 <ul>
-                                    <li><a href="#">Trophy</a></li>
-                                    <li><a href="#">Medal</a></li>
-                                    <li><a href="#">Crystal</a></li>
-                                    <li><a href="#">Pewter Award</a></li>
+                                    <li><a href="../../Product/product_pages/trophy.php">Trophy</a></li>
+                                    <li><a href="../../Product/product_pages/medal.php">Medal</a></li>
+                                    <li><a href="../../Product/product_pages/crystal.php">Crystal</a></li>
+                                    <li><a href="../../Product/product_pages/pewter.php">Pewter Award</a></li>
                                 </ul>
                                 <h4><a href="#">Gifts & Souvenirs</a></h4>
                                 <ul>
