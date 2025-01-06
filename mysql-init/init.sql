@@ -329,7 +329,7 @@ INSERT INTO transactions (payment_amount, payment_status, transaction_date, paye
 (120.00, 'FAILED', '2025-12-29 11:30:00', 17, 'dylan.hill@example.com', '15 Pineapple St', 'Klang', 'Selangor', '41050', 'Malaysia'),
 (300.00, 'SUCCESS', '2025-12-06 10:50:00', 18, 'harper.wong@example.com', '730 Crystal Ave', 'Tawau', 'Sabah', '91000', 'Malaysia'),
 (275.50, 'SUCCESS', '2024-12-14 15:25:00', 19, 'jackson.lee@example.com', '801 Maple Grove', 'Bintulu', 'Sarawak', '97000', 'Malaysia'),
-(325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia');
+(325.25, 'SUCCESS', '2024-06-22 09:30:00', 20, 'chloe.harris@example.com', '999 Emerald St', 'Kuantan', 'Pahang', '25000', 'Malaysia'),
 (299.99, 'SUCCESS', '2024-12-05 10:30:00', 6, 'ahmad@email.com','Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
 (159.50, 'SUCCESS', '2024-04-01 14:15:00', 2, 'siti@email.com','Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
 (75.25, 'SUCCESS', '2024-12-23 09:20:00', 3, 'raj@email.com','Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
