@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $state = $_POST['address_state'];
     $zip = $_POST['address_zip'];
     $country = $_POST['address_country'];
-    
+
     if ($address) {
         // Update existing address
         $updateStmt = $pdo->prepare("UPDATE user_address SET address_street = ?, address_city = ?, 
@@ -33,59 +33,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             address_state, address_zip, address_country) VALUES (?, ?, ?, ?, ?, ?)");
         $insertStmt->execute([$userId, $street, $city, $state, $zip, $country]);
     }
-    
+
     $_SESSION['message'] = "Address updated successfully!";
-    header("Location: profile.php");
+    header("Location: ../Profile/profile.php");
     exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Edit Address</title>
     <link rel="stylesheet" href="profile.css">
 </head>
+
 <body>
     <div class="management-container">
         <h2>Edit Address</h2>
-        
+
         <form method="POST" onsubmit="return validateForm('edit-address-form')" id="edit-address-form">
             <div class="form-group">
                 <label for="address_street">Street Address</label>
-                <input type="text" id="address_street" name="address_street" 
+                <input type="text" id="address_street" name="address_street"
                     value="<?php echo htmlspecialchars($address['address_street'] ?? ''); ?>" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="address_city">City</label>
-                <input type="text" id="address_city" name="address_city" 
+                <input type="text" id="address_city" name="address_city"
                     value="<?php echo htmlspecialchars($address['address_city'] ?? ''); ?>" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="address_state">State</label>
-                <input type="text" id="address_state" name="address_state" 
+                <input type="text" id="address_state" name="address_state"
                     value="<?php echo htmlspecialchars($address['address_state'] ?? ''); ?>" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="address_zip">ZIP Code</label>
-                <input type="text" id="address_zip" name="address_zip" 
+                <input type="text" id="address_zip" name="address_zip"
                     value="<?php echo htmlspecialchars($address['address_zip'] ?? ''); ?>" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="address_country">Country</label>
-                <input type="text" id="address_country" name="address_country" 
+                <input type="text" id="address_country" name="address_country"
                     value="<?php echo htmlspecialchars($address['address_country'] ?? ''); ?>" required>
             </div>
-            
-            <button type="submit" class="edit-btn">Save Address</button>
-            <button type="button" class="edit-btn" onclick="window.location.href='profile.php'">Cancel</button>
+
+            <button type="submit" class="edit-btn">Save</button>
+            <button type="button" class="edit-btn" onclick="window.location.href='../Profile/profile.php';">Cancel</button>
         </form>
     </div>
-    
+
     <script src="profile.js"></script>
 </body>
+
 </html>
