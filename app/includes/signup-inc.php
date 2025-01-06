@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'dbh-inc.php';
         require_once 'signup_model-inc.php';
         require_once 'signup_contr-inc.php';
+        require_once 'mail_stuff.php';
 
         // Error Handlers~
         $errors = [];
@@ -47,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         create_user($pdo, $fullname, $username, $phoneno, $pwd, $email);
+
+        notify_mail($username, $email);
 
         header("Location: ../Reg_Login/login.php?signup=success");
 
