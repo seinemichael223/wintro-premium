@@ -132,6 +132,8 @@ INSERT INTO users (full_name, username, pwd, email, phone_number, is_admin) VALU
 ('Siti Khalifah', 'jackson_l', '$2y$12$5C87...hashedPwd', 'siti@email.com', '014-6077889', FALSE),
 ('Raj Kumar', 'chloe_h', '$2y$12$1D45...hashedPwd', 'raj@email.com', '013-2239445', FALSE);
 
+INSERT INTO user_address (uid, address_street, address_city, address_state, address_zip, address_country) VALUES
+(1, 'Wisma Saberkas', 'Sibu', 'Sarawak', '696969', 'Malaysia');
 
 INSERT INTO category (category_name) VALUES
 ('Awards and Trophies'),
