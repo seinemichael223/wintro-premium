@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         create_user($pdo, $fullname, $username, $phoneno, $pwd, $email);
 
-        notify_mail($username, $email);
+//        notify_mail($username, $email);
 
         header("Location: ../Reg_Login/login.php?signup=success");
 
