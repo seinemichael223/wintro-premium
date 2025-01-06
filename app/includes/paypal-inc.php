@@ -18,12 +18,22 @@ if (isset($_POST['paypal'])) {
         $totalCost += intval($item['quantity']) * floatval($item['product_price']);
     }
 
-    // Hardcoded address data (to be replaced with actual user input later)
-    $address_street = "123 Fake Street";
-    $address_city = "Faketown";
-    $address_state = "FS";
-    $address_zip = "12345";
-    $address_country = "Fakecountry";
+    // Fetch the user's address from the user_address table
+    $address_query = "SELECT * FROM user_address WHERE uid = :uid LIMIT 1";
+    $address_stmt = $pdo->prepare($address_query);
+    $address_stmt->execute([':uid' => $user_id]);
+    $address = $address_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$address) {
+        die("Error: Address not found for the user.");
+    }
+
+    // Extract address details
+    $address_street = $address['address_street'];
+    $address_city = $address['address_city'];
+    $address_state = $address['address_state'];
+    $address_zip = $address['address_zip'];
+    $address_country = $address['address_country'];
 
     // Start transaction for atomic database operations
     try {
@@ -93,3 +103,4 @@ if (isset($_POST['paypal'])) {
     }
 }
 ?>
+
