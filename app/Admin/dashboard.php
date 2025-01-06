@@ -1,9 +1,13 @@
 <?php
 require_once '../includes/dbh-inc.php';
-include 'dashboard_summary.php';
+include '../Admin/dashboard_summary.php';
 // Calculate total sales for the current month
 $totalSales = getTotalSalesForCurrentMonth($pdo);
-
+$pendingOrders = getPendingOrdersCount($pdo);
+$ordersThisMonth = getOrdersCountForCurrentMonth($pdo);
+$registrations = getRegistrationsForCurrentMonth($pdo);
+$topSellingProduct = getTopSellingProduct($pdo);
+$successfulTransactions = getSuccessfulTransactionCount($pdo);
 
 ?>
 
@@ -29,7 +33,7 @@ $totalSales = getTotalSalesForCurrentMonth($pdo);
       <div class="stats">
         <div id="card1">
           <h2>Pending Order</h2><br>
-          <p><?php echo $pendingOrders; ?></p>
+          <h1><?php echo $pendingOrders; ?></h1>
         </div>
         <div id="card2">
           <h2>Total Sales of This Month</h2><br>
@@ -37,24 +41,25 @@ $totalSales = getTotalSalesForCurrentMonth($pdo);
         </div>
         <div id="card3">
           <h2>Top-Selling Category</h2><br>
-          <p><?php echo $topSellingCategory; ?></p>
+          <h1><?php echo "" . $topSellingProduct['product_name'] . "<br>";
+              echo "Quantity Sold: " . $topSellingProduct['total_quantity_sold']; ?></h1>
         </div>
       </div>
     </section>
     <section>
       <div class="stats-row">
         <div id="card4">
-          <h2>Site Visits of This Month</h2><br>
-          <p><?php echo $siteVisits; ?></p>
+          <h2>Successful Payment Transaction</h2><br>
+          <h1><?php echo $successfulTransactions; ?></h1>
         </div>
         <div id="card5">
           <h2>Registrations of This Month</h2><br>
-          <p><?php echo $registrations; ?></p>
+          <h1><?php echo $registrations; ?></h1>
         </div>
 
         <div id="card6">
           <h2>Orders of This Month</h2><br>
-          <p><?php echo $ordersLastMonth; ?></p>
+          <h1><?php echo $ordersThisMonth; ?></h1>
         </div>
       </div>
     </section>
