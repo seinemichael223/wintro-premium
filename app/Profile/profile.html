@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Account</title>
+        <title>Home</title>
         <meta charset="Utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="stylesheet" rel="stylesheet" type="text/css" href="profile.css">
@@ -33,7 +33,7 @@
                 <div class="icons">
                 <i class="fa-regular fa-heart"></i>
                 <i class="fa-regular fa-user"></i>
-                <a href="../MyCart/myCart.php"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="../MyCart/myCart.html"><i class="fa-solid fa-cart-shopping"></i></a>
                 <p>RM 0.00</p>
                 </div>
             </div>
@@ -143,8 +143,12 @@
                             <td class="value" id="fullName">Adam Wong</td>
                         </tr>
                         <tr>
-                            <th class="label">Username</th>
-                            <td class="value" id="username">2000-01-01</td>
+                            <th class="label">Birthday</th>
+                            <td class="value" id="birthday">2000-01-01</td>
+                        </tr>
+                        <tr>
+                            <th class="label">Gender</th>
+                            <td class="value" id="gender">Male</td>
                         </tr>
                         <tr>
                             <th class="label">Email</th>
@@ -251,6 +255,28 @@
                                 </form>
                             </div>
                         </fieldset>
+
+                        <div class="billing-address">
+                            <h5>Billing Address</h5>
+                            <div class="bill-list">
+                                <div class="row">
+                                    <div class="bill-info">
+                                        <div class="bill-name">Adam</div>
+                                        <div class="bill-phoneNo">012-123-1234</div>
+                                        <div class="bill-email">123@gmail.com</div>
+                                        <div class="bill-street">No.1A, Lorong1A, Jalan Permai</div>
+                                        <div class="bill-street2">94300, Kota Samarahan, Sarawak.</div>
+                                    </div>
+                                    <div class="actions">
+                                        <div class="address-edit"><p>EDIT</p></div>
+                                        <div class="pipe"><p>|</p></div>
+                                        <div class="delete"><p>DELETE</p></div>
+                                        <div class="pipe"><p>|</p></div>
+                                        <div class="add"><p>ADD NEW</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <fieldset class="fieldset6 hidden">
                             <legend class="legend3">Billing Address</legend>
