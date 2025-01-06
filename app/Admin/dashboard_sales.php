@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="generate_chart.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <?php include 'header.php'; ?>
 
 </head>
 
@@ -25,21 +27,24 @@
     </div>
 
     <div class="export__file">
-        <button id="dailyPDF" class="export__file-btn" title="Generate PDF">
+        <button
+            id="dailyPDF"
+            class="export__file-btn"
+            title="Generate PDF"
+            onclick="generatePDF()">
             Generate PDF
         </button>
     </div>
 
-    <div style="width: 600px; margin: 0 auto;">
+    <div>
         <canvas id="dailyChart"></canvas>
     </div>
 
-
     <!--Weekly-->
     <div class="navigation">
-        <div>
-            <span id="currentWeek">Current Week</span>
-        </div>
+        <button id="prevWeek" onclick="changeWeek(-1)">←</button>
+        <span id="currentWeek">Week 1 of 2024</span>
+        <button id="nextWeek" onclick="changeWeek(1)">→</button>
     </div>
 
     <div class="export__file" id="weeklyPDF">
@@ -48,10 +53,9 @@
         </button>
     </div>
 
-    <div style="width: 600px; margin: 0 auto;">
-        <canvas id="WeeklyChart "></canvas>
+    <div>
+        <canvas id="weeklyChart"></canvas>
     </div>
-
 
     <!--Monthly-->
     <div class="navigation">
@@ -68,11 +72,13 @@
         </button>
     </div>
 
-    <div style="width: 600px; margin: 0 auto;">
+    <div>
         <canvas id="monthlyChart"></canvas>
     </div>
 
-    <script src="J_chart.js"></script>
+    <?php include 'footer.php'; ?>
+
+
 </body>
 
 </html>
