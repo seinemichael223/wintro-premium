@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const weeklySales = data.weeklySales;
 
                 // Prepare new data
-                const weeklyLabels = weeklySales.map(sale => `Day ${sale.day}`); // Example: Replace with actual day names if available
+                const weeklyLabels = weeklySales.map(sale => `${sale.day}`);
                 const weeklyData = weeklySales.map(sale => sale.total_sales);
 
                 // Update chart
@@ -176,7 +176,7 @@ const monthlyChart = new Chart(document.getElementById('monthlyChart'), {
         maintainAspectRatio: false,
         scales: {
             y: { beginAtZero: true, title: { display: true, text: 'Sales (RM)' } },
-            x: { title: { display: true, text: 'Day' } }
+            x: { title: { display: true, text: 'Month' } }
         },
         plugins: {
             title: {
