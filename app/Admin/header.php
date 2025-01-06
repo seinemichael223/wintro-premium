@@ -38,7 +38,7 @@
                 <li><a class="<?php echo $currentPage == 'dashboard.php' ? 'active' : ''; ?>" href="dashboard.php">Dashboard</a></li>
                 <li><a class="<?php echo $currentPage == 'sales.php' ? 'active' : ''; ?>" href="dashboard_sales.php">Sales</a></li>
                 <li><a class="<?php echo $currentPage == 'products_view.php' ? 'active' : ''; ?>" href="products_view.php">Products</a></li>
-                <li><a class="<?php echo $currentPage == 'orders.php' ? 'active' : ''; ?>" href="orders.php">Orders</a></li>
+                <li><a class="<?php echo $currentPage == 'orders_view.php' ? 'active' : ''; ?>" href="orders_view.php">Orders</a></li>
                 <li><a class="<?php echo $currentPage == 'customers_view.php' ? 'active' : ''; ?>" href="customers_view.php">Customers</a></li>
         </nav>
     </header>

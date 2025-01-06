@@ -104,8 +104,6 @@ CREATE TABLE IF NOT EXISTS orders (
     user_id INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(50) NOT NULL DEFAULT 'pending',
-    total_amount DECIMAL(10,2) NOT NULL,
-    shipping_address TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -367,8 +365,48 @@ INSERT INTO transaction_details (tid, product_name, quantity) VALUES
 (19, 'CT5003F Acrylic Plastic Trophy', 1),
 (18, '7503 Pewter Tray', 1);
 
+-- First, insert some users
+INSERT INTO users (id, username, email) VALUES
+(1, 'ahmad_shah', 'ahmad@email.com'),
+(2, 'siti_nur', 'siti@email.com'),
+(3, 'raj_kumar', 'raj@email.com');
 
+-- Insert orders
+INSERT INTO orders (id, user_id, order_date, status) VALUES
+(1, 1, '2024-01-05 10:30:00', 'processing'),
+(2, 2, '2024-01-06 14:15:00', 'pending'),
+(3, 3, '2024-01-06 09:20:00', 'delivered'),
+(4, 1, '2024-01-06 16:45:00', 'shipped'),
+(5, 2, '2024-01-05 11:30:00', 'cancelled');
 
+-- Insert transactions
+INSERT INTO transactions (tid, payment_amount, payment_status, transaction_date, payer_id, payer_email, 
+    address_street, address_city, address_state, address_zip, address_country) VALUES
+(1, 299.99, 'COMPLETED', '2024-01-05 10:30:00', 1, 'ahmad@email.com',
+    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+    
+(2, 159.50, 'COMPLETED', '2024-01-06 14:15:00', 2, 'siti@email.com',
+    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia'),
+    
+(3, 75.25, 'COMPLETED', '2024-01-06 09:20:00', 3, 'raj@email.com',
+    'Jalan Pantai Baharu', 'Johor Bahru', 'Johor', '80300', 'Malaysia'),
+    
+(4, 499.99, 'COMPLETED', '2024-01-06 16:45:00', 1, 'ahmad@email.com',
+    'Jalan SS2/75', 'Petaling Jaya', 'Selangor', '47300', 'Malaysia'),
+    
+(5, 199.99, 'CANCELLED', '2024-01-05 11:30:00', 2, 'siti@email.com',
+    'Lorong Medan Tuanku 1', 'Kuala Lumpur', 'Wilayah Persekutuan', '50300', 'Malaysia');
+
+-- Insert transaction details
+INSERT INTO transaction_details (tid, product_name, quantity) VALUES
+(1, 'Samsung Galaxy S23', 1),
+(1, 'Phone Case', 2),
+(2, 'Wireless Earbuds', 1),
+(2, 'Screen Protector', 2),
+(3, 'Smart Watch', 1),
+(4, 'iPhone 15', 1),
+(4, 'AirPods Pro', 1),
+(5, 'iPad Air', 1);
 
 GRANT ALL PRIVILEGES ON front_db.* TO 'virtuosa'@'%';
 FLUSH PRIVILEGES;
