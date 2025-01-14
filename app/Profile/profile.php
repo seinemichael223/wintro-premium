@@ -177,7 +177,7 @@ try {
                     </tr>
                     <tr>
                         <th>Username</th>
-                        <td><?php echo htmlspecialchars($user['full_name']); ?></td>
+                        <td><?php echo htmlspecialchars($user['username']); ?></td>
                     </tr>
                     <tr>
                         <th>Email</th>
