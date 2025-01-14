@@ -41,25 +41,25 @@
         </div>
         <ul class="product-list">
             <li class="product">
-                <a href="#">Awards & Trophies</a>
+                <a href="../Product/product_pages/awards_trophies.php">Awards & Trophies</a>
             </li>
             <li class="product">
-                <a href="#">Gift & Souvenirs</a>
+                <a href="../Product/product_pages/awards_trophies.php">Gift & Souvenirs</a>
             </li>
             <li class="product">
-                <a href="#">Clothing</a>
+                <a href="../Product/product_pages/awards_trophies.php">Clothing</a>
             </li>
             <li class="product">
-                <a href="#">Printing</a>
+                <a href="../Product/product_pages/awards_trophies.php">Printing</a>
             </li>
             <li class="product">
-                <a href="#">Office Equipment</a>
+                <a href="../Product/product_pages/awards_trophies.php">Office Equipment</a>
             </li>
             <li class="product">
-                <a href="#">Sport Equipment</a>
+                <a href="../Product/product_pages/awards_trophies.php">Sport Equipment</a>
             </li>
             <li class="product">
-                <a href="#">Nametags</a>
+                <a href="../Product/product_pages/awards_trophies.php">Nametags</a>
             </li>
         </ul>
     </div>
