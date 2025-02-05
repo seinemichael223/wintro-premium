@@ -148,7 +148,7 @@ try {
     </div>
 
     <div class="management-container">
-        <h2>Welcome, <?php echo htmlspecialchars($user['full_name']); ?></h2>
+        <h2>Welcome, <?php echo htmlspecialchars($user['username']); ?></h2>
 
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert alert-success">
@@ -173,7 +173,7 @@ try {
                 <table class="info-table">
                     <tr>
                         <th>Full Name</th>
-                        <td><?php echo htmlspecialchars($user['full_name']) ?></td>
+                        <td><?php echo htmlspecialchars($user['full_name']); ?></td>
                     </tr>
                     <tr>
                         <th>Username</th>
